@@ -9,6 +9,11 @@
  */
 {
   "sections": {
+    "ks_announcement_78cqGc": {
+      "type": "ks-announcement",
+      "name": "KS Announcement",
+      "settings": {}
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -220,14 +225,15 @@
         "padding_bottom": 36
       }
     },
-    "ks_announcement_78cqGc": {
-      "type": "ks-announcement",
-      "name": "KS Announcement",
+    "ks_hero_gCN7ht": {
+      "type": "ks-hero",
+      "name": "KS Hero",
       "settings": {}
     }
   },
   "order": [
     "ks_announcement_78cqGc",
+    "ks_hero_gCN7ht",
     "image_banner",
     "rich_text",
     "featured_collection",
