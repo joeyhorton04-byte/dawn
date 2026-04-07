@@ -1,0 +1,121 @@
+<section class="ks-mission">
+  <div class="ks-mission-cross-bg"></div>
+  <div class="ks-mission-inner">
+    <div class="ks-gold-divider">
+      <div class="ks-divider-line"></div>
+      <span class="ks-divider-cross">✝</span>
+      <div class="ks-divider-line ks-divider-right"></div>
+    </div>
+    <p class="ks-mission-verse">"Go and make disciples of all nations..."</p>
+    <p class="ks-mission-verse-ref">Matthew 28:19</p>
+    <h2 class="ks-mission-title">Not Just Jewelry —<br>The Good News</h2>
+    <p class="ks-mission-text">Our mission is to create pieces that glorify God, spark faith conversations, and spread the Gospel without saying a word. Every necklace is a quiet testimony — a reminder of God's love and your calling.</p>
+    <div class="ks-donate-badge">
+      ✝ We donate 10% of all profits to local ministry & church outreach
+    </div>
+  </div>
+</section>
+
+<style>
+.ks-mission {
+  padding: 120px 40px;
+  background: #0A0A0A;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ks-mission-cross-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  opacity: 0.025;
+  background: #C9A84C;
+  clip-path: polygon(40% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 55%, 60% 55%, 60% 100%, 40% 100%, 40% 55%, 0% 55%, 0% 35%, 40% 35%);
+}
+.ks-mission-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.ks-gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 200px;
+  margin: 0 auto 32px;
+}
+.ks-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #8B6914);
+}
+.ks-divider-right {
+  background: linear-gradient(to left, transparent, #8B6914);
+}
+.ks-divider-cross {
+  color: #C9A84C;
+  font-size: 16px;
+}
+.ks-mission-verse {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: #C9A84C;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.ks-mission-verse-ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #888888;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+.ks-mission-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #FAFAF5;
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+.ks-mission-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: #CCCCCC;
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+.ks-donate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 16px 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+@media (max-width: 768px) {
+  .ks-mission { padding: 60px 20px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Mission",
+  "settings": [],
+  "presets": [{ "name": "KS Mission" }]
+}
+{% endschema %}
