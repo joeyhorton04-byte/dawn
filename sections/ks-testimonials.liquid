@@ -1,0 +1,109 @@
+<section class="ks-testimonials">
+  <div class="ks-testimonials-inner">
+    <div class="ks-section-header">
+      <span class="ks-section-eyebrow">Verified Reviews</span>
+      <h2 class="ks-section-title">Worn By Believers</h2>
+    </div>
+    <div class="ks-testimonials-grid">
+      <div class="ks-testimonial-card">
+        <div class="ks-testimonial-stars">★★★★★</div>
+        <p class="ks-testimonial-quote">"The details are incredible. It's a great daily reminder of what Jesus did for me. I wear it everywhere — gym, pool, shower."</p>
+        <div class="ks-testimonial-author">Dima G.</div>
+        <div class="ks-testimonial-verified">✓ Verified Purchase</div>
+      </div>
+      <div class="ks-testimonial-card">
+        <div class="ks-testimonial-stars">★★★★★</div>
+        <p class="ks-testimonial-quote">"Great quality and an even better message. I've bought multiples for myself and as gifts. Everyone asks where I got it."</p>
+        <div class="ks-testimonial-author">Latrell J.</div>
+        <div class="ks-testimonial-verified">✓ Verified Purchase</div>
+      </div>
+      <div class="ks-testimonial-card">
+        <div class="ks-testimonial-stars">★★★★★</div>
+        <p class="ks-testimonial-quote">"Had it over a year, wear it daily — gym, shower, pool. Still holding up great. The lifetime guarantee is real."</p>
+        <div class="ks-testimonial-author">Rayyan M.</div>
+        <div class="ks-testimonial-verified">✓ Verified Purchase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.ks-testimonials {
+  padding: 100px 40px;
+  background: #1A1A1A;
+  position: relative;
+  overflow: hidden;
+}
+.ks-testimonials::before {
+  content: '"';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 400px;
+  color: rgba(201,168,76,0.03);
+  line-height: 1;
+  pointer-events: none;
+}
+.ks-testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.ks-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.ks-testimonial-card {
+  background: #0A0A0A;
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 36px;
+  transition: border-color 0.3s;
+}
+.ks-testimonial-card:hover {
+  border-color: rgba(201,168,76,0.35);
+}
+.ks-testimonial-stars {
+  color: #C9A84C;
+  font-size: 14px;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+}
+.ks-testimonial-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: #F5F0E8;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.ks-testimonial-author {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+.ks-testimonial-verified {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  color: #888888;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+@media (max-width: 768px) {
+  .ks-testimonials-grid { grid-template-columns: 1fr; }
+  .ks-testimonials { padding: 60px 20px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Testimonials",
+  "settings": [],
+  "presets": [{ "name": "KS Testimonials" }]
+}
+{% endschema %}
