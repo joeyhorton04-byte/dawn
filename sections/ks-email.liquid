@@ -1,0 +1,103 @@
+<section class="ks-email">
+  <div class="ks-email-inner">
+    <h2 class="ks-email-title">Join The Kingdom</h2>
+    <p class="ks-email-sub">New drops, exclusive offers, and faith content — delivered to your inbox.</p>
+    {% form 'customer' %}
+      <div class="ks-email-form">
+        <input
+          type="email"
+          name="contact[email]"
+          class="ks-email-input"
+          placeholder="Enter your email address"
+          required
+        >
+        <button type="submit" class="ks-email-submit">Subscribe</button>
+      </div>
+      {% if form.posted_successfully? %}
+        <p class="ks-email-success">✝ Thank you for joining the Kingdom.</p>
+      {% endif %}
+    {% endform %}
+  </div>
+</section>
+
+<style>
+.ks-email {
+  background: #1A1A1A;
+  padding: 80px 40px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.ks-email-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ks-email-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #FAFAF5;
+  margin-bottom: 12px;
+}
+.ks-email-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: #888888;
+  margin-bottom: 32px;
+}
+.ks-email-form {
+  display: flex;
+}
+.ks-email-input {
+  flex: 1;
+  padding: 16px 20px;
+  background: #0A0A0A;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-right: none;
+  color: #FAFAF5;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ks-email-input:focus { border-color: #C9A84C; }
+.ks-email-input::placeholder { color: #888888; }
+.ks-email-submit {
+  padding: 16px 28px;
+  background: #C9A84C;
+  color: #0A0A0A;
+  border: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ks-email-submit:hover { background: #E8C97A; }
+.ks-email-success {
+  margin-top: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .ks-email { padding: 60px 20px; }
+  .ks-email-form { flex-direction: column; }
+  .ks-email-input { border-right: 1px solid rgba(201,168,76,0.2); border-bottom: none; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Email Capture",
+  "settings": [],
+  "presets": [{ "name": "KS Email Capture" }]
+}
+{% endschema %}
