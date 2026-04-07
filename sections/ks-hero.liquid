@@ -1,0 +1,177 @@
+<div class="ks-hero">
+  <div class="ks-hero-bg"></div>
+  <div class="ks-hero-cross"></div>
+  <div class="ks-hero-content">
+    <p class="ks-eyebrow">✝ Faith-Inspired Jewelry — Kingdom Supply</p>
+    <h1 class="ks-hero-title">
+      Wear Your<br>
+      <span class="ks-gold">Faith</span><br>
+      Every Day
+    </h1>
+    <p class="ks-hero-sub">Premium Christian jewelry crafted to remind you who you live for — and spark conversation wherever you go.</p>
+    <div class="ks-hero-ctas">
+      <a href="/collections/necklaces" class="ks-btn-primary">Shop The Collection</a>
+      <a href="/pages/our-mission" class="ks-btn-secondary">Our Mission →</a>
+    </div>
+  </div>
+  <div class="ks-hero-stats">
+    <div class="ks-stat">
+      <span class="ks-stat-num">4.9★</span>
+      <span class="ks-stat-label">Avg. Rating</span>
+    </div>
+    <div class="ks-stat">
+      <span class="ks-stat-num">2K+</span>
+      <span class="ks-stat-label">Happy Believers</span>
+    </div>
+    <div class="ks-stat">
+      <span class="ks-stat-num">∞</span>
+      <span class="ks-stat-label">Lifetime Guarantee</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.ks-hero {
+  min-height: 90vh;
+  background: #111111;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.ks-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 30% 30%, rgba(201,168,76,0.05) 0%, transparent 60%);
+}
+.ks-hero-cross {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  opacity: 0.04;
+  background: #C9A84C;
+  clip-path: polygon(40% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 55%, 60% 55%, 60% 100%, 40% 100%, 40% 55%, 0% 55%, 0% 35%, 40% 35%);
+}
+.ks-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 80px;
+  width: 100%;
+}
+.ks-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  color: #C9A84C;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: block;
+  opacity: 0;
+  animation: ksFadeUp 0.8s forwards 0.2s;
+}
+.ks-hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: #FAFAF5;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: ksFadeUp 0.8s forwards 0.4s;
+}
+.ks-gold { color: #C9A84C; }
+.ks-hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: #CCCCCC;
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: ksFadeUp 0.8s forwards 0.6s;
+}
+.ks-hero-ctas {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  opacity: 0;
+  animation: ksFadeUp 0.8s forwards 0.8s;
+}
+.ks-btn-primary {
+  background: #C9A84C;
+  color: #0A0A0A;
+  padding: 16px 40px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.25s;
+}
+.ks-btn-primary:hover { background: #E8C97A; }
+.ks-btn-secondary {
+  color: #C9A84C;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid #C9A84C;
+  padding-bottom: 2px;
+}
+.ks-btn-secondary:hover { color: #E8C97A; }
+.ks-hero-stats {
+  position: absolute;
+  bottom: 60px;
+  right: 80px;
+  display: flex;
+  gap: 48px;
+  opacity: 0;
+  animation: ksFadeUp 0.8s forwards 1s;
+}
+.ks-stat { text-align: center; }
+.ks-stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #C9A84C;
+  display: block;
+}
+.ks-stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #888888;
+  text-transform: uppercase;
+}
+@keyframes ksFadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .ks-hero-content { padding: 0 30px; }
+  .ks-hero-title { font-size: 48px; }
+  .ks-hero-stats { position: static; margin: 40px 30px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Hero",
+  "settings": [],
+  "presets": [{ "name": "KS Hero" }]
+}
+{% endschema %}
