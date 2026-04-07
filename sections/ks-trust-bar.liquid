@@ -1,0 +1,68 @@
+<div class="ks-trust">
+  <div class="ks-trust-inner">
+    <div class="ks-trust-item">
+      <span class="ks-trust-icon">✈️</span>
+      <span class="ks-trust-text">Free Worldwide Shipping</span>
+    </div>
+    <div class="ks-trust-item">
+      <span class="ks-trust-icon">🛡️</span>
+      <span class="ks-trust-text">Lifetime Guarantee</span>
+    </div>
+    <div class="ks-trust-item">
+      <span class="ks-trust-icon">💧</span>
+      <span class="ks-trust-text">100% Waterproof</span>
+    </div>
+    <div class="ks-trust-item">
+      <span class="ks-trust-icon">♻️</span>
+      <span class="ks-trust-text">Tarnish Free Forever</span>
+    </div>
+    <div class="ks-trust-item">
+      <span class="ks-trust-icon">✝️</span>
+      <span class="ks-trust-text">10% to Ministry</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.ks-trust {
+  background: #1A1A1A;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 20px 40px;
+}
+.ks-trust-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.ks-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ks-trust-icon { font-size: 20px; }
+.ks-trust-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #CCCCCC;
+}
+@media (max-width: 768px) {
+  .ks-trust-inner { gap: 20px; }
+  .ks-trust-text { font-size: 10px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Trust Bar",
+  "settings": [],
+  "presets": [{ "name": "KS Trust Bar" }]
+}
+{% endschema %}
