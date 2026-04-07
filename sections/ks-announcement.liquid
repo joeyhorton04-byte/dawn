@@ -1,0 +1,45 @@
+<div class="ks-announce">
+  <div class="ks-announce-track">
+    <span>✝ FREE WORLDWIDE SHIPPING ON ALL ORDERS</span>
+    <span>✝ BUY 2 GET 1 FREE STOREWIDE</span>
+    <span>✝ LIFETIME GUARANTEE ON EVERY PIECE</span>
+    <span>✝ 10% OF PROFITS DONATED TO MINISTRY</span>
+    <span>✝ FREE WORLDWIDE SHIPPING ON ALL ORDERS</span>
+    <span>✝ BUY 2 GET 1 FREE STOREWIDE</span>
+    <span>✝ LIFETIME GUARANTEE ON EVERY PIECE</span>
+    <span>✝ 10% OF PROFITS DONATED TO MINISTRY</span>
+  </div>
+</div>
+
+<style>
+.ks-announce {
+  background: #C9A84C;
+  color: #0A0A0A;
+  padding: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+.ks-announce-track {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  animation: ksMarquee 20s linear infinite;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+@keyframes ksMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Announcement",
+  "settings": [],
+  "presets": [{ "name": "KS Announcement" }]
+}
+{% endschema %}
