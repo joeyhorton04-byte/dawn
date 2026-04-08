@@ -4,8 +4,9 @@
       "type": "ks-announcement",
       "settings": {}
     },
-    "ks-product": {
-      "type": "ks-product",
+    "main": {
+      "type": "main-product",
+      "blocks": {},
       "settings": {}
     },
     "ks-testimonials": {
@@ -27,7 +28,7 @@
   },
   "order": [
     "ks-announcement",
-    "ks-product",
+    "main",
     "ks-testimonials",
     "ks-mission",
     "ks-email",
