@@ -1,0 +1,382 @@
+{% assign product = all_products['jesus-quarter-necklace'] %}
+
+<section class="ks-product">
+  <div class="ks-product-inner">
+
+    <!-- IMAGE GALLERY -->
+    <div class="ks-product-gallery">
+      <div class="ks-product-main-image">
+        {% if product.featured_image %}
+          <img
+            id="ks-main-img"
+            src="{{ product.featured_image | img_url: 'master' }}"
+            alt="{{ product.title }}"
+          >
+        {% else %}
+          <div class="ks-img-placeholder">✝</div>
+        {% endif %}
+        <div class="ks-product-badge">Low Stock</div>
+      </div>
+      <div class="ks-product-thumbs">
+        {% for image in product.images %}
+          <div class="ks-thumb {% if forloop.first %}active{% endif %}" onclick="ksSetImage('{{ image | img_url: 'master' }}', this)">
+            <img src="{{ image | img_url: '100x100' }}" alt="{{ product.title }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="ks-product-info">
+      <div class="ks-product-reviews">
+        <span class="ks-stars">★★★★★</span>
+        <span class="ks-review-count">4.9 · 238 REVIEWS</span>
+      </div>
+
+      <h1 class="ks-product-title">{{ product.title }}</h1>
+      <p class="ks-product-tagline">Carry the message of Christ wherever you go — a daily reminder of His sacrifice and who you live for.</p>
+
+      <div class="ks-product-price">
+        <span id="ks-price">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <span class="ks-compare-price">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+
+      <div class="ks-product-features">
+        <div class="ks-feature-pill">✝ Faith-Driven Design</div>
+        <div class="ks-feature-pill">⚡ Lifetime Guarantee</div>
+        <div class="ks-feature-pill">💧 Skin-Safe, No Tarnish</div>
+        <div class="ks-feature-pill">🙏 Serenity Prayer Engraved</div>
+      </div>
+
+      {% form 'product', product %}
+        {% for option in product.options_with_values %}
+          <p class="ks-variant-label">{{ option.name }}</p>
+          <div class="ks-variants">
+            {% for value in option.values %}
+              <button
+                type="button"
+                class="ks-variant-btn {% if forloop.first %}active{% endif %}"
+                onclick="ksSelectVariant(this)"
+                data-value="{{ value }}"
+              >
+                {{ value }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <input type="hidden" name="id" id="ks-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <div class="ks-stock-indicator">
+          <div class="ks-stock-dot"></div>
+          <span>In Stock — Ready to Ship</span>
+        </div>
+
+        <button type="submit" name="add" class="ks-add-to-cart">
+          ADD TO CART — <span id="ks-btn-price">{{ product.price | money }}</span>
+        </button>
+
+      {% endform %}
+
+      <div class="ks-product-accordion">
+        <div class="ks-accordion-item open">
+          <div class="ks-accordion-header" onclick="ksToggle(this)">
+            Product Details
+            <span class="ks-accordion-arrow">▼</span>
+          </div>
+          <div class="ks-accordion-body">
+            {{ product.description }}
+          </div>
+        </div>
+        <div class="ks-accordion-item">
+          <div class="ks-accordion-header" onclick="ksToggle(this)">
+            Materials
+            <span class="ks-accordion-arrow">▼</span>
+          </div>
+          <div class="ks-accordion-body">
+            316L Stainless Steel with triple-coat 18K gold option. Tarnish-free, waterproof, heat and sweat resistant, and hypoallergenic. Backed by a Lifetime Warranty.
+          </div>
+        </div>
+        <div class="ks-accordion-item">
+          <div class="ks-accordion-header" onclick="ksToggle(this)">
+            Shipping & Returns
+            <span class="ks-accordion-arrow">▼</span>
+          </div>
+          <div class="ks-accordion-body">
+            Orders processed within 24–72 hours. Shipping to USA, Canada, and worldwide in 7–12 business days. 14-day easy returns and exchanges. Questions? Email support@kingdomsupply.com.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.ks-product {
+  padding: 80px 40px;
+  background: #0A0A0A;
+}
+.ks-product-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.ks-product-main-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #1A1A1A;
+  border: 1px solid rgba(201,168,76,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.ks-product-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ks-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  color: rgba(201,168,76,0.2);
+}
+.ks-product-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #C9A84C;
+  color: #0A0A0A;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+}
+.ks-product-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.ks-thumb {
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(201,168,76,0.15);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.ks-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ks-thumb.active { border-color: #C9A84C; }
+.ks-product-reviews {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.ks-stars { color: #C9A84C; font-size: 16px; letter-spacing: 2px; }
+.ks-review-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  color: #888888;
+  letter-spacing: 1px;
+}
+.ks-product-title {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #FAFAF5;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.ks-product-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #CCCCCC;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.ks-product-price {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #C9A84C;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ks-compare-price {
+  font-size: 20px;
+  color: #888888;
+  text-decoration: line-through;
+}
+.ks-product-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.ks-feature-pill {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 10px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #E8C97A;
+}
+.ks-variant-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888888;
+  margin-bottom: 12px;
+}
+.ks-variants {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.ks-variant-btn {
+  padding: 10px 20px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent;
+  color: #CCCCCC;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ks-variant-btn:hover,
+.ks-variant-btn.active {
+  border-color: #C9A84C;
+  color: #C9A84C;
+  background: rgba(201,168,76,0.08);
+}
+.ks-stock-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  color: #888888;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.ks-stock-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4CAF50;
+  animation: ksPulse 2s infinite;
+}
+@keyframes ksPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.ks-add-to-cart {
+  width: 100%;
+  padding: 20px;
+  background: #C9A84C;
+  color: #0A0A0A;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s;
+  margin-bottom: 32px;
+}
+.ks-add-to-cart:hover { background: #E8C97A; }
+.ks-product-accordion {
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+.ks-accordion-item {
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.ks-accordion-header {
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #CCCCCC;
+  transition: color 0.2s;
+}
+.ks-accordion-header:hover { color: #C9A84C; }
+.ks-accordion-arrow { transition: transform 0.3s; font-size: 10px; }
+.ks-accordion-body {
+  padding: 0 0 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: #888888;
+  line-height: 1.7;
+  display: none;
+}
+.ks-accordion-item.open .ks-accordion-body { display: block; }
+.ks-accordion-item.open .ks-accordion-arrow { transform: rotate(180deg); }
+@media (max-width: 768px) {
+  .ks-product-inner { grid-template-columns: 1fr; gap: 40px; }
+  .ks-product { padding: 40px 20px; }
+  .ks-product-title { font-size: 28px; }
+}
+</style>
+
+<script>
+function ksSetImage(src, el) {
+  document.getElementById('ks-main-img').src = src;
+  document.querySelectorAll('.ks-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+function ksSelectVariant(btn) {
+  document.querySelectorAll('.ks-variant-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function ksToggle(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.ks-accordion-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+
+{% schema %}
+{
+  "name": "KS Product",
+  "settings": [],
+  "presets": [{ "name": "KS Product" }]
+}
+{% endschema %}
