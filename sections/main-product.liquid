@@ -348,9 +348,82 @@
 .ks-accordion-item.open .ks-accordion-body { display: block; }
 .ks-accordion-item.open .ks-accordion-arrow { transform: rotate(180deg); }
 @media (max-width: 768px) {
-  .ks-product-inner { grid-template-columns: 1fr; gap: 40px; }
-  .ks-product { padding: 40px 20px; }
-  .ks-product-title { font-size: 28px; }
+  .ks-product {
+    padding: 20px 16px;
+  }
+  .ks-product-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .ks-product-main-image {
+    aspect-ratio: 1;
+    border-radius: 0;
+  }
+  .ks-gallery-nav {
+    bottom: 12px;
+    right: 12px;
+  }
+  .ks-prev, .ks-next {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  .ks-product-title {
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .ks-product-tagline {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .ks-product-price {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  .ks-compare-price {
+    font-size: 16px;
+  }
+  .ks-product-features {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .ks-feature-pill {
+    font-size: 9px;
+    padding: 8px 10px;
+    letter-spacing: 1px;
+  }
+  .ks-variants {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .ks-swatch-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .ks-stock-indicator {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+  .ks-add-to-cart {
+    font-size: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  .ks-accordion-header {
+    font-size: 11px;
+    padding: 14px 0;
+  }
+  .ks-accordion-body {
+    font-size: 14px;
+  }
+  .ks-product-reviews {
+    margin-bottom: 12px;
+  }
+  .ks-stars { font-size: 14px; }
+  .ks-review-count { font-size: 11px; }
 }
 </style>
 
