@@ -25,12 +25,6 @@
       <h1 class="ks-product-title">{{ product.title }}</h1>
       <p class="ks-product-tagline">Carry the message of Christ wherever you go — a daily reminder of His sacrifice and who you live for.</p>
 
-      <div class="ks-product-price">
-        {{ product.price | money }}
-        {% if product.compare_at_price > product.price %}
-          <span class="ks-compare-price">{{ product.compare_at_price | money }}</span>
-        {% endif %}
-      </div>
 
       <div class="ks-product-features">
         <div class="ks-feature-pill">✝ Faith-Driven Design</div>
