@@ -44,7 +44,7 @@
           <p class="ks-variant-label">{{ option.name }}</p>
           <div class="ks-variants">
             {% for value in option.values %}
-  {% assign swatch_color = '#C0C0C0' %}
+  {% assign swatch_color = '#A8A8A8' %}
   {% if value == '18K Gold' or value == 'Gold' %}
     {% assign swatch_color = '#C9A84C' %}
   {% endif %}
@@ -54,7 +54,7 @@
     onclick="ksSelectVariant(this, '{{ value }}')"
     data-value="{{ value }}"
     title="{{ value }}"
-    style="background: {{ swatch_color }};"
+    style="background: {{ swatch_color }}; width:44px; height:44px; border-radius:50%; border:3px solid #0A0A0A; cursor:pointer; display:inline-block; box-shadow: 0 0 0 2px {% if forloop.first %}#C9A84C{% else %}transparent{% endif %};"
   ></button>
 {% endfor %}
           </div>
@@ -253,14 +253,20 @@
   cursor: pointer;
   transition: all 0.2s;
 .ks-swatch-btn {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 2px solid transparent;
+  border: 3px solid #0A0A0A;
   cursor: pointer;
   transition: all 0.2s;
-  outline: 2px solid transparent;
-  outline-offset: 3px;
+  box-shadow: 0 0 0 2px transparent;
+  display: inline-block;
+}
+.ks-swatch-btn:hover {
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.6);
+}
+.ks-swatch-btn.active {
+  box-shadow: 0 0 0 2px #C9A84C;
 }
 .ks-swatch-btn:hover {
   outline-color: rgba(201,168,76,0.5);
