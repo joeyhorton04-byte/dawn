@@ -336,4 +336,51 @@ function ksToggle(header) {
   "blocks": [],
   "presets": [{ "name": "Product" }]
 }
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const variantData = {
+    {% for variant in product.variants %}
+      "{{ variant.id }}": {
+        images: [
+          {% for image in product.images %}
+            {% if image.alt contains variant.title or forloop.index <= 1 %}
+              "{{ image | img_url: 'master' }}",
+            {% endif %}
+          {% endfor %}
+        ],
+        featuredImage: "{{ variant.featured_image | img_url: 'master' }}"
+      },
+    {% endfor %}
+  };
+
+  function switchVariantImages(variantId) {
+    const data = variantData[variantId];
+    if (!data || !data.featuredImage) return;
+
+    // Switch main image
+    const mainImg = document.getElementById('ks-main-img');
+    if (mainImg) mainImg.src = data.featuredImage;
+
+    // Switch thumbnails
+    const thumbs = document.querySelectorAll('.ks-thumb img');
+    if (data.images.length > 0) {
+      thumbs.forEach((thumb, i) => {
+        if (data.images[i]) thumb.src = data.images[i];
+      });
+    }
+  }
+
+  // Listen for variant button clicks
+  document.querySelectorAll('.ks-variant-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const variantTitle = this.textContent.trim();
+      {% for variant in product.variants %}
+        if (variantTitle === "{{ variant.title }}") {
+          switchVariantImages("{{ variant.id }}");
+        }
+      {% endfor %}
+    });
+  });
+});
+</script>
 {% endschema %}
