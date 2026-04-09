@@ -162,9 +162,56 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 768px) {
-  .ks-hero-content { padding: 0 30px; }
-  .ks-hero-title { font-size: 48px; }
-  .ks-hero-stats { position: static; margin: 40px 30px; }
+  .ks-hero {
+    min-height: 100svh;
+    padding: 60px 0 40px;
+  }
+  .ks-hero-content {
+    padding: 0 24px;
+  }
+  .ks-eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .ks-hero-title {
+    font-size: 52px;
+    line-height: 0.92;
+    margin-bottom: 20px;
+  }
+  .ks-hero-sub {
+    font-size: 15px;
+    margin-bottom: 32px;
+    max-width: 100%;
+  }
+  .ks-hero-ctas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .ks-btn-primary {
+    width: 100%;
+    text-align: center;
+    padding: 16px 24px;
+  }
+  .ks-hero-stats {
+    position: static;
+    margin: 40px 24px 0;
+    gap: 24px;
+    justify-content: flex-start;
+  }
+  .ks-stat-num {
+    font-size: 24px;
+  }
+  .ks-stat-label {
+    font-size: 9px;
+  }
+  .ks-hero-cross {
+    width: 300px;
+    height: 300px;
+    right: -50px;
+    opacity: 0.03;
+  }
 }
 </style>
 
