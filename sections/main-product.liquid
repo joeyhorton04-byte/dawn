@@ -252,6 +252,23 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
+.ks-swatch-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+.ks-swatch-btn:hover {
+  outline-color: rgba(201,168,76,0.5);
+}
+.ks-swatch-btn.active {
+  outline-color: #C9A84C;
+  border-color: #0A0A0A;
+}
 }
 .ks-variant-btn:hover,
 .ks-variant-btn.active {
