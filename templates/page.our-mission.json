@@ -1,4 +1,5 @@
 {
+  "layout": "theme",
   "sections": {
     "ks-announcement": {
       "type": "ks-announcement",
