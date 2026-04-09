@@ -5,10 +5,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      body { background: #0A0A0A !important; color: #FAFAF5 !important; }
-      .color-scheme-1, .color-background-1 { background: #0A0A0A !important; }
-      .shopify-section { background: transparent; }
-    </style>
+  body, .shopify-section { background: #0A0A0A !important; color: #FAFAF5 !important; }
+  .collection, .collection-hero, .product-grid-container, .facets-container { background: #0A0A0A !important; }
+  .card { background: #1A1A1A !important; border: 1px solid rgba(201,168,76,0.15) !important; border-radius: 0 !important; }
+  .card:hover { border-color: rgba(201,168,76,0.4) !important; }
+  .card__media, .card__information { background: #0A0A0A !important; }
+  .card__heading a { font-family: 'Cinzel', serif !important; color: #FAFAF5 !important; text-transform: uppercase !important; letter-spacing: 1px !important; font-size: 13px !important; }
+  .card__heading a:hover { color: #C9A84C !important; }
+  .price, .price * { color: #C9A84C !important; font-family: 'Cinzel', serif !important; }
+  .price__sale .price-item--regular { color: #888888 !important; text-decoration: line-through !important; }
+  .badge { background: #C9A84C !important; color: #0A0A0A !important; border-radius: 0 !important; font-weight: 700 !important; }
+  .collection-hero__title, h1, h2 { font-family: 'Cinzel', serif !important; color: #FAFAF5 !important; text-transform: uppercase !important; letter-spacing: 2px !important; }
+  .collection-hero__description p { font-family: 'Cormorant Garamond', serif !important; font-style: italic !important; color: #888888 !important; }
+  .select__select { background: #1A1A1A !important; color: #FAFAF5 !important; border-color: rgba(201,168,76,0.2) !important; border-radius: 0 !important; }
+  .facets__summary, .product-count__text { color: #888888 !important; font-family: 'Barlow Condensed', sans-serif !important; }
+  .header { background: #0A0A0A !important; border-bottom: 1px solid rgba(201,168,76,0.15) !important; }
+  .header__heading-link, .header__menu-item { color: #FAFAF5 !important; font-family: 'Barlow Condensed', sans-serif !important; letter-spacing: 2px !important; }
+  .header__heading-link:hover, .header__menu-item:hover { color: #C9A84C !important; }
+  .cart-count-bubble { background: #C9A84C !important; color: #0A0A0A !important; }
+  .footer { background: #111111 !important; border-top: 1px solid rgba(201,168,76,0.15) !important; }
+  .announcement-bar { display: none !important; }
+</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
