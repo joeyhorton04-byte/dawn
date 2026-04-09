@@ -1,0 +1,199 @@
+<header class="ks-header">
+  <div class="ks-header-inner">
+    <button class="ks-hamburger" onclick="ksToggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <a href="/" class="ks-logo">KNGDM <span>Supply</span></a>
+
+    <a href="/cart" class="ks-cart-icon">
+      🛒
+      {%- if cart.item_count > 0 -%}
+        <span class="ks-cart-count">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+
+  <nav class="ks-mobile-menu" id="ks-mobile-menu">
+    <ul>
+      <li><a href="/" onclick="ksToggleMenu()">Home</a></li>
+      <li><a href="/collections/best-sellers" onclick="ksToggleMenu()">Shop</a></li>
+      <li><a href="/products/jesus-quarter-necklace" onclick="ksToggleMenu()">Jesus Quarter</a></li>
+      <li><a href="/products/crown-of-thorns-necklace" onclick="ksToggleMenu()">Crown of Thorns</a></li>
+      <li><a href="/pages/our-mission" onclick="ksToggleMenu()">Our Mission</a></li>
+      <li><a href="/pages/contact" onclick="ksToggleMenu()">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+.ks-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0A0A0A;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  width: 100%;
+}
+.ks-header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ks-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #C9A84C;
+  text-decoration: none;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ks-logo span { color: #FAFAF5; }
+.ks-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+.ks-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #FAFAF5;
+  transition: all 0.3s;
+}
+.ks-hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.ks-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.ks-hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+.ks-cart-icon {
+  font-size: 20px;
+  text-decoration: none;
+  position: relative;
+  color: #FAFAF5;
+}
+.ks-cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #C9A84C;
+  color: #0A0A0A;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ks-mobile-menu {
+  background: #0A0A0A;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.ks-mobile-menu.open {
+  max-height: 400px;
+}
+.ks-mobile-menu ul {
+  list-style: none;
+  padding: 16px 24px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ks-mobile-menu li {
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.ks-mobile-menu a {
+  display: block;
+  padding: 16px 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #CCCCCC;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ks-mobile-menu a:hover { color: #C9A84C; }
+
+/* DESKTOP */
+@media (min-width: 769px) {
+  .ks-header-inner {
+    padding: 0 40px;
+    height: 70px;
+  }
+  .ks-logo {
+    font-size: 22px;
+    position: static;
+    transform: none;
+  }
+  .ks-hamburger { display: none; }
+  .ks-mobile-menu {
+    max-height: none !important;
+    overflow: visible;
+    border-top: none;
+    background: transparent;
+  }
+  .ks-mobile-menu ul {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ks-mobile-menu li { border: none; }
+  .ks-mobile-menu a {
+    font-size: 12px;
+    padding: 0;
+    letter-spacing: 2px;
+  }
+  .ks-header-inner {
+    position: relative;
+  }
+}
+</style>
+
+<script>
+function ksToggleMenu() {
+  const menu = document.getElementById('ks-mobile-menu');
+  const btn = document.querySelector('.ks-hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+</script>
+
+{% schema %}
+{
+  "name": "KS Header",
+  "settings": [],
+  "presets": [{ "name": "KS Header" }]
+}
+{% endschema %}
