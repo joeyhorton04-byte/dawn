@@ -30,29 +30,27 @@
 </section>
 
 <style>
-.ks-hero-content {
+.ks-hero {
+  background: #111111;
   position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 32px 24px 60px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  overflow: hidden;
+  padding: 60px 24px;
+  min-height: calc(100svh - 64px);
 }
 .ks-hero-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  pointer-events: none;
 }
 .ks-hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 40px 24px 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 .ks-eyebrow {
   font-family: 'Barlow Condensed', sans-serif;
@@ -68,7 +66,7 @@
 }
 .ks-hero-title {
   font-family: 'Cinzel', serif;
-  font-size: 52px;
+  font-size: clamp(42px, 10vw, 96px);
   font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
@@ -80,36 +78,36 @@
 .ks-gold { color: #C9A84C; }
 .ks-hero-sub {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
+  font-size: clamp(15px, 3vw, 20px);
   font-weight: 300;
   font-style: italic;
   color: #CCCCCC;
   line-height: 1.6;
   margin-bottom: 36px;
-  max-width: 320px;
+  max-width: 480px;
   opacity: 0;
   animation: ksFadeUp 0.8s forwards 0.6s;
 }
 .ks-hero-ctas {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 100%;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
   opacity: 0;
   animation: ksFadeUp 0.8s forwards 0.8s;
+  margin-bottom: 48px;
 }
 .ks-btn-primary {
   background: #C9A84C;
   color: #0A0A0A;
-  padding: 16px 24px;
+  padding: 16px 32px;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
   text-decoration: none;
-  display: block;
-  text-align: center;
+  display: inline-block;
   transition: background 0.25s;
 }
 .ks-btn-primary:hover { background: #E8C97A; }
@@ -123,19 +121,17 @@
   text-decoration: none;
   border-bottom: 1px solid #C9A84C;
   padding-bottom: 2px;
-  align-self: flex-start;
 }
 .ks-hero-stats {
   display: flex;
-  gap: 32px;
-  margin-top: 48px;
+  gap: 40px;
   opacity: 0;
   animation: ksFadeUp 0.8s forwards 1s;
 }
 .ks-stat { text-align: left; }
 .ks-stat-num {
   font-family: 'Cinzel', serif;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: #C9A84C;
   display: block;
@@ -152,36 +148,11 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-/* DESKTOP */
 @media (min-width: 769px) {
-  .ks-hero-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 80px;
-    min-height: 90vh;
-    justify-content: center;
-  }
-  .ks-hero-title {
-    font-size: 88px;
-    line-height: 0.95;
-  }
-  .ks-hero-sub {
-    font-size: 20px;
-    max-width: 480px;
-  }
-  .ks-hero-ctas {
-    flex-direction: row;
-    width: auto;
-    align-items: center;
-  }
-  .ks-btn-primary {
-    display: inline-block;
-    width: auto;
-  }
-  .ks-hero-stats {
-    gap: 48px;
-  }
+  .ks-hero { padding: 0 80px; }
+  .ks-hero-title { font-size: 88px; line-height: 0.95; }
+  .ks-hero-ctas { flex-wrap: nowrap; margin-bottom: 0; }
+  .ks-hero-stats { gap: 48px; position: absolute; bottom: 60px; right: 80px; }
   .ks-stat-num { font-size: 32px; }
   .ks-stat-label { font-size: 10px; }
 }
