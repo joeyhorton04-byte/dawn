@@ -165,6 +165,55 @@
   .ks-footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
   .ks-footer { padding: 40px 20px 20px; }
 }
+@media (max-width: 768px) {
+  .ks-footer {
+    padding: 40px 20px 20px;
+  }
+  .ks-footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .ks-footer-brand {
+    grid-column: 1 / -1;
+  }
+  .ks-footer-brand-name {
+    font-size: 20px;
+  }
+  .ks-footer-tagline {
+    font-size: 13px;
+  }
+  .ks-footer-col-title {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+  .ks-footer-links a {
+    font-size: 12px;
+  }
+  .ks-footer-links {
+    gap: 8px;
+  }
+  .ks-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ks-footer-payments {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ks-payment-icon {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+  .ks-footer-copyright {
+    font-size: 10px;
+  }
+  .ks-social-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+}
 </style>
 
 {% schema %}
