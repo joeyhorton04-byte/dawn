@@ -23,13 +23,20 @@
         "enable_language_selector": false
       }
     },
+    "ks_header_Wdwxdq": {
+      "type": "ks-header",
+      "name": "KS Header",
+      "settings": {}
+    },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {}
     }
   },
   "order": [
     "announcement-bar",
+    "ks_header_Wdwxdq",
     "header"
   ]
 }
