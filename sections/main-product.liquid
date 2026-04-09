@@ -40,7 +40,25 @@
       </div>
 
       {% form 'product', product %}
-      
+      {% for option in product.options_with_values %}
+  <p class="ks-variant-label">{{ option.name }}</p>
+  <div class="ks-variants">
+    {% for value in option.values %}
+      {% assign swatch_color = '#A8A8A8' %}
+      {% if value == '18K Gold' or value == 'Gold' %}
+        {% assign swatch_color = '#C9A84C' %}
+      {% endif %}
+      <button
+        type="button"
+        class="ks-swatch-btn {% if forloop.first %}active{% endif %}"
+        onclick="ksSelectVariant(this, '{{ value }}')"
+        data-value="{{ value }}"
+        title="{{ value }}"
+        style="background: {{ swatch_color }}; width:44px; height:44px; border-radius:50%; border:3px solid #0A0A0A; cursor:pointer; display:inline-block; box-shadow: 0 0 0 2px {% if forloop.first %}#C9A84C{% else %}transparent{% endif %};"
+      ></button>
+    {% endfor %}
+  </div>
+{% endfor %}
 
         <input type="hidden" name="id" id="ks-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
