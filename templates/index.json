@@ -4,10 +4,6 @@
       "type": "ks-announcement",
       "settings": {}
     },
-    "header": {
-      "type": "header",
-      "settings": {}
-    },
     "ks-hero": {
       "type": "ks-hero",
       "settings": {}
@@ -39,7 +35,6 @@
   },
   "order": [
     "ks-announcement",
-    "header",
     "ks-hero",
     "ks-trust-bar",
     "ks-collections",
