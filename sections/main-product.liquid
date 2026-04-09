@@ -1,21 +1,21 @@
 <section class="ks-product">
   <div class="ks-product-inner">
+
+    <!-- IMAGE GALLERY -->
     <div class="ks-product-gallery">
       <div class="ks-product-main-image">
         {% if product.featured_image %}
           <img id="ks-main-img" src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
         {% endif %}
         <div class="ks-product-badge">Low Stock</div>
-      </div>
-      <div class="ks-product-thumbs">
-        {% for image in product.images %}
-          <div class="ks-thumb {% if forloop.first %}active{% endif %}" onclick="ksSetImage('{{ image | img_url: 'master' }}', this)">
-            <img src="{{ image | img_url: '100x100' }}" alt="{{ product.title }}">
-          </div>
-        {% endfor %}
+        <div class="ks-gallery-nav">
+          <button class="ks-prev" onclick="ksPrevImage()">&#8592;</button>
+          <button class="ks-next" onclick="ksNextImage()">&#8594;</button>
+        </div>
       </div>
     </div>
 
+    <!-- PRODUCT INFO -->
     <div class="ks-product-info">
       <div class="ks-product-reviews">
         <span class="ks-stars">★★★★★</span>
@@ -44,7 +44,7 @@
           <p class="ks-variant-label">{{ option.name }}</p>
           <div class="ks-variants">
             {% for value in option.values %}
-              <button type="button" class="ks-variant-btn {% if forloop.first %}active{% endif %}" onclick="ksSelectVariant(this, {{ forloop.index0 }})">{{ value }}</button>
+              <button type="button" class="ks-variant-btn {% if forloop.first %}active{% endif %}" onclick="ksSelectVariant(this, '{{ value }}')">{{ value }}</button>
             {% endfor %}
           </div>
         {% endfor %}
@@ -87,7 +87,7 @@
 
 <style>
 .ks-product {
-  padding: 80px 40px;
+  padding: 60px 40px;
   background: #0A0A0A;
 }
 .ks-product-inner {
@@ -110,6 +110,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 0.3s;
 }
 .ks-product-badge {
   position: absolute;
@@ -123,23 +124,33 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   padding: 6px 12px;
+  z-index: 2;
 }
-.ks-product-thumbs {
+.ks-gallery-nav {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
+  z-index: 2;
 }
-.ks-thumb {
-  width: 64px;
-  height: 64px;
-  border: 1px solid rgba(201,168,76,0.15);
+.ks-prev, .ks-next {
+  width: 36px;
+  height: 36px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(201,168,76,0.4);
+  color: #C9A84C;
+  font-size: 16px;
   cursor: pointer;
-  overflow: hidden;
-  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
-.ks-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.ks-thumb.active { border-color: #C9A84C; }
+.ks-prev:hover, .ks-next:hover {
+  background: #C9A84C;
+  color: #0A0A0A;
+}
 .ks-product-reviews {
   display: flex;
   align-items: center;
@@ -307,74 +318,49 @@
   .ks-product { padding: 40px 20px; }
   .ks-product-title { font-size: 28px; }
 }
-.product__media-wrapper,
-.product__media-list,
-.product__media-item,
-.media,
-.media > *,
-.product__media-toggle {
-  background: #1A1A1A !important;
-}
-
-.product__media-list img {
-  mix-blend-mode: multiply;
-  filter: brightness(0.95);
-}
-
-.thumbnail-list__item button {
-  background: #1A1A1A !important;
-  border-color: rgba(201,168,76,0.2) !important;
-}
-
-.thumbnail-list__item button.is-active,
-.thumbnail-list__item button:hover {
-  border-color: #C9A84C !important;
-}
-.thumbnail-list {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  margin-top: 12px !important;
-}
-
-.thumbnail-list__item {
-  width: 64px !important;
-  height: 64px !important;
-  flex-shrink: 0 !important;
-}
-
-.thumbnail-list__item button {
-  width: 64px !important;
-  height: 64px !important;
-  padding: 0 !important;
-  background: #1A1A1A !important;
-  border: 1px solid rgba(201,168,76,0.2) !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
-}
-
-.thumbnail-list__item button.is-active,
-.thumbnail-list__item button:hover {
-  border-color: #C9A84C !important;
-}
-
-.thumbnail-list__item img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
 </style>
 
 <script>
-function ksSetImage(src, el) {
-  document.getElementById('ks-main-img').src = src;
-  document.querySelectorAll('.ks-thumb').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+const ksImages = [
+  {% for image in product.images %}
+    "{{ image | img_url: 'master' }}"{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+const ksVariantImages = {
+  {% for variant in product.variants %}
+    "{{ variant.title }}": "{{ variant.featured_image | img_url: 'master' }}"{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+};
+
+let ksCurrentIndex = 0;
+
+function ksSetMainImage(src) {
+  const img = document.getElementById('ks-main-img');
+  img.style.opacity = '0';
+  setTimeout(() => { img.src = src; img.style.opacity = '1'; }, 200);
 }
-function ksSelectVariant(btn) {
+
+function ksNextImage() {
+  ksCurrentIndex = (ksCurrentIndex + 1) % ksImages.length;
+  ksSetMainImage(ksImages[ksCurrentIndex]);
+}
+
+function ksPrevImage() {
+  ksCurrentIndex = (ksCurrentIndex - 1 + ksImages.length) % ksImages.length;
+  ksSetMainImage(ksImages[ksCurrentIndex]);
+}
+
+function ksSelectVariant(btn, variantTitle) {
   document.querySelectorAll('.ks-variant-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  if (ksVariantImages[variantTitle]) {
+    const idx = ksImages.indexOf(ksVariantImages[variantTitle]);
+    if (idx !== -1) ksCurrentIndex = idx;
+    ksSetMainImage(ksVariantImages[variantTitle]);
+  }
 }
+
 function ksToggle(header) {
   const item = header.parentElement;
   const wasOpen = item.classList.contains('open');
@@ -392,51 +378,4 @@ function ksToggle(header) {
   "blocks": [],
   "presets": [{ "name": "Product" }]
 }
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const variantData = {
-    {% for variant in product.variants %}
-      "{{ variant.id }}": {
-        images: [
-          {% for image in product.images %}
-            {% if image.alt contains variant.title or forloop.index <= 1 %}
-              "{{ image | img_url: 'master' }}",
-            {% endif %}
-          {% endfor %}
-        ],
-        featuredImage: "{{ variant.featured_image | img_url: 'master' }}"
-      },
-    {% endfor %}
-  };
-
-  function switchVariantImages(variantId) {
-    const data = variantData[variantId];
-    if (!data || !data.featuredImage) return;
-
-    // Switch main image
-    const mainImg = document.getElementById('ks-main-img');
-    if (mainImg) mainImg.src = data.featuredImage;
-
-    // Switch thumbnails
-    const thumbs = document.querySelectorAll('.ks-thumb img');
-    if (data.images.length > 0) {
-      thumbs.forEach((thumb, i) => {
-        if (data.images[i]) thumb.src = data.images[i];
-      });
-    }
-  }
-
-  // Listen for variant button clicks
-  document.querySelectorAll('.ks-variant-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const variantTitle = this.textContent.trim();
-      {% for variant in product.variants %}
-        if (variantTitle === "{{ variant.title }}") {
-          switchVariantImages("{{ variant.id }}");
-        }
-      {% endfor %}
-    });
-  });
-});
-</script>
 {% endschema %}
