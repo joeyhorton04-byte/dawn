@@ -19,8 +19,22 @@
     },
     "main-cart-footer": {
       "type": "main-cart-footer",
+      "blocks": {
+        "subtotal_NxGDYi": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "buttons_MbLEGD": {
+          "type": "buttons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "subtotal_NxGDYi",
+        "buttons_MbLEGD"
+      ],
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-4",
         "padding_top": 40,
         "padding_bottom": 40
       }
