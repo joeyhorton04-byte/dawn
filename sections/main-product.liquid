@@ -116,11 +116,13 @@
   border: 1px solid rgba(201,168,76,0.2);
   position: relative;
   overflow: hidden;
+  max-height: 600px;
 }
 .ks-product-main-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: opacity 0.3s;
 }
 .ks-product-badge {
