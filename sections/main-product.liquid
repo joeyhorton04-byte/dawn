@@ -39,27 +39,28 @@
         <div class="ks-feature-pill">🙏 Serenity Prayer Engraved</div>
       </div>
 
-      {% form 'product', product %}
+      <!-- VARIANT SELECTOR - OUTSIDE FORM SO IT SHOWS ABOVE KATCHING -->
       {% for option in product.options_with_values %}
-  <p class="ks-variant-label">{{ option.name }}</p>
-  <div class="ks-variants">
-    {% for value in option.values %}
-      {% assign swatch_color = '#A8A8A8' %}
-      {% if value == '18K Gold' or value == 'Gold' %}
-        {% assign swatch_color = '#C9A84C' %}
-      {% endif %}
-      <button
-        type="button"
-        class="ks-swatch-btn {% if forloop.first %}active{% endif %}"
-        onclick="ksSelectVariant(this, '{{ value }}')"
-        data-value="{{ value }}"
-        title="{{ value }}"
-        style="background: {{ swatch_color }}; width:44px; height:44px; border-radius:50%; border:3px solid #0A0A0A; cursor:pointer; display:inline-block; box-shadow: 0 0 0 2px {% if forloop.first %}#C9A84C{% else %}transparent{% endif %};"
-      ></button>
-    {% endfor %}
-  </div>
-{% endfor %}
+        <p class="ks-variant-label">{{ option.name }}</p>
+        <div class="ks-variants">
+          {% for value in option.values %}
+            {% assign swatch_color = '#A8A8A8' %}
+            {% if value == '18K Gold' or value == 'Gold' %}
+              {% assign swatch_color = '#C9A84C' %}
+            {% endif %}
+            <button
+              type="button"
+              class="ks-swatch-btn {% if forloop.first %}active{% endif %}"
+              onclick="ksSelectVariant(this, '{{ value }}')"
+              data-value="{{ value }}"
+              title="{{ value }}"
+              style="background: {{ swatch_color }}; width:44px; height:44px; border-radius:50%; border:3px solid #0A0A0A; cursor:pointer; display:inline-block; box-shadow: 0 0 0 2px {% if forloop.first %}#C9A84C{% else %}transparent{% endif %};"
+            ></button>
+          {% endfor %}
+        </div>
+      {% endfor %}
 
+      {% form 'product', product %}
         <input type="hidden" name="id" id="ks-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
         <div class="ks-stock-indicator">
@@ -112,7 +113,7 @@
 .ks-product-main-image {
   width: 100%;
   aspect-ratio: 1;
-background: transparent;
+  background: transparent;
   border: none;
   position: relative;
   overflow: hidden;
@@ -241,18 +242,6 @@ background: transparent;
   margin-bottom: 28px;
   flex-wrap: wrap;
 }
-.ks-variant-btn {
-  padding: 10px 20px;
-  border: 1px solid rgba(201,168,76,0.3);
-  background: transparent;
-  color: #CCCCCC;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
 .ks-swatch-btn {
   width: 44px;
   height: 44px;
@@ -263,26 +252,8 @@ background: transparent;
   box-shadow: 0 0 0 2px transparent;
   display: inline-block;
 }
-.ks-swatch-btn:hover {
-  box-shadow: 0 0 0 2px rgba(201,168,76,0.6);
-}
-.ks-swatch-btn.active {
-  box-shadow: 0 0 0 2px #C9A84C;
-}
-.ks-swatch-btn:hover {
-  outline-color: rgba(201,168,76,0.5);
-}
-.ks-swatch-btn.active {
-  outline-color: #C9A84C;
-  border-color: #0A0A0A;
-}
-}
-.ks-variant-btn:hover,
-.ks-variant-btn.active {
-  border-color: #C9A84C;
-  color: #C9A84C;
-  background: rgba(201,168,76,0.08);
-}
+.ks-swatch-btn:hover { box-shadow: 0 0 0 2px rgba(201,168,76,0.6); }
+.ks-swatch-btn.active { box-shadow: 0 0 0 2px #C9A84C; }
 .ks-stock-indicator {
   display: flex;
   align-items: center;
@@ -349,80 +320,20 @@ background: transparent;
 .ks-accordion-item.open .ks-accordion-body { display: block; }
 .ks-accordion-item.open .ks-accordion-arrow { transform: rotate(180deg); }
 @media (max-width: 768px) {
-  .ks-product {
-    padding: 20px 16px;
-  }
-  .ks-product-inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .ks-product-main-image {
-    aspect-ratio: 1;
-    border-radius: 0;
-  }
-  .ks-gallery-nav {
-    bottom: 12px;
-    right: 12px;
-  }
-  .ks-prev, .ks-next {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-  .ks-product-title {
-    font-size: 24px;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
-  .ks-product-tagline {
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-  .ks-product-price {
-    font-size: 26px;
-    margin-bottom: 16px;
-  }
-  .ks-compare-price {
-    font-size: 16px;
-  }
-  .ks-product-features {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  .ks-feature-pill {
-    font-size: 9px;
-    padding: 8px 10px;
-    letter-spacing: 1px;
-  }
-  .ks-variants {
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  .ks-swatch-btn {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  .ks-stock-indicator {
-    font-size: 11px;
-    margin-bottom: 14px;
-  }
-  .ks-add-to-cart {
-    font-size: 14px;
-    padding: 16px;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-  }
-  .ks-accordion-header {
-    font-size: 11px;
-    padding: 14px 0;
-  }
-  .ks-accordion-body {
-    font-size: 14px;
-  }
-  .ks-product-reviews {
-    margin-bottom: 12px;
-  }
+  .ks-product { padding: 20px 16px; }
+  .ks-product-inner { grid-template-columns: 1fr; gap: 24px; }
+  .ks-product-title { font-size: 24px; letter-spacing: 1px; margin-bottom: 10px; }
+  .ks-product-tagline { font-size: 14px; margin-bottom: 16px; }
+  .ks-product-price { font-size: 26px; margin-bottom: 16px; }
+  .ks-product-features { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+  .ks-feature-pill { font-size: 9px; padding: 8px 10px; letter-spacing: 1px; }
+  .ks-variants { gap: 8px; margin-bottom: 20px; }
+  .ks-swatch-btn { width: 40px !important; height: 40px !important; }
+  .ks-stock-indicator { font-size: 11px; margin-bottom: 14px; }
+  .ks-add-to-cart { font-size: 14px; padding: 16px; margin-bottom: 20px; letter-spacing: 2px; }
+  .ks-accordion-header { font-size: 11px; padding: 14px 0; }
+  .ks-accordion-body { font-size: 14px; }
+  .ks-product-reviews { margin-bottom: 12px; }
   .ks-stars { font-size: 14px; }
   .ks-review-count { font-size: 11px; }
 }
@@ -464,7 +375,6 @@ function ksSelectVariant(btn, variantTitle) {
     b.style.boxShadow = '0 0 0 2px transparent';
   });
   btn.style.boxShadow = '0 0 0 2px #C9A84C';
-  btn.classList.add('active');
 
   {% for variant in product.variants %}
     if (variantTitle === "{{ variant.title }}") {
@@ -477,6 +387,7 @@ function ksSelectVariant(btn, variantTitle) {
     }
   {% endfor %}
 }
+
 function ksToggle(header) {
   const item = header.parentElement;
   const wasOpen = item.classList.contains('open');
