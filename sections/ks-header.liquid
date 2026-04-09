@@ -1,5 +1,6 @@
 <header class="ks-header">
   <div class="ks-header-inner">
+
     <button class="ks-hamburger" onclick="ksToggleMenu()" aria-label="Menu">
       <span></span>
       <span></span>
@@ -8,12 +9,22 @@
 
     <a href="/" class="ks-logo">KNGDM <span>Supply</span></a>
 
+    <nav class="ks-desktop-nav">
+      <a href="/">Home</a>
+      <a href="/collections/best-sellers">Shop</a>
+      <a href="/products/jesus-quarter-necklace">Jesus Quarter</a>
+      <a href="/products/crown-of-thorns-necklace">Crown of Thorns</a>
+      <a href="/pages/our-mission">Our Mission</a>
+      <a href="/pages/contact">Contact</a>
+    </nav>
+
     <a href="/cart" class="ks-cart-icon">
       🛒
       {%- if cart.item_count > 0 -%}
         <span class="ks-cart-count">{{ cart.item_count }}</span>
       {%- endif -%}
     </a>
+
   </div>
 
   <nav class="ks-mobile-menu" id="ks-mobile-menu">
@@ -45,6 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 .ks-logo {
   font-family: 'Cinzel', serif;
@@ -54,12 +66,10 @@
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: uppercase;
+  white-space: nowrap;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  white-space: nowrap;
-  text-align: center;
-  line-height: 1.2;
 }
 .ks-logo span { color: #FAFAF5; }
 .ks-hamburger {
@@ -79,20 +89,15 @@
   background: #FAFAF5;
   transition: all 0.3s;
 }
-.ks-hamburger.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.ks-hamburger.open span:nth-child(2) {
-  opacity: 0;
-}
-.ks-hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
+.ks-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.ks-hamburger.open span:nth-child(2) { opacity: 0; }
+.ks-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 .ks-cart-icon {
   font-size: 20px;
   text-decoration: none;
   position: relative;
   color: #FAFAF5;
+  z-index: 1001;
 }
 .ks-cart-count {
   position: absolute;
@@ -110,6 +115,9 @@
   align-items: center;
   justify-content: center;
 }
+.ks-desktop-nav {
+  display: none;
+}
 .ks-mobile-menu {
   background: #0A0A0A;
   border-top: 1px solid rgba(201,168,76,0.15);
@@ -117,9 +125,7 @@
   overflow: hidden;
   transition: max-height 0.4s ease;
 }
-.ks-mobile-menu.open {
-  max-height: 400px;
-}
+.ks-mobile-menu.open { max-height: 400px; }
 .ks-mobile-menu ul {
   list-style: none;
   padding: 16px 24px;
@@ -128,9 +134,7 @@
   flex-direction: column;
   gap: 0;
 }
-.ks-mobile-menu li {
-  border-bottom: 1px solid rgba(201,168,76,0.08);
-}
+.ks-mobile-menu li { border-bottom: 1px solid rgba(201,168,76,0.08); }
 .ks-mobile-menu a {
   display: block;
   padding: 16px 0;
@@ -145,42 +149,39 @@
 }
 .ks-mobile-menu a:hover { color: #C9A84C; }
 
-/* DESKTOP */
 @media (min-width: 769px) {
   .ks-header-inner {
     padding: 0 40px;
     height: 70px;
   }
   .ks-logo {
-    font-size: 22px;
+    font-size: 20px;
     position: static;
     transform: none;
+    letter-spacing: 3px;
   }
   .ks-hamburger { display: none; }
-  .ks-mobile-menu {
-    max-height: none !important;
-    overflow: visible;
-    border-top: none;
-    background: transparent;
-  }
-  .ks-mobile-menu ul {
-    flex-direction: row;
+  .ks-mobile-menu { display: none; }
+  .ks-desktop-nav {
+    display: flex;
     align-items: center;
-    gap: 32px;
-    padding: 0;
+    gap: 28px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
-  .ks-mobile-menu li { border: none; }
-  .ks-mobile-menu a {
+  .ks-desktop-nav a {
+    font-family: 'Barlow Condensed', sans-serif;
     font-size: 12px;
-    padding: 0;
+    font-weight: 600;
     letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #CCCCCC;
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
   }
-  .ks-header-inner {
-    position: relative;
-  }
+  .ks-desktop-nav a:hover { color: #C9A84C; }
 }
 </style>
 
