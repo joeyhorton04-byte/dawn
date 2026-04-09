@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "ks-announcement": {
+      "type": "ks-announcement",
+      "settings": {}
+    },
+    "ks-mission-page": {
+      "type": "ks-mission-page",
+      "settings": {}
+    },
+    "ks-testimonials": {
+      "type": "ks-testimonials",
+      "settings": {}
+    },
+    "ks-email": {
+      "type": "ks-email",
+      "settings": {}
+    },
+    "ks-footer": {
+      "type": "ks-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ks-announcement",
+    "ks-mission-page",
+    "ks-testimonials",
+    "ks-email",
+    "ks-footer"
+  ]
+}
