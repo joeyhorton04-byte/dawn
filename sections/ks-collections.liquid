@@ -5,9 +5,16 @@
       <h2 class="ks-section-title">Wear The Word</h2>
     </div>
     <div class="ks-collections-grid">
+
       <div class="ks-collection-card">
-        <div class="ks-collection-bg ks-collection-bg-1"></div>
-        <div class="ks-collection-icon">✝</div>
+        {% assign col1 = collections['best-sellers'] %}
+        {% if col1.image %}
+          <div class="ks-collection-bg" style="background-image: url('{{ col1.image | img_url: 'master' }}'); background-size: cover; background-position: center;"></div>
+        {% elsif col1.products.first and col1.products.first.featured_image %}
+          <div class="ks-collection-bg" style="background-image: url('{{ col1.products.first.featured_image | img_url: 'master' }}'); background-size: cover; background-position: center;"></div>
+        {% else %}
+          <div class="ks-collection-bg ks-collection-bg-1"></div>
+        {% endif %}
         <div class="ks-collection-overlay"></div>
         <div class="ks-collection-content">
           <p class="ks-collection-tag">Best Sellers</p>
@@ -15,26 +22,38 @@
           <a href="/collections/best-sellers" class="ks-collection-link">Shop Now →</a>
         </div>
       </div>
+
       <div class="ks-collection-card">
-        <div class="ks-collection-bg ks-collection-bg-2"></div>
-        <div class="ks-collection-icon">⛓</div>
+        {% assign col2 = collections['best-sellers'] %}
+        {% assign second_product = col2.products[1] %}
+        {% if second_product and second_product.featured_image %}
+          <div class="ks-collection-bg" style="background-image: url('{{ second_product.featured_image | img_url: 'master' }}'); background-size: cover; background-position: center;"></div>
+        {% else %}
+          <div class="ks-collection-bg ks-collection-bg-2"></div>
+        {% endif %}
         <div class="ks-collection-overlay"></div>
         <div class="ks-collection-content">
           <p class="ks-collection-tag">New In</p>
-          <h3 class="ks-collection-name">Chains & Bracelets</h3>
+          <h3 class="ks-collection-name">Crown of Thorns</h3>
           <a href="/collections/best-sellers" class="ks-collection-link">Shop Now →</a>
         </div>
       </div>
+
       <div class="ks-collection-card">
-        <div class="ks-collection-bg ks-collection-bg-3"></div>
-        <div class="ks-collection-icon">🎁</div>
+        {% assign col3 = collections['best-sellers'] %}
+        {% if col3.products.first and col3.products.first.featured_image %}
+          <div class="ks-collection-bg" style="background-image: url('{{ col3.products.first.featured_image | img_url: 'master' }}'); background-size: cover; background-position: center; filter: hue-rotate(30deg) brightness(0.7);"></div>
+        {% else %}
+          <div class="ks-collection-bg ks-collection-bg-3"></div>
+        {% endif %}
         <div class="ks-collection-overlay"></div>
         <div class="ks-collection-content">
           <p class="ks-collection-tag">Gift Ideas</p>
-          <h3 class="ks-collection-name">Sets & Bundles</h3>
+          <h3 class="ks-collection-name">Best Sellers</h3>
           <a href="/collections/best-sellers" class="ks-collection-link">Shop Now →</a>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -44,14 +63,8 @@
   padding: 100px 40px;
   background: #0A0A0A;
 }
-.ks-collections-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-.ks-section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
+.ks-collections-inner { max-width: 1400px; margin: 0 auto; }
+.ks-section-header { text-align: center; margin-bottom: 60px; }
 .ks-section-eyebrow {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px;
@@ -73,7 +86,7 @@
 .ks-collections-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 12px;
 }
 .ks-collection-card {
   position: relative;
@@ -88,30 +101,13 @@
   transition: transform 0.6s ease;
 }
 .ks-collection-card:hover .ks-collection-bg { transform: scale(1.05); }
-.ks-collection-bg-1 {
-  background: linear-gradient(135deg, #1a1206 0%, #2d1f08 40%, #1a1206 100%);
-}
-.ks-collection-bg-2 {
-  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
-}
-.ks-collection-bg-3 {
-  background: linear-gradient(135deg, #0d1a12 0%, #142b1c 50%, #0d1a12 100%);
-}
-.ks-collection-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 100px;
-  opacity: 0.08;
-  color: #C9A84C;
-  transition: opacity 0.3s;
-}
-.ks-collection-card:hover .ks-collection-icon { opacity: 0.15; }
+.ks-collection-bg-1 { background: linear-gradient(135deg, #1a1206 0%, #2d1f08 40%, #1a1206 100%); }
+.ks-collection-bg-2 { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%); }
+.ks-collection-bg-3 { background: linear-gradient(135deg, #0d1a12 0%, #142b1c 50%, #0d1a12 100%); }
 .ks-collection-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
 }
 .ks-collection-content {
   position: absolute;
@@ -152,8 +148,9 @@
 }
 .ks-collection-link:hover { border-color: #C9A84C; }
 @media (max-width: 768px) {
-  .ks-collections-grid { grid-template-columns: 1fr; }
   .ks-collections { padding: 60px 20px; }
+  .ks-collections-grid { grid-template-columns: 1fr; gap: 8px; }
+  .ks-collection-card { aspect-ratio: 4/3; }
 }
 </style>
 
