@@ -57,14 +57,9 @@
       {% form 'product', product %}
         <input type="hidden" name="id" id="ks-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
-        <div class="ks-stock-indicator">
-          <div class="ks-stock-dot"></div>
-          <span>In Stock — Ready to Ship</span>
-        </div>
-
-        <button type="submit" name="add" class="ks-add-to-cart">
-          ADD TO CART — {{ product.price | money }}
-        </button>
+<button type="submit" name="add" class="ks-add-to-cart">
+  ADD TO CART
+</button>
       {% endform %}
 
       <div class="ks-product-accordion">
