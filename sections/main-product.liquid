@@ -459,15 +459,23 @@ function ksPrevImage() {
 }
 
 function ksSelectVariant(btn, variantTitle) {
-  document.querySelectorAll('.ks-variant-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.ks-swatch-btn').forEach(b => {
+    b.style.boxShadow = '0 0 0 2px transparent';
+  });
+  btn.style.boxShadow = '0 0 0 2px #C9A84C';
   btn.classList.add('active');
-  if (ksVariantImages[variantTitle]) {
-    const idx = ksImages.indexOf(ksVariantImages[variantTitle]);
-    if (idx !== -1) ksCurrentIndex = idx;
-    ksSetMainImage(ksVariantImages[variantTitle]);
-  }
-}
 
+  {% for variant in product.variants %}
+    if (variantTitle === "{{ variant.title }}") {
+      document.getElementById('ks-variant-id').value = "{{ variant.id }}";
+      document.querySelector('.ks-add-to-cart').innerHTML = 'ADD TO CART — {{ variant.price | money }}';
+      {% if variant.featured_image %}
+        const idx = ksImages.indexOf("{{ variant.featured_image | img_url: 'master' }}");
+        if (idx !== -1) { ksCurrentIndex = idx; ksSetMainImage(ksImages[idx]); }
+      {% endif %}
+    }
+  {% endfor %}
+}
 function ksToggle(header) {
   const item = header.parentElement;
   const wasOpen = item.classList.contains('open');
