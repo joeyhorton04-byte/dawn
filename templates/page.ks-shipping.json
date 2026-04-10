@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "ks-shipping": {
+      "type": "ks-shipping",
+      "settings": {}
+    }
+  },
+  "order": ["ks-shipping"]
+}
