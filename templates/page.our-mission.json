@@ -12,6 +12,7 @@
   "sections": {
     "ks-announcement": {
       "type": "ks-announcement",
+      "disabled": true,
       "settings": {}
     },
     "ks-mission-page": {
