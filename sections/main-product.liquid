@@ -368,7 +368,7 @@ function ksSelectVariant(btn, variantTitle) {
   {% for variant in product.variants %}
     if (variantTitle === "{{ variant.title }}") {
       document.getElementById('ks-variant-id').value = "{{ variant.id }}";
-      document.querySelector('.ks-add-to-cart').innerHTML = 'ADD TO CART — {{ variant.price | money }}';
+      document.querySelector('.ks-add-to-cart').innerHTML = 'ADD TO CART';
       {% if variant.featured_image %}
         const idx = ksImages.indexOf("{{ variant.featured_image | img_url: 'master' }}");
         if (idx !== -1) { ksCurrentIndex = idx; ksSetMainImage(ksImages[idx]); }
