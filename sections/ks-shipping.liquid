@@ -1,0 +1,171 @@
+<section class="ks-shipping">
+  <div class="ks-shipping-inner">
+
+    <div class="ks-shipping-hero">
+      <p class="ks-shipping-overline">✝ Kingdom Supply</p>
+      <h1 class="ks-shipping-title">Shipping & Returns</h1>
+      <p class="ks-shipping-subtitle">Every order is handled with care and shipped with purpose.</p>
+    </div>
+
+    <div class="ks-shipping-blocks">
+
+      <div class="ks-shipping-block">
+        <div class="ks-shipping-icon">📦</div>
+        <h2>Order Processing</h2>
+        <p>All orders are processed within 24–72 hours of being placed. You will receive a confirmation email with tracking information once your order has shipped.</p>
+      </div>
+
+      <div class="ks-shipping-block">
+        <div class="ks-shipping-icon">🌍</div>
+        <h2>Shipping Times</h2>
+        <p>We ship worldwide. Estimated delivery times are 7–12 business days for the USA, Canada, and international destinations. Delays may occur during peak seasons.</p>
+      </div>
+
+      <div class="ks-shipping-block">
+        <div class="ks-shipping-icon">🚚</div>
+        <h2>Free Shipping</h2>
+        <p>Free worldwide shipping on all orders over $50. Orders under $50 are subject to a standard shipping fee calculated at checkout based on your location.</p>
+      </div>
+
+      <div class="ks-shipping-block">
+        <div class="ks-shipping-icon">↩️</div>
+        <h2>Returns & Exchanges</h2>
+        <p>We offer hassle-free returns and exchanges within 14 days of delivery. Items must be unused and in original condition. Sale items are final sale.</p>
+      </div>
+
+      <div class="ks-shipping-block">
+        <div class="ks-shipping-icon">⚡</div>
+        <h2>Damaged or Wrong Item</h2>
+        <p>If you received a damaged or incorrect item, email us within 7 days of delivery and we will make it right — no questions asked.</p>
+      </div>
+
+      <div class="ks-shipping-block">
+        <div class="ks-shipping-icon">✉️</div>
+        <h2>Contact Us</h2>
+        <p>For any shipping or return inquiries, reach us at <strong>support@kingdomsupply.com</strong>. We respond within 24 hours, Monday through Friday.</p>
+      </div>
+
+    </div>
+
+    <div class="ks-shipping-closing">
+      <p>"Whatever you do, work at it with all your heart, as working for the Lord."</p>
+      <span>— Colossians 3:23</span>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.ks-shipping {
+  background: #0A0A0A;
+  padding: 80px 40px;
+  color: #FAFAF5;
+}
+.ks-shipping-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.ks-shipping-hero {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.ks-shipping-overline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 20px;
+}
+.ks-shipping-title {
+  font-family: 'Cinzel', serif;
+  font-size: 52px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #FAFAF5;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.ks-shipping-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #CCCCCC;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.ks-shipping-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 80px;
+}
+.ks-shipping-block {
+  background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 40px;
+}
+.ks-shipping-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.ks-shipping-block h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C9A84C;
+  margin-bottom: 16px;
+}
+.ks-shipping-block p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: #CCCCCC;
+  line-height: 1.8;
+}
+.ks-shipping-block strong {
+  color: #C9A84C;
+}
+.ks-shipping-closing {
+  text-align: center;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding-top: 60px;
+}
+.ks-shipping-closing p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: #FAFAF5;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 16px;
+}
+.ks-shipping-closing span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+@media (max-width: 768px) {
+  .ks-shipping { padding: 60px 20px; }
+  .ks-shipping-title { font-size: 32px; }
+  .ks-shipping-subtitle { font-size: 17px; }
+  .ks-shipping-blocks { grid-template-columns: 1fr; gap: 24px; }
+  .ks-shipping-block { padding: 28px; }
+  .ks-shipping-closing p { font-size: 18px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "KS Shipping",
+  "settings": [],
+  "presets": [{ "name": "KS Shipping" }]
+}
+{% endschema %}
