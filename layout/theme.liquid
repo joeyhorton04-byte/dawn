@@ -426,6 +426,7 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+<!-- KNGDM Supply Popup - Paste before </body> in theme.liquid -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Raleway:wght@400;500;600&display=swap');
  
@@ -711,10 +712,12 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
         <p class="kngdm-legal">By submitting this form, you consent to receive informational and/or marketing texts from KNGDM Supply including texts sent by autodialer. Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies. Unsubscribe at any time by replying STOP.</p>
       </div>
       <div id="kngdm-success">
-        <h3>You're In</h3>
-        <div class="kngdm-code-box"><div class="kngdm-code">SHIPFREE</div></div>
-        <p>Free expedited shipping applied.<br>Use code above at checkout.</p>
-        <button class="kngdm-shop-btn" onclick="kngdmClose()">SHOP NOW</button>
+        <div style="background:rgba(10,10,10,0.9);border-radius:8px;padding:24px 20px;">
+          <h3>You're In</h3>
+          <div class="kngdm-code-box"><div class="kngdm-code">SHIPFREE</div></div>
+          <p>Free expedited shipping applied.<br>Use code above at checkout.</p>
+          <button class="kngdm-shop-btn" onclick="kngdmClose()">SHOP NOW</button>
+        </div>
       </div>
     </div>
   </div>
