@@ -446,16 +446,14 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
 
   #kngdm-popup {
     position: relative;
-    width: 400px;
+    width: 420px;
     max-width: 94vw;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 20px 80px rgba(0,0,0,0.9);
     animation: kngdmSlide 0.4s cubic-bezier(0.16,1,0.3,1);
-    background-image: url('https://cdn.shopify.com/s/files/1/0983/6268/7795/files/narrow_path_6.png?v=1775754514');
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
   }
 
   @keyframes kngdmSlide {
@@ -463,28 +461,47 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
     to { transform: translateY(0); opacity:1 }
   }
 
-  #kngdm-darkener {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
+  /* TOP HALF - image only */
+  #kngdm-image-half {
+    width: 100%;
+    height: 220px;
+    background-image: url('https://cdn.shopify.com/s/files/1/0983/6268/7795/files/narrow_path_6.png?v=1775754514');
+    background-position: center 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
+  #kngdm-image-half::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #111);
+  }
+
+  /* BOTTOM HALF - dark content */
   #kngdm-content {
-    position: relative;
-    z-index: 2;
-    padding: 40px 32px 32px;
+    background: #111111;
+    padding: 28px 32px 32px;
     text-align: center;
+    position: relative;
   }
 
   #kngdm-close {
     position: absolute;
-    top: 14px;
+    top: 12px;
     right: 16px;
     z-index: 3;
     background: none;
     border: none;
-    color: #999;
-    font-size: 24px;
+    color: #666;
+    font-size: 22px;
     cursor: pointer;
     line-height: 1;
     padding: 0;
@@ -493,52 +510,59 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
 
   #kngdm-close:hover { color: #fff; }
 
-  #kngdm-content img.kngdm-logo {
-    height: 36px;
-    margin-bottom: 24px;
+  #kngdm-logo-wrap {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  #kngdm-logo-wrap img {
+    height: 32px;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
   }
 
   #kngdm-content h2 {
     font-family: 'Cinzel', serif;
     color: #ffffff;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 900;
-    line-height: 1.15;
-    margin: 0 0 10px;
-    letter-spacing: 0.03em;
+    line-height: 1.2;
+    margin: 18px 0 8px;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.9);
   }
 
   #kngdm-content h2 span { color: #c9a84c; }
 
   #kngdm-content p.kngdm-sub {
     font-family: 'Raleway', sans-serif;
-    color: #ddd;
-    font-size: 13px;
-    letter-spacing: 0.06em;
+    color: #999;
+    font-size: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin: 0 0 24px;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    margin: 0 0 20px;
   }
 
   #kngdm-email {
     width: 100%;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 3px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
     color: #fff;
     font-family: 'Raleway', sans-serif;
     font-size: 13px;
-    letter-spacing: 0.08em;
-    padding: 14px 16px;
-    margin-bottom: 10px;
+    letter-spacing: 0.06em;
+    padding: 13px 16px;
+    margin-bottom: 8px;
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.2s;
   }
 
-  #kngdm-email::placeholder { color: #888; letter-spacing: 0.08em; }
+  #kngdm-email::placeholder { color: #555; font-size: 12px; letter-spacing: 0.08em; }
   #kngdm-email:focus { border-color: #c9a84c; }
 
   #kngdm-phone-wrap {
@@ -548,35 +572,38 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
   }
 
   #kngdm-flag {
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 3px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
     color: #fff;
     font-family: 'Raleway', sans-serif;
-    font-size: 12px;
-    padding: 14px 8px;
-    width: 90px;
+    font-size: 13px;
+    padding: 13px 10px;
+    width: 85px;
     box-sizing: border-box;
     outline: none;
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
   }
 
   #kngdm-phone {
     flex: 1;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 3px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
     color: #fff;
     font-family: 'Raleway', sans-serif;
     font-size: 13px;
-    letter-spacing: 0.08em;
-    padding: 14px 16px;
+    letter-spacing: 0.06em;
+    padding: 13px 16px;
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.2s;
   }
 
-  #kngdm-phone::placeholder { color: #888; letter-spacing: 0.08em; }
+  #kngdm-phone::placeholder { color: #555; font-size: 12px; letter-spacing: 0.08em; }
   #kngdm-phone:focus { border-color: #c9a84c; }
 
   #kngdm-submit {
@@ -584,60 +611,75 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
     background: #ffffff;
     color: #111111;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     font-family: 'Cinzel', serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 16px;
+    padding: 15px;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   #kngdm-submit:hover { background: #c9a84c; color: #fff; }
 
   .kngdm-skip {
     font-family: 'Raleway', sans-serif;
-    color: #aaa;
+    color: #444;
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
     transition: color 0.2s;
     display: block;
-    margin-bottom: 16px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    margin-bottom: 14px;
   }
 
-  .kngdm-skip:hover { color: #fff; }
+  .kngdm-skip:hover { color: #888; }
 
   .kngdm-legal {
     font-family: 'Raleway', sans-serif;
-    color: #888;
-    font-size: 10px;
-    line-height: 1.5;
+    color: #3a3a3a;
+    font-size: 9px;
+    line-height: 1.6;
     margin: 0;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
   }
 
-  #kngdm-success { display: none; animation: kngdmFade 0.3s ease; }
+  #kngdm-success { display: none; animation: kngdmFade 0.3s ease; padding-top: 10px; }
   #kngdm-success.visible { display: block; }
 
   #kngdm-success h3 {
     font-family: 'Cinzel', serif;
     color: #c9a84c;
-    font-size: 22px;
-    margin: 0 0 8px;
+    font-size: 20px;
+    margin: 0 0 10px;
     text-transform: uppercase;
   }
 
   #kngdm-success p {
     font-family: 'Raleway', sans-serif;
-    color: #ddd;
+    color: #aaa;
     font-size: 13px;
     letter-spacing: 0.05em;
+    line-height: 1.6;
+  }
+
+  #kngdm-success .code-box {
+    background: #1a1a1a;
+    border: 1px dashed #c9a84c;
+    border-radius: 4px;
+    padding: 14px;
+    margin: 14px 0;
+  }
+
+  #kngdm-success .code {
+    font-family: 'Cinzel', serif;
+    color: #c9a84c;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
   }
 
   #kngdm-form { display: block; }
@@ -645,31 +687,46 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
 
 <div id="kngdm-overlay">
   <div id="kngdm-popup">
-    <div id="kngdm-darkener"></div>
-    <button id="kngdm-close" onclick="kngdmClose()">&#215;</button>
+    <!-- Image top half -->
+    <div id="kngdm-image-half"></div>
+
+    <!-- Dark content bottom half -->
     <div id="kngdm-content">
-      <img class="kngdm-logo" src="data:image/png;base64,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" alt="KNGDM Supply" />
+      <button id="kngdm-close" onclick="kngdmClose()">&#215;</button>
+
+      <!-- Logo floats between the two halves -->
+      <div id="kngdm-logo-wrap">
+        <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAtAOEDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAYHAwQIBQEC/8QANRAAAQMEAQMDAgQEBgMAAAAAAQIDBAAFBhEHEiExCBNBFFEiMmFxCRUWgRgjNEJDoYKSwf/EABkBAQADAQEAAAAAAAAAAAAAAAABAgMEBf/EACgRAQACAQIFAgcBAAAAAAAAAAABAgMREgQhMUFRE5EFIiMyYXGhgf/aAAwDAQACEQMRAD8A4/pSlXVKUoATvQ8eaBSlKBSvqEqWoJQkqUfAA2TX1xtxo6cbUgn4UNUH5pSlApSlApQdzoUoFKVti2XIxPrBb5ZjdPV7wZV0a+/VrWqDUpSlApSlApSlApSlApSlApSlApSlArpPHP5jN9MHsRFvuzHmlMMhKj1Hb/SEg/31XNlXfZ83xmFwR/TSMhQzfEtKW2hMd/8AAv3etI6gjW/Hfet/Ned8Rpa9abY1+aHRw8xEzr4eFyPGu3HmMQMMjIdjpntiXcZqFf6lzx7SSPCEdtj5J3++L02w4tw5Bfgzo7ciM/bnkOtOJ2laSU9iKlN+z/C+QOOE2zKJptV+YSFNPKjOLR7wH5gUJVpKvBB8b+dCoZwPfrJi+dOXS93NuLETFcaCw04vrUSnWglJPx86rKPUtwuStqzF+f8As+YXnbGWsxPJL3uOVY1ylbLnjEpUu0sXVlqUhC9uwVKKT0OfJSQoaV9j3+5werVxZymztdaugQioJ3231nvqo7lGfvWvl245ViN0TIiyVtkgoWlDyAhIKFpUAfIP7eQawc2Znbs3m2e5wUOMuIhluSwsd2l9ZOt+FD7Ef9VGHDnnNiyZOfLr36dy96bLVr5WZlMVHGHCUZywNojXaf7LUichI93qWkqUQryNaIH2/eqysN85FuGP3OIuJkGQWy4R1M9TjLslLa/hSVEHRGiDo1JX87x/NeKW8UyG4C0XeGG/p5LrK1sulA0CSgEp2nYOx87G/FZMBzLGOPcCultVdWr5c5zq1oagtOhtIKAkdS3Ep+xJ0Cf0NZ463x47bqbr7vH91WtNbWjSdI0eR6Z/qI/KqYy/dZP0ryXWztPcDwofofvUkveY3u2eoaRaXLhIk2eRMZiuwX1lxnoWhAOkHYSdnfaoLwRfbNjedou18uCIUVuO4jqLTiypShoABCT/AN1JZtywWVzDIzablkdy3oeRJYisQ5JecWhCQAepsJSNp35P9q0z49eJva1ZmNunTurjt9OIie7R9SOI2zGcohyrQwiLGuLSllhA0hC0kA9I+Adjt+9S5fGrWScFWJ6A0kXqLFVIYPgupWorLZ/fex+v7mq15ezj+vMnalNNKiW+Oj2YyXe6gCdlatb7n7Dfgeamln5RgY9yBATCn/W44bbGgyChC0hCkJ17gStIOwSfjuD+1RenExgxxH3V5+3b2lMWxze2vSWX03cffVzV5Teo5S0wVNwmXBoqcHZSyD8J8D9f2qm79F+hvk+FrX08lxr/ANVEf/Ku/E+W7W5yldrrergIFk+mMeCgNOLGg4CFdKEnuruSTryB8VU3Jcm1zs5u0+zTES4MqQp5paW1o/N3IIWAd7JrbhbZp4i05I5TEfqPx/VMkU9ONrc4Yex2Pyrjb+Wez/JUT0GX7w22E/BX8dIVre+2t7rtfmPA+Vp+URs84tz95yMy20tqwGWpuI6lI8I0r2lhQ+FAefzeNcRcTScWh8h2iRmrRdx9LqhNSGi5+EoUAekdyAopP9qvHhfI7PxTmSpsfm22z8GBWv8AljbMtyRIBSegewprpaX1EbUFDx389vScyvOGxe7f6nbI1d2ZFuupvvTNZO0KSpSiVpP6Hf7EferM/iJPvHPccjl5z2RbVLDfUenq9wjevG9fNVNk/J/1/qDd5RgW8ttpubctmK4RstthKQFEdgopT386J+atn1HZDxtzaxYr/Yc8tliukJlTMmHeWH2vwK/F+dDawSk7HbY7+fuET5FmS3fR7xuHZT7gXdJyVBThPUlLjgSD+g0NfbVXx6Ppcz/C9dXUyX/dYcmhhQcPU3psEdJ+NHxquY+Xstx9zAsS44xWcq6W+wJdflXEsraTIkuqKle2lelBA2ryATv9KuD048r8cYjwLcMVyHK2Yd2lqlKQz9DKcCPcRpPUpDRHn7E1AneaRH3/AEZuSOXkNLyFu3OLjOzdfUJkEq+n7n8XuEdAUPJ77+a8T+HU+8vFsrZU84ppuUyW0FRKU7Qreh8brjafMmSA3GkXB6WzG2hjqcUpCU7/ANgV+UH7aFdK+jDk/AeOsfyBrL8kbtz8+Q2ploQ5DyulKSCSW21AefvUi68FZm3Lg/K3eZCmTaFTpjkNy5na0w/+NXUruD1bKD5106+KpH+HlIfTyTfIofcDCrZ1qaCj0lQcSASPG+/mqCze6OTMgujUW7uTrUue9IjBK3AyQtZIUlCwCDo/KQatf0a5xiHH+a3a85ffW7ZHeg/TtAxn3lLUVg9g2hQA0PkioEW9UsmRI58y3333Hfbm9COtRPSkJToDfgfpV4+iHlNd0amcWZTPfkCQ0tVrdeeJV09P+YwCe/jak/8Al9hVdZW3xRk/Nd5zS9cl21VikSzLagx7ZPVIkaSNNL6o6UIBIAJ2rsf71DfTxkFjxzmuy5RkNxj2m2QnnXnVey64AFNrSEpS2lR8qH6a+akWfyDDc9O2N5Fj9qvLrmSZVJWhh1p5QVEtqSelZ0ezqySN9j2JHiubHnHHnVuvOLccWSpS1HZUT5JPzV0esTMsUz3kqHkGI3tq5w02xuKvUd5paFpccUdhxCe2ljxuqUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoP/9k=" alt="KNGDM Supply" />
+      </div>
+
       <div id="kngdm-form">
         <h2>UNLOCK FREE<br><span>EXPEDITED SHIPPING</span></h2>
         <p class="kngdm-sub">Enter your details below to claim your offer</p>
+
         <input type="email" id="kngdm-email" placeholder="ENTER YOUR EMAIL ADDRESS" />
+
         <div id="kngdm-phone-wrap">
           <select id="kngdm-flag">
-            <option value="+1">🇺🇸 US +1</option>
-            <option value="+44">🇬🇧 UK +44</option>
-            <option value="+61">🇦🇺 AU +61</option>
-            <option value="+1">🇨🇦 CA +1</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+61">🇦🇺 +61</option>
+            <option value="+1">🇨🇦 +1</option>
           </select>
           <input type="tel" id="kngdm-phone" placeholder="PHONE NUMBER" />
         </div>
+
         <button id="kngdm-submit" onclick="kngdmSubmit()">UNLOCK OFFER</button>
         <span class="kngdm-skip" onclick="kngdmClose()">NO THANKS, I PREFER STANDARD SHIPPING</span>
         <p class="kngdm-legal">By submitting this form, you consent to receive informational and/or marketing texts from KNGDM Supply including texts sent by autodialer. Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies. Unsubscribe at any time by replying STOP.</p>
       </div>
+
       <div id="kngdm-success">
         <h3>You're In</h3>
-        <p>Free expedited shipping has been applied.<br>Use code <strong style="color:#c9a84c;">SHIPFREE</strong> at checkout.</p>
-        <button onclick="kngdmClose()" style="margin-top:20px;background:#c9a84c;color:#fff;border:none;padding:14px 32px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;">Shop Now</button>
+        <div class="code-box">
+          <div class="code">SHIPFREE</div>
+        </div>
+        <p>Free expedited shipping applied.<br>Use code above at checkout.</p>
+        <button onclick="kngdmClose()" style="margin-top:18px;background:#c9a84c;color:#fff;border:none;padding:14px 32px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:4px;width:100%;">SHOP NOW</button>
       </div>
     </div>
   </div>
