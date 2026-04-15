@@ -724,15 +724,63 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
 </div>
  
 <script>
+  var KLAVIYO_PUBLIC_KEY = 'XkeJcu';
+  var KLAVIYO_LIST_ID = 'YqbNF9';
+ 
   function kngdmSubmit() {
     var email = document.getElementById('kngdm-email').value;
+    var phone = document.getElementById('kngdm-phone').value;
+    var countryCode = document.getElementById('kngdm-flag').value;
+ 
     if (!email || !email.includes('@')) {
       document.getElementById('kngdm-email').style.borderColor = '#ff4444';
       return;
     }
-    document.getElementById('kngdm-form').style.display = 'none';
-    document.getElementById('kngdm-success').classList.add('visible');
-    localStorage.setItem('kngdm_popup_shown', '1');
+ 
+    var btn = document.getElementById('kngdm-submit');
+    btn.textContent = 'SENDING...';
+    btn.disabled = true;
+ 
+    var profileData = {
+      type: 'profile',
+      attributes: {
+        email: email,
+        properties: {
+          source: 'KNGDM Popup - Free Expedited Shipping'
+        }
+      }
+    };
+ 
+    if (phone) {
+      profileData.attributes.phone_number = countryCode + phone.replace(/\D/g, '');
+    }
+ 
+    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'revision': '2023-12-15'
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: profileData,
+            list_id: KLAVIYO_LIST_ID
+          }
+        }
+      })
+    })
+    .then(function(res) {
+      document.getElementById('kngdm-form').style.display = 'none';
+      document.getElementById('kngdm-success').classList.add('visible');
+      localStorage.setItem('kngdm_popup_shown', '1');
+    })
+    .catch(function(err) {
+      document.getElementById('kngdm-form').style.display = 'none';
+      document.getElementById('kngdm-success').classList.add('visible');
+      localStorage.setItem('kngdm_popup_shown', '1');
+    });
   }
  
   function kngdmClose() {
