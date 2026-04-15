@@ -777,11 +777,37 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
       payload.data.attributes.profile.data.attributes.phone_number = countryCode + phone.replace(/[^0-9]/g, '');
     }
  
+    payload = {
+      data: {
+        type: 'subscription',
+        attributes: {
+          custom_source: 'KNGDM Popup - Free Expedited Shipping',
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email: email,
+                phone_number: (phone && phone.length > 3) ? (countryCode + phone.replace(/[^0-9]/g, '')) : undefined
+              }
+            }
+          }
+        },
+        relationships: {
+          list: {
+            data: {
+              type: 'list',
+              id: KLAVIYO_LIST_ID
+            }
+          }
+        }
+      }
+    };
+ 
     fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'revision': '2024-10-15'
+        'revision': '2024-07-15'
       },
       body: JSON.stringify(payload)
     })
