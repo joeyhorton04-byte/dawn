@@ -755,30 +755,35 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
       profileData.attributes.phone_number = countryCode + phone.replace(/\D/g, '');
     }
  
-    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'revision': '2024-02-15'
-      },
-      body: JSON.stringify({
-        data: {
-          type: 'subscription',
-          attributes: {
-            list_id: KLAVIYO_LIST_ID,
-            custom_source: 'KNGDM Popup',
-            profile: {
-              data: {
-                type: 'profile',
-                attributes: {
-                  email: email,
-                  phone_number: phone ? (countryCode + phone.replace(/[^0-9]/g, '')) : undefined
-                }
+    var payload = {
+      data: {
+        type: 'subscription',
+        attributes: {
+          list_id: KLAVIYO_LIST_ID,
+          custom_source: 'KNGDM Popup - Free Expedited Shipping',
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email: email
               }
             }
           }
         }
-      })
+      }
+    };
+ 
+    if (phone && phone.length > 3) {
+      payload.data.attributes.profile.data.attributes.phone_number = countryCode + phone.replace(/[^0-9]/g, '');
+    }
+ 
+    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15'
+      },
+      body: JSON.stringify(payload)
     })
     .then(function(res) {
       document.getElementById('kngdm-form').style.display = 'none';
