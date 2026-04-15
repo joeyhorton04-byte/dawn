@@ -434,41 +434,43 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     z-index: 99999;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(4px);
+    padding: 16px;
+    box-sizing: border-box;
   }
 
   #kngdm-overlay.active { display: flex; animation: kngdmFade 0.3s ease; }
   @keyframes kngdmFade { from { opacity:0 } to { opacity:1 } }
 
   #kngdm-popup {
-    position: relative;
-    width: 420px;
-    max-width: 94vw;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 20px 80px rgba(0,0,0,0.9);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9);
     animation: kngdmSlide 0.4s cubic-bezier(0.16,1,0.3,1);
-    display: flex;
-    flex-direction: column;
+    background: #111;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   @keyframes kngdmSlide {
-    from { transform: translateY(30px); opacity:0 }
+    from { transform: translateY(20px); opacity:0 }
     to { transform: translateY(0); opacity:1 }
   }
 
   #kngdm-image-half {
     width: 100%;
-    height: 220px;
+    height: 200px;
     background-image: url('https://cdn.shopify.com/s/files/1/0983/6268/7795/files/narrow_path_6.png?v=1775754514');
     background-position: center 60%;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    flex-shrink: 0;
   }
 
   #kngdm-image-half::after {
@@ -478,12 +480,12 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
     left: 0;
     right: 0;
     height: 80px;
-    background: linear-gradient(to bottom, transparent, #0f0f0f);
+    background: linear-gradient(to bottom, transparent, #111);
   }
 
   #kngdm-content {
-    background: #0f0f0f;
-    padding: 28px 32px 32px;
+    background: #111;
+    padding: 20px 24px 28px;
     text-align: center;
     position: relative;
   }
@@ -491,42 +493,36 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
   #kngdm-close {
     position: absolute;
     top: 12px;
-    right: 16px;
-    z-index: 3;
+    right: 14px;
     background: none;
     border: none;
     color: #777;
-    font-size: 22px;
+    font-size: 24px;
     cursor: pointer;
     line-height: 1;
-    padding: 0;
-    transition: color 0.2s;
+    padding: 4px;
+    z-index: 10;
   }
 
   #kngdm-close:hover { color: #fff; }
 
-  #kngdm-logo-wrap {
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-
-  #kngdm-logo-wrap img {
-    height: 30px;
+  #kngdm-content img.kngdm-logo {
+    height: 28px;
+    margin-bottom: 16px;
     display: block;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,1));
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.8));
   }
 
   #kngdm-content h2 {
     font-family: 'Cinzel', serif;
     color: #ffffff;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
     line-height: 1.2;
-    margin: 18px 0 8px;
-    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
   }
 
@@ -534,147 +530,166 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
 
   #kngdm-content p.kngdm-sub {
     font-family: 'Raleway', sans-serif;
-    color: #bbbbbb;
-    font-size: 13px;
+    color: #aaa;
+    font-size: 12px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    margin: 0 0 20px;
+    margin: 0 0 18px;
+    line-height: 1.5;
   }
 
   #kngdm-email {
     width: 100%;
-    background: #1c1c1c;
+    background: #1e1e1e;
     border: 1px solid #3a3a3a;
-    border-radius: 4px;
-    color: #ffffff;
+    border-radius: 6px;
+    color: #fff;
     font-family: 'Raleway', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.06em;
+    font-size: 14px;
+    letter-spacing: 0.04em;
     padding: 14px 16px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.2s;
+    -webkit-appearance: none;
   }
 
-  #kngdm-email::placeholder { color: #666; font-size: 12px; letter-spacing: 0.08em; }
+  #kngdm-email::placeholder { color: #555; font-size: 13px; }
   #kngdm-email:focus { border-color: #c9a84c; }
 
   #kngdm-phone-wrap {
     display: flex;
     gap: 8px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 
   #kngdm-flag {
-    background: #1c1c1c;
+    background: #1e1e1e;
     border: 1px solid #3a3a3a;
-    border-radius: 4px;
-    color: #ffffff;
-    font-family: 'Raleway', sans-serif;
-    font-size: 13px;
-    padding: 14px 10px;
-    width: 85px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    padding: 14px 8px;
+    width: 90px;
     box-sizing: border-box;
     outline: none;
     cursor: pointer;
-    appearance: none;
     -webkit-appearance: none;
+    appearance: none;
     text-align: center;
   }
 
   #kngdm-phone {
     flex: 1;
-    background: #1c1c1c;
+    background: #1e1e1e;
     border: 1px solid #3a3a3a;
-    border-radius: 4px;
-    color: #ffffff;
+    border-radius: 6px;
+    color: #fff;
     font-family: 'Raleway', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.06em;
+    font-size: 14px;
     padding: 14px 16px;
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.2s;
+    -webkit-appearance: none;
   }
 
-  #kngdm-phone::placeholder { color: #666; font-size: 12px; letter-spacing: 0.08em; }
+  #kngdm-phone::placeholder { color: #555; font-size: 13px; }
   #kngdm-phone:focus { border-color: #c9a84c; }
 
   #kngdm-submit {
     width: 100%;
     background: #ffffff;
-    color: #111111;
+    color: #111;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-family: 'Cinzel', serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 15px;
+    padding: 16px;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    -webkit-appearance: none;
   }
 
-  #kngdm-submit:hover { background: #c9a84c; color: #fff; }
+  #kngdm-submit:hover, #kngdm-submit:active { background: #c9a84c; color: #fff; }
 
   .kngdm-skip {
     font-family: 'Raleway', sans-serif;
-    color: #666;
+    color: #555;
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: color 0.2s;
     display: block;
     margin-bottom: 14px;
+    padding: 4px 0;
   }
 
-  .kngdm-skip:hover { color: #aaa; }
+  .kngdm-skip:hover { color: #888; }
 
   .kngdm-legal {
     font-family: 'Raleway', sans-serif;
-    color: #444;
+    color: #3a3a3a;
     font-size: 9px;
     line-height: 1.6;
     margin: 0;
   }
 
-  #kngdm-success { display: none; animation: kngdmFade 0.3s ease; padding-top: 10px; }
+  #kngdm-success { display: none; animation: kngdmFade 0.3s ease; }
   #kngdm-success.visible { display: block; }
 
   #kngdm-success h3 {
     font-family: 'Cinzel', serif;
     color: #c9a84c;
     font-size: 20px;
-    margin: 0 0 10px;
+    margin: 0 0 16px;
     text-transform: uppercase;
   }
 
   #kngdm-success p {
     font-family: 'Raleway', sans-serif;
-    color: #bbb;
+    color: #aaa;
     font-size: 13px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     line-height: 1.6;
+    margin: 0 0 16px;
   }
 
-  #kngdm-success .code-box {
-    background: #1c1c1c;
+  .kngdm-code-box {
+    background: #1e1e1e;
     border: 1px dashed #c9a84c;
-    border-radius: 4px;
-    padding: 14px;
-    margin: 14px 0;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 0 0 16px;
   }
 
-  #kngdm-success .code {
+  .kngdm-code {
     font-family: 'Cinzel', serif;
     color: #c9a84c;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     letter-spacing: 0.12em;
+  }
+
+  .kngdm-shop-btn {
+    width: 100%;
+    background: #c9a84c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px;
+    cursor: pointer;
+    -webkit-appearance: none;
   }
 
   #kngdm-form { display: block; }
@@ -685,13 +700,12 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
     <div id="kngdm-image-half"></div>
     <div id="kngdm-content">
       <button id="kngdm-close" onclick="kngdmClose()">&#215;</button>
-      <div id="kngdm-logo-wrap">
-        <img src="data:image/png;base64,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" alt="KNGDM Supply" />
-      </div>
+      <img class="kngdm-logo" src="data:image/png;base64,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" alt="KNGDM Supply" />
+
       <div id="kngdm-form">
         <h2>UNLOCK FREE<br><span>EXPEDITED SHIPPING</span></h2>
         <p class="kngdm-sub">Enter your details below to claim your offer</p>
-        <input type="email" id="kngdm-email" placeholder="ENTER YOUR EMAIL ADDRESS" />
+        <input type="email" id="kngdm-email" placeholder="ENTER YOUR EMAIL ADDRESS" autocomplete="email" />
         <div id="kngdm-phone-wrap">
           <select id="kngdm-flag">
             <option value="+1">🇺🇸 +1</option>
@@ -699,17 +713,18 @@ main#MainContent { margin: 0 !important; padding: 0 !important; padding-top: 0 !
             <option value="+61">🇦🇺 +61</option>
             <option value="+1">🇨🇦 +1</option>
           </select>
-          <input type="tel" id="kngdm-phone" placeholder="PHONE NUMBER" />
+          <input type="tel" id="kngdm-phone" placeholder="PHONE NUMBER" autocomplete="tel" />
         </div>
         <button id="kngdm-submit" onclick="kngdmSubmit()">UNLOCK OFFER</button>
         <span class="kngdm-skip" onclick="kngdmClose()">NO THANKS, I PREFER STANDARD SHIPPING</span>
         <p class="kngdm-legal">By submitting this form, you consent to receive informational and/or marketing texts from KNGDM Supply including texts sent by autodialer. Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies. Unsubscribe at any time by replying STOP.</p>
       </div>
+
       <div id="kngdm-success">
         <h3>You're In</h3>
-        <div class="code-box"><div class="code">SHIPFREE</div></div>
+        <div class="kngdm-code-box"><div class="kngdm-code">SHIPFREE</div></div>
         <p>Free expedited shipping applied.<br>Use code above at checkout.</p>
-        <button onclick="kngdmClose()" style="margin-top:18px;background:#c9a84c;color:#fff;border:none;padding:14px 32px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:4px;width:100%;">SHOP NOW</button>
+        <button class="kngdm-shop-btn" onclick="kngdmClose()">SHOP NOW</button>
       </div>
     </div>
   </div>
