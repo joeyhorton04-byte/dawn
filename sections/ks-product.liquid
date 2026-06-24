@@ -1,382 +1,460 @@
-{% assign product = all_products['jesus-quarter-necklace'] %}
-
-<section class="ks-product">
-  <div class="ks-product-inner">
+<section class="thr-product">
+  <div class="thr-product-inner">
 
     <!-- IMAGE GALLERY -->
-    <div class="ks-product-gallery">
-      <div class="ks-product-main-image">
+    <div class="thr-product-gallery">
+      <div class="thr-product-main-image">
         {% if product.featured_image %}
-          <img
-            id="ks-main-img"
-            src="{{ product.featured_image | img_url: 'master' }}"
-            alt="{{ product.title }}"
-          >
-        {% else %}
-          <div class="ks-img-placeholder">✝</div>
+          <img id="thr-main-img" src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
         {% endif %}
-        <div class="ks-product-badge">Low Stock</div>
+        <div class="thr-gallery-nav">
+          <button class="thr-prev" onclick="thrPrevImage()" aria-label="Previous image">&#8592;</button>
+          <button class="thr-next" onclick="thrNextImage()" aria-label="Next image">&#8594;</button>
+        </div>
       </div>
-      <div class="ks-product-thumbs">
-        {% for image in product.images %}
-          <div class="ks-thumb {% if forloop.first %}active{% endif %}" onclick="ksSetImage('{{ image | img_url: 'master' }}', this)">
-            <img src="{{ image | img_url: '100x100' }}" alt="{{ product.title }}">
-          </div>
-        {% endfor %}
-      </div>
+      {% if product.images.size > 1 %}
+        <div class="thr-thumb-row">
+          {% for image in product.images %}
+            <button class="thr-thumb-btn {% if forloop.first %}active{% endif %}" onclick="thrGoToImage({{ forloop.index0 }}, this)">
+              <img src="{{ image | img_url: '200x' }}" alt="{{ product.title }} thumbnail {{ forloop.index }}">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
 
     <!-- PRODUCT INFO -->
-    <div class="ks-product-info">
-      <div class="ks-product-reviews">
-        <span class="ks-stars">★★★★★</span>
-        <span class="ks-review-count">4.9 · 238 REVIEWS</span>
+    <div class="thr-product-info">
+
+      <div class="thr-product-reviews">
+        <span class="thr-stars">★★★★☆</span>
+        <span class="thr-review-count">4.42/5 (593 Reviews)</span>
       </div>
 
-      <h1 class="ks-product-title">{{ product.title }}</h1>
-      <p class="ks-product-tagline">Carry the message of Christ wherever you go — a daily reminder of His sacrifice and who you live for.</p>
+      <h1 class="thr-product-title">{{ product.title }}</h1>
 
-      <div class="ks-product-price">
-        <span id="ks-price">{{ product.price | money }}</span>
-        {% if product.compare_at_price > product.price %}
-          <span class="ks-compare-price">{{ product.compare_at_price | money }}</span>
+      <div class="thr-price-row">
+        <span class="thr-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+        {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+          <span class="thr-compare-price">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+          <span class="thr-save-badge">SAVE 40%</span>
         {% endif %}
       </div>
 
-      <div class="ks-product-features">
-        <div class="ks-feature-pill">✝ Faith-Driven Design</div>
-        <div class="ks-feature-pill">⚡ Lifetime Guarantee</div>
-        <div class="ks-feature-pill">💧 Skin-Safe, No Tarnish</div>
-        <div class="ks-feature-pill">🙏 Serenity Prayer Engraved</div>
+      <ul class="thr-feature-list">
+        <li>🔴 Easy daily scalp care</li>
+        <li>💪 Red light therapy support</li>
+        <li>☀️ Lightweight, hands-free comfort</li>
+      </ul>
+
+      <div class="thr-stock-banner">ONLY 6 LEFT IN STOCK!</div>
+
+      <!-- BUNDLE / UPSELL BOX -->
+      <div class="thr-bundle-box">
+        <div class="thr-bundle-option selected" onclick="thrSelectBundle(this)">
+          <span class="thr-radio"></span>
+          <div class="thr-bundle-text">
+            <div class="thr-bundle-name">Starter System</div>
+            <div class="thr-bundle-sub">Red Light Therapy Cap</div>
+          </div>
+          <div class="thr-bundle-price">
+            <span class="thr-bundle-now">{{ product.selected_or_first_available_variant.price | money }}</span>
+            {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+              <span class="thr-bundle-was">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="thr-bundle-product-row">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '100x' }}" alt="{{ product.title }}">
+          {% endif %}
+          <div class="thr-bundle-text">
+            <div class="thr-bundle-name">{{ product.title }}</div>
+          </div>
+          <div class="thr-bundle-price">
+            <span class="thr-bundle-now">{{ product.selected_or_first_available_variant.price | money }}</span>
+            {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+              <span class="thr-bundle-was">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <label class="thr-addon-row">
+          <input type="checkbox" id="thr-shipping-protection" checked>
+          <span class="thr-addon-icon">🛡️</span>
+          <span class="thr-addon-text">+ Shipping Protection</span>
+          <span class="thr-addon-price">$4.40</span>
+        </label>
+
+        <label class="thr-addon-row">
+          <input type="checkbox" id="thr-warranty" checked>
+          <span class="thr-addon-icon">⏱️</span>
+          <span class="thr-addon-text">+ 30-Day Warranty</span>
+          <span class="thr-addon-price">$4.40</span>
+        </label>
       </div>
 
-      {% form 'product', product %}
-        {% for option in product.options_with_values %}
-          <p class="ks-variant-label">{{ option.name }}</p>
-          <div class="ks-variants">
+      <!-- VARIANT SELECTOR -->
+      {% for option in product.options_with_values %}
+        {% if option.values.size > 1 %}
+          <p class="thr-variant-label">{{ option.name }}</p>
+          <div class="thr-variants">
             {% for value in option.values %}
               <button
                 type="button"
-                class="ks-variant-btn {% if forloop.first %}active{% endif %}"
-                onclick="ksSelectVariant(this)"
+                class="thr-pill-btn {% if forloop.first %}active{% endif %}"
+                onclick="thrSelectVariant(this, '{{ value }}')"
                 data-value="{{ value }}"
-              >
-                {{ value }}
-              </button>
+              >{{ value }}</button>
             {% endfor %}
           </div>
-        {% endfor %}
+        {% endif %}
+      {% endfor %}
 
-        <input type="hidden" name="id" id="ks-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-
-        <div class="ks-stock-indicator">
-          <div class="ks-stock-dot"></div>
-          <span>In Stock — Ready to Ship</span>
-        </div>
-
-        <button type="submit" name="add" class="ks-add-to-cart">
-          ADD TO CART — <span id="ks-btn-price">{{ product.price | money }}</span>
+      {% form 'product', product %}
+        <input type="hidden" name="id" id="thr-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" name="add" class="thr-add-to-cart">
+          ADD TO CART — <span id="thr-cta-total">{{ product.selected_or_first_available_variant.price | money }}</span>
         </button>
-
       {% endform %}
 
-      <div class="ks-product-accordion">
-        <div class="ks-accordion-item open">
-          <div class="ks-accordion-header" onclick="ksToggle(this)">
-            Product Details
-            <span class="ks-accordion-arrow">▼</span>
+      <div class="thr-trust-row">
+        <span>🔒 Secure Checkout</span>
+        <span>🚚 Free Shipping Over $50</span>
+        <span>↩️ 30-Day Returns</span>
+      </div>
+
+      <div class="thr-product-accordion">
+        <div class="thr-accordion-item open">
+          <div class="thr-accordion-header" onclick="thrToggle(this)">
+            Product Details <span class="thr-accordion-arrow">▼</span>
           </div>
-          <div class="ks-accordion-body">
-            {{ product.description }}
-          </div>
+          <div class="thr-accordion-body">{{ product.description }}</div>
         </div>
-        <div class="ks-accordion-item">
-          <div class="ks-accordion-header" onclick="ksToggle(this)">
-            Materials
-            <span class="ks-accordion-arrow">▼</span>
+        <div class="thr-accordion-item">
+          <div class="thr-accordion-header" onclick="thrToggle(this)">
+            How It Works <span class="thr-accordion-arrow">▼</span>
           </div>
-          <div class="ks-accordion-body">
-            316L Stainless Steel with triple-coat 18K gold option. Tarnish-free, waterproof, heat and sweat resistant, and hypoallergenic. Backed by a Lifetime Warranty.
-          </div>
+          <div class="thr-accordion-body">Red and near-infrared LEDs are positioned along the inner brim for hands-free, daily scalp exposure. Use for 10–15 minutes per session, 3–5 times per week.</div>
         </div>
-        <div class="ks-accordion-item">
-          <div class="ks-accordion-header" onclick="ksToggle(this)">
-            Shipping & Returns
-            <span class="ks-accordion-arrow">▼</span>
+        <div class="thr-accordion-item">
+          <div class="thr-accordion-header" onclick="thrToggle(this)">
+            Shipping & Returns <span class="thr-accordion-arrow">▼</span>
           </div>
-          <div class="ks-accordion-body">
-            Orders processed within 24–72 hours. Shipping to USA, Canada, and worldwide in 7–12 business days. 14-day easy returns and exchanges. Questions? Email support@kingdomsupply.com.
-          </div>
+          <div class="thr-accordion-body">Orders processed within 24–72 hours. Ships worldwide in 5–10 business days. 30-day returns. Email support@thrivvelabs.com.</div>
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- STICKY MOBILE CTA -->
+  <div class="thr-sticky-cta">
+    <div class="thr-sticky-info">
+      <span class="thr-sticky-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      <span class="thr-sticky-was">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+    </div>
+    <button type="button" class="thr-sticky-btn" onclick="document.querySelector('.thr-add-to-cart').click()">ADD TO CART</button>
   </div>
 </section>
 
 <style>
-.ks-product {
-  padding: 80px 40px;
-  background: #0A0A0A;
+.thr-product {
+  padding: 60px 40px 100px;
+  background: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  color: #111111;
 }
-.ks-product-inner {
-  max-width: 1300px;
+.thr-product-inner {
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 64px;
   align-items: start;
 }
-.ks-product-main-image {
+
+/* GALLERY */
+.thr-product-main-image {
   width: 100%;
   aspect-ratio: 1;
-  background: #1A1A1A;
-  border: 1px solid rgba(201,168,76,0.2);
+  background: #F4F4F4;
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
 }
-.ks-product-main-image img {
+.thr-product-main-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 0.3s;
 }
-.ks-img-placeholder {
-  width: 100%;
-  height: 100%;
+.thr-gallery-nav {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+.thr-prev, .thr-next {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 50%;
+  color: #111;
+  font-size: 16px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
-  color: rgba(201,168,76,0.2);
 }
-.ks-product-badge {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: #C9A84C;
-  color: #0A0A0A;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-}
-.ks-product-thumbs {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-.ks-thumb {
-  width: 64px;
-  height: 64px;
-  border: 1px solid rgba(201,168,76,0.15);
-  cursor: pointer;
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.ks-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.ks-thumb.active { border-color: #C9A84C; }
-.ks-product-reviews {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.ks-stars { color: #C9A84C; font-size: 16px; letter-spacing: 2px; }
-.ks-review-count {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  color: #888888;
-  letter-spacing: 1px;
-}
-.ks-product-title {
-  font-family: 'Cinzel', serif;
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #FAFAF5;
-  line-height: 1.1;
+.thr-prev:hover, .thr-next:hover { background: #E63946; color: #fff; }
+.thr-thumb-row { display: flex; gap: 10px; margin-top: 12px; }
+.thr-thumb-btn { width: 64px; height: 64px; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; padding: 0; background: none; }
+.thr-thumb-btn.active { border-color: #E63946; }
+.thr-thumb-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* INFO */
+.thr-product-reviews { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.thr-stars { color: #FFB400; font-size: 16px; letter-spacing: 1px; }
+.thr-review-count { font-size: 13px; color: #555; font-weight: 600; }
+
+.thr-product-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.15;
   margin-bottom: 16px;
 }
-.ks-product-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: #CCCCCC;
-  margin-bottom: 28px;
-  line-height: 1.6;
+
+.thr-price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.thr-price { font-size: 28px; font-weight: 800; color: #E63946; }
+.thr-compare-price { font-size: 18px; color: #999; text-decoration: line-through; }
+.thr-save-badge { background: #E63946; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 20px; }
+
+.thr-feature-list { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-direction: column; gap: 8px; }
+.thr-feature-list li { font-size: 14px; font-weight: 600; color: #333; }
+
+.thr-stock-banner {
+  background: rgba(230,57,70,0.08);
+  border: 1px solid rgba(230,57,70,0.3);
+  color: #E63946;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
-.ks-product-price {
-  font-family: 'Cinzel', serif;
-  font-size: 32px;
-  font-weight: 600;
-  color: #C9A84C;
-  margin-bottom: 28px;
+
+/* BUNDLE BOX */
+.thr-bundle-box {
+  border: 2px solid #E63946;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.thr-bundle-option, .thr-bundle-product-row, .thr-addon-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
-.ks-compare-price {
-  font-size: 20px;
-  color: #888888;
-  text-decoration: line-through;
-}
-.ks-product-features {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 32px;
-}
-.ks-feature-pill {
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.2);
-  padding: 10px 14px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
+.thr-bundle-option { background: rgba(230,57,70,0.06); cursor: pointer; }
+.thr-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #E63946; background: #E63946; flex-shrink: 0; position: relative; }
+.thr-radio::after { content: ''; position: absolute; top: 4px; left: 4px; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.thr-bundle-text { flex: 1; }
+.thr-bundle-name { font-size: 14px; font-weight: 700; color: #111; }
+.thr-bundle-sub { font-size: 12px; color: #777; }
+.thr-bundle-price { text-align: right; }
+.thr-bundle-now { font-size: 14px; font-weight: 800; color: #111; }
+.thr-bundle-was { font-size: 12px; color: #999; text-decoration: line-through; margin-left: 6px; }
+.thr-bundle-product-row img { width: 44px; height: 44px; border-radius: 6px; object-fit: cover; }
+.thr-addon-row { cursor: pointer; background: rgba(230,57,70,0.04); }
+.thr-addon-row:last-child { border-bottom: none; }
+.thr-addon-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: #E63946; flex-shrink: 0; }
+.thr-addon-icon { font-size: 16px; }
+.thr-addon-text { flex: 1; font-size: 13px; font-weight: 700; color: #111; }
+.thr-addon-price { font-size: 13px; font-weight: 700; color: #111; }
+
+/* VARIANTS */
+.thr-variant-label { font-size: 12px; font-weight: 700; color: #555; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+.thr-variants { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
+.thr-pill-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  background: #fff;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #E8C97A;
-}
-.ks-variant-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #888888;
-  margin-bottom: 12px;
-}
-.ks-variants {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.ks-variant-btn {
-  padding: 10px 20px;
-  border: 1px solid rgba(201,168,76,0.3);
-  background: transparent;
-  color: #CCCCCC;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
 }
-.ks-variant-btn:hover,
-.ks-variant-btn.active {
-  border-color: #C9A84C;
-  color: #C9A84C;
-  background: rgba(201,168,76,0.08);
-}
-.ks-stock-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  color: #888888;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-.ks-stock-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #4CAF50;
-  animation: ksPulse 2s infinite;
-}
-@keyframes ksPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.ks-add-to-cart {
+.thr-pill-btn.active, .thr-pill-btn:hover { border-color: #E63946; color: #E63946; }
+
+/* CTA */
+.thr-add-to-cart {
   width: 100%;
-  padding: 20px;
-  background: #C9A84C;
-  color: #0A0A0A;
+  padding: 18px;
+  background: #E63946;
+  color: #fff;
   border: none;
-  font-family: 'Cinzel', serif;
+  border-radius: 10px;
   font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 3px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.25s;
-  margin-bottom: 32px;
+  transition: background 0.2s;
+  margin-bottom: 18px;
 }
-.ks-add-to-cart:hover { background: #E8C97A; }
-.ks-product-accordion {
-  border-top: 1px solid rgba(201,168,76,0.15);
-}
-.ks-accordion-item {
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-}
-.ks-accordion-header {
-  padding: 18px 0;
+.thr-add-to-cart:hover { background: #c92b38; }
+
+.thr-trust-row { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: #777; font-weight: 600; margin-bottom: 32px; flex-wrap: wrap; }
+
+/* ACCORDION */
+.thr-product-accordion { border-top: 1px solid rgba(0,0,0,0.08); }
+.thr-accordion-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
+.thr-accordion-header {
+  padding: 16px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #CCCCCC;
-  transition: color 0.2s;
+  color: #333;
 }
-.ks-accordion-header:hover { color: #C9A84C; }
-.ks-accordion-arrow { transition: transform 0.3s; font-size: 10px; }
-.ks-accordion-body {
-  padding: 0 0 20px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  color: #888888;
-  line-height: 1.7;
+.thr-accordion-header:hover { color: #E63946; }
+.thr-accordion-arrow { transition: transform 0.3s; font-size: 10px; }
+.thr-accordion-body { padding: 0 0 18px; font-size: 14px; color: #666; line-height: 1.7; display: none; }
+.thr-accordion-item.open .thr-accordion-body { display: block; }
+.thr-accordion-item.open .thr-accordion-arrow { transform: rotate(180deg); }
+
+/* STICKY MOBILE CTA */
+.thr-sticky-cta {
   display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding: 12px 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 50;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
 }
-.ks-accordion-item.open .ks-accordion-body { display: block; }
-.ks-accordion-item.open .ks-accordion-arrow { transform: rotate(180deg); }
+.thr-sticky-info { display: flex; align-items: baseline; gap: 8px; }
+.thr-sticky-price { font-size: 16px; font-weight: 800; color: #E63946; }
+.thr-sticky-was { font-size: 12px; color: #999; text-decoration: line-through; }
+.thr-sticky-btn {
+  background: #E63946;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
-  .ks-product-inner { grid-template-columns: 1fr; gap: 40px; }
-  .ks-product { padding: 40px 20px; }
-  .ks-product-title { font-size: 28px; }
+  .thr-product { padding: 24px 16px 90px; }
+  .thr-product-inner { grid-template-columns: 1fr; gap: 24px; }
+  .thr-product-title { font-size: 22px; }
+  .thr-price { font-size: 22px; }
+  .thr-sticky-cta { display: flex; }
 }
 </style>
 
 <script>
-function ksSetImage(src, el) {
-  document.getElementById('ks-main-img').src = src;
-  document.querySelectorAll('.ks-thumb').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+const thrImages = [
+  {% for image in product.images %}
+    "{{ image | img_url: 'master' }}"{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+let thrCurrentIndex = 0;
+
+function thrSetMainImage(src) {
+  const img = document.getElementById('thr-main-img');
+  if (!img) return;
+  img.style.opacity = '0';
+  setTimeout(() => { img.src = src; img.style.opacity = '1'; }, 200);
 }
-function ksSelectVariant(btn) {
-  document.querySelectorAll('.ks-variant-btn').forEach(b => b.classList.remove('active'));
+
+function thrNextImage() {
+  if (!thrImages.length) return;
+  thrCurrentIndex = (thrCurrentIndex + 1) % thrImages.length;
+  thrSetMainImage(thrImages[thrCurrentIndex]);
+  thrSyncThumbs();
+}
+
+function thrPrevImage() {
+  if (!thrImages.length) return;
+  thrCurrentIndex = (thrCurrentIndex - 1 + thrImages.length) % thrImages.length;
+  thrSetMainImage(thrImages[thrCurrentIndex]);
+  thrSyncThumbs();
+}
+
+function thrGoToImage(index, btn) {
+  thrCurrentIndex = index;
+  thrSetMainImage(thrImages[index]);
+  document.querySelectorAll('.thr-thumb-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
-function ksToggle(header) {
+
+function thrSyncThumbs() {
+  document.querySelectorAll('.thr-thumb-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === thrCurrentIndex);
+  });
+}
+
+function thrSelectVariant(btn, variantTitle) {
+  document.querySelectorAll('.thr-pill-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  {% for variant in product.variants %}
+    if (variantTitle === "{{ variant.title }}") {
+      document.getElementById('thr-variant-id').value = "{{ variant.id }}";
+      {% if variant.featured_image %}
+        const idx = thrImages.indexOf("{{ variant.featured_image | img_url: 'master' }}");
+        if (idx !== -1) { thrCurrentIndex = idx; thrSetMainImage(thrImages[idx]); thrSyncThumbs(); }
+      {% endif %}
+    }
+  {% endfor %}
+}
+
+function thrSelectBundle(el) {
+  document.querySelectorAll('.thr-bundle-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function thrToggle(header) {
   const item = header.parentElement;
   const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.ks-accordion-item').forEach(i => i.classList.remove('open'));
+  document.querySelectorAll('.thr-accordion-item').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
 }
 </script>
 
 {% schema %}
 {
-  "name": "KS Product",
+  "name": "Thrivve Product",
+  "tag": "section",
+  "class": "section",
   "settings": [],
-  "presets": [{ "name": "KS Product" }]
+  "blocks": [],
+  "presets": [{ "name": "Thrivve Product" }]
 }
 {% endschema %}
