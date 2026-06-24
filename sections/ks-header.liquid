@@ -1,111 +1,90 @@
-<header class="ks-header">
-  <div class="ks-header-inner">
-
-    <button class="ks-hamburger" onclick="ksToggleMenu()" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
+<header class="thr-header">
+  <div class="thr-header-inner">
+    <button class="thr-menu-toggle" onclick="thrToggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
 
-    <a href="/" class="ks-logo">KNGDM <span>Supply</span></a>
+    <a href="/" class="thr-logo">THRIVVE <span>LABS</span></a>
 
-    <nav class="ks-desktop-nav">
+    <nav class="thr-nav">
       <a href="/">Home</a>
-      <a href="/collections/best-sellers">Shop</a>
-      <a href="/products/jesus-quarter-necklace">Jesus Quarter</a>
-      <a href="/products/crown-of-thorns-necklace">Crown of Thorns</a>
-      <a href="/pages/our-mission">Our Mission</a>
+      <a href="/pages/track-order">Track Your Order</a>
       <a href="/pages/contact">Contact</a>
     </nav>
 
-    <a href="/cart" class="ks-cart-icon">
-      🛒
-      {%- if cart.item_count > 0 -%}
-        <span class="ks-cart-count">{{ cart.item_count }}</span>
-      {%- endif -%}
-    </a>
-
+    <div class="thr-header-icons">
+      <a href="/search" class="thr-icon" aria-label="Search">🔍</a>
+      <a href="/account" class="thr-icon" aria-label="Account">👤</a>
+      <a href="/cart" class="thr-icon thr-cart-icon" aria-label="Cart">
+        🛒
+        {% if cart.item_count > 0 %}
+          <span class="thr-cart-count">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+    </div>
   </div>
 
-  <nav class="ks-mobile-menu" id="ks-mobile-menu">
-    <ul>
-      <li><a href="/" onclick="ksToggleMenu()">Home</a></li>
-      <li><a href="/collections/best-sellers" onclick="ksToggleMenu()">Shop</a></li>
-      <li><a href="/products/jesus-quarter-necklace" onclick="ksToggleMenu()">Jesus Quarter</a></li>
-      <li><a href="/products/crown-of-thorns-necklace" onclick="ksToggleMenu()">Crown of Thorns</a></li>
-      <li><a href="/pages/our-mission" onclick="ksToggleMenu()">Our Mission</a></li>
-      <li><a href="/pages/contact" onclick="ksToggleMenu()">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="thr-mobile-menu" id="thr-mobile-menu">
+    <a href="/">Home</a>
+    <a href="/pages/track-order">Track Your Order</a>
+    <a href="/pages/contact">Contact</a>
+  </div>
 </header>
 
 <style>
-.ks-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #0A0A0A;
-  border-bottom: 1px solid rgba(201,168,76,0.2);
-  width: 100%;
+.thr-header {
+  background: #0B0B0B;
+  position: relative;
+  z-index: 90;
 }
-.ks-header-inner {
-  max-width: 1400px;
+.thr-header-inner {
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 24px;
-  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  padding: 18px 32px;
 }
-.ks-logo {
-  font-family: 'Cinzel', serif;
-  font-size: 16px;
-  font-weight: 900;
-  color: #C9A84C;
-  text-decoration: none;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.ks-logo span { color: #FAFAF5; }
-.ks-hamburger {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 1001;
-}
-.ks-hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #FAFAF5;
-  transition: all 0.3s;
-}
-.ks-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.ks-hamburger.open span:nth-child(2) { opacity: 0; }
-.ks-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-.ks-cart-icon {
+.thr-logo {
+  font-family: 'Archivo Black', sans-serif;
   font-size: 20px;
+  letter-spacing: 0.5px;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.thr-logo span { color: #E63946; }
+.thr-nav {
+  display: flex;
+  gap: 32px;
+}
+.thr-nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #DDDDDD;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.thr-nav a:hover { color: #E63946; }
+.thr-header-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.thr-icon {
+  font-size: 16px;
   text-decoration: none;
   position: relative;
-  color: #FAFAF5;
-  z-index: 1001;
+  filter: grayscale(1) brightness(2);
 }
-.ks-cart-count {
+.thr-cart-icon { position: relative; }
+.thr-cart-count {
   position: absolute;
   top: -8px;
-  right: -8px;
-  background: #C9A84C;
-  color: #0A0A0A;
-  font-family: 'Barlow Condensed', sans-serif;
+  right: -10px;
+  background: #E63946;
+  color: #fff;
   font-size: 10px;
   font-weight: 700;
   width: 16px;
@@ -115,89 +94,57 @@
   align-items: center;
   justify-content: center;
 }
-.ks-desktop-nav {
+.thr-menu-toggle {
   display: none;
-}
-.ks-mobile-menu {
-  background: #0A0A0A;
-  border-top: 1px solid rgba(201,168,76,0.15);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-.ks-mobile-menu.open { max-height: 400px; }
-.ks-mobile-menu ul {
-  list-style: none;
-  padding: 16px 24px;
-  margin: 0;
-  display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
 }
-.ks-mobile-menu li { border-bottom: 1px solid rgba(201,168,76,0.08); }
-.ks-mobile-menu a {
-  display: block;
-  padding: 16px 0;
-  font-family: 'Barlow Condensed', sans-serif;
+.thr-menu-toggle span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+.thr-mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #0B0B0B;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 12px 24px 18px;
+}
+.thr-mobile-menu.open { display: flex; }
+.thr-mobile-menu a {
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #CCCCCC;
+  color: #DDDDDD;
   text-decoration: none;
-  transition: color 0.2s;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.ks-mobile-menu a:hover { color: #C9A84C; }
 
-@media (min-width: 769px) {
-  .ks-header-inner {
-    padding: 0 40px;
-    height: 70px;
-  }
-  .ks-logo {
-    font-size: 20px;
-    position: static;
-    transform: none;
-    letter-spacing: 3px;
-  }
-  .ks-hamburger { display: none; }
-  .ks-mobile-menu { display: none; }
-  .ks-desktop-nav {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .ks-desktop-nav a {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #CCCCCC;
-    text-decoration: none;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-  .ks-desktop-nav a:hover { color: #C9A84C; }
+@media (max-width: 768px) {
+  .thr-header-inner { padding: 14px 18px; }
+  .thr-nav { display: none; }
+  .thr-menu-toggle { display: flex; }
+  .thr-logo { font-size: 16px; }
 }
 </style>
 
 <script>
-function ksToggleMenu() {
-  const menu = document.getElementById('ks-mobile-menu');
-  const btn = document.querySelector('.ks-hamburger');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
+function thrToggleMenu() {
+  document.getElementById('thr-mobile-menu').classList.toggle('open');
 }
 </script>
 
 {% schema %}
 {
-  "name": "KS Header",
+  "name": "Thrivve Header",
+  "tag": "section",
+  "class": "section",
   "settings": [],
-  "presets": [{ "name": "KS Header" }]
+  "presets": [{ "name": "Thrivve Header" }]
 }
 {% endschema %}
