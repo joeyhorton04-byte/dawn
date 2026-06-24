@@ -1,68 +1,65 @@
-<div class="ks-trust">
-  <div class="ks-trust-inner">
-    <div class="ks-trust-item">
-      <span class="ks-trust-icon">✈️</span>
-      <span class="ks-trust-text">Free Worldwide Shipping</span>
+<section class="thr-trustbar">
+  <div class="thr-trustbar-inner">
+    <div class="thr-trust-item">
+      <span class="thr-trust-icon">🔴</span>
+      <span class="thr-trust-text">FDA-Registered<br>Red Light Tech</span>
     </div>
-    <div class="ks-trust-item">
-      <span class="ks-trust-icon">🛡️</span>
-      <span class="ks-trust-text">Lifetime Guarantee</span>
+    <div class="thr-trust-item">
+      <span class="thr-trust-icon">🛡️</span>
+      <span class="thr-trust-text">30-Day Money<br>Back Guarantee</span>
     </div>
-    <div class="ks-trust-item">
-      <span class="ks-trust-icon">💧</span>
-      <span class="ks-trust-text">100% Waterproof</span>
+    <div class="thr-trust-item">
+      <span class="thr-trust-icon">🚚</span>
+      <span class="thr-trust-text">Free Shipping<br>Over $50</span>
     </div>
-    <div class="ks-trust-item">
-      <span class="ks-trust-icon">♻️</span>
-      <span class="ks-trust-text">Tarnish Free Forever</span>
-    </div>
-    <div class="ks-trust-item">
-      <span class="ks-trust-icon">✝️</span>
-      <span class="ks-trust-text">10% to Ministry</span>
+    <div class="thr-trust-item">
+      <span class="thr-trust-icon">⭐</span>
+      <span class="thr-trust-text">4.4/5 From<br>500+ Customers</span>
     </div>
   </div>
-</div>
+</section>
 
 <style>
-.ks-trust {
-  background: #1A1A1A;
-  border-top: 1px solid rgba(201,168,76,0.15);
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-  padding: 20px 40px;
+.thr-trustbar {
+  background: #F7F7F7;
+  padding: 32px 24px;
 }
-.ks-trust-inner {
-  max-width: 1200px;
+.thr-trustbar-inner {
+  max-width: 1100px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.thr-trust-item {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  text-align: center;
+  gap: 8px;
 }
-.ks-trust-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.thr-trust-icon { font-size: 26px; }
+.thr-trust-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.4;
 }
-.ks-trust-icon { font-size: 20px; }
-.ks-trust-text {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #CCCCCC;
-}
+
 @media (max-width: 768px) {
-  .ks-trust-inner { gap: 20px; }
-  .ks-trust-text { font-size: 10px; }
+  .thr-trustbar-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .thr-trust-icon { font-size: 22px; }
+  .thr-trust-text { font-size: 11px; }
 }
 </style>
 
 {% schema %}
 {
-  "name": "KS Trust Bar",
+  "name": "Thrivve Trust Bar",
+  "tag": "section",
+  "class": "section",
   "settings": [],
-  "presets": [{ "name": "KS Trust Bar" }]
+  "presets": [{ "name": "Thrivve Trust Bar" }]
 }
 {% endschema %}
