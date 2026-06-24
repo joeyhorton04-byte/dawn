@@ -1,0 +1,117 @@
+<style>
+  .thrivve-accordion {
+    padding: 2rem 0 4rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .thrivve-accordion__item {
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .thrivve-accordion__summary {
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding: 1.8rem 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .thrivve-accordion__summary::-webkit-details-marker {
+    display: none;
+  }
+  .thrivve-accordion__summary::after {
+    content: '+';
+    font-size: 2rem;
+    color: var(--thrivve-accent, #e8492a);
+    margin-left: 1.6rem;
+    flex-shrink: 0;
+  }
+  details[open] .thrivve-accordion__summary::after {
+    content: '–';
+  }
+  .thrivve-accordion__body {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    padding-bottom: 1.8rem;
+  }
+  .thrivve-accordion__body p {
+    margin-bottom: 1.2rem;
+  }
+  .thrivve-accordion__body p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<div class="thrivve-accordion color-{{ section.settings.color_scheme }} page-width">
+  {% for block in section.blocks %}
+    {% if block.type == 'accordion_item' %}
+      <details class="thrivve-accordion__item" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+        <summary class="thrivve-accordion__summary">{{ block.settings.title | escape }}</summary>
+        <div class="thrivve-accordion__body">{{ block.settings.body }}</div>
+      </details>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Thrivve Accordion",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_item",
+      "name": "Accordion item",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What's Included"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Each order includes one Thrivve Labs Red Light Cap and a USB-C charging cable.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve Accordion",
+      "blocks": [
+        {
+          "type": "accordion_item",
+          "settings": {
+            "title": "What's Included",
+            "body": "<p>Each order includes one Thrivve Labs Red Light Cap and a USB-C charging cable.</p>"
+          }
+        },
+        {
+          "type": "accordion_item",
+          "settings": {
+            "title": "Shipping & Returns",
+            "body": "<p>Orders are processed within 2–3 business days and ship within [X] business days. We offer a 30-day money-back guarantee — contact us at [your support email] to start a return.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
