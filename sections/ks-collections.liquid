@@ -1,163 +1,125 @@
-<section class="ks-collections">
-  <div class="ks-collections-inner">
-    <div class="ks-section-header">
-      <span class="ks-section-eyebrow">Shop By Collection</span>
-      <h2 class="ks-section-title">Wear The Word</h2>
-    </div>
-    <div class="ks-collections-grid">
+<section class="thr-collections">
+  <div class="thr-collections-inner">
+    <h2 class="thr-collections-heading">{{ section.settings.heading | default: 'Shop The System' }}</h2>
+    <p class="thr-collections-sub">{{ section.settings.subheading | default: 'Everything you need for a simple, daily scalp care routine.' }}</p>
 
-      <div class="ks-collection-card">
-        {% assign col1 = collections['best-sellers'] %}
-        {% if col1.image %}
-          <div class="ks-collection-bg" style="background-image: url('{{ col1.image | img_url: 'master' }}'); background-size: cover; background-position: center;"></div>
-        {% elsif col1.products.first and col1.products.first.featured_image %}
-          <div class="ks-collection-bg" style="background-image: url('{{ col1.products.first.featured_image | img_url: 'master' }}'); background-size: cover; background-position: center;"></div>
-        {% else %}
-          <div class="ks-collection-bg ks-collection-bg-1"></div>
-        {% endif %}
-        <div class="ks-collection-overlay"></div>
-        <div class="ks-collection-content">
-          <p class="ks-collection-tag">Best Sellers</p>
-          <h3 class="ks-collection-name">Necklaces</h3>
-          <a href="/collections/best-sellers" class="ks-collection-link">Shop Now →</a>
-        </div>
-      </div>
-
-      <div class="ks-collection-card">
-        {% assign col2 = collections['best-sellers'] %}
-        {% assign second_product = col2.products[1] %}
-        {% if second_product and second_product.featured_image %}
-          <div class="ks-collection-bg" style="background-image: url('{{ second_product.featured_image | img_url: 'master' }}'); background-size: cover; background-position: center;"></div>
-        {% else %}
-          <div class="ks-collection-bg ks-collection-bg-2"></div>
-        {% endif %}
-        <div class="ks-collection-overlay"></div>
-        <div class="ks-collection-content">
-          <p class="ks-collection-tag">New In</p>
-          <h3 class="ks-collection-name">Crown of Thorns</h3>
-          <a href="/collections/best-sellers" class="ks-collection-link">Shop Now →</a>
-        </div>
-      </div>
-
-      <div class="ks-collection-card">
-        {% assign col3 = collections['best-sellers'] %}
-        {% if col3.products.first and col3.products.first.featured_image %}
-          <div class="ks-collection-bg" style="background-image: url('{{ col3.products.first.featured_image | img_url: 'master' }}'); background-size: cover; background-position: center; filter: hue-rotate(30deg) brightness(0.7);"></div>
-        {% else %}
-          <div class="ks-collection-bg ks-collection-bg-3"></div>
-        {% endif %}
-        <div class="ks-collection-overlay"></div>
-        <div class="ks-collection-content">
-          <p class="ks-collection-tag">Gift Ideas</p>
-          <h3 class="ks-collection-name">Best Sellers</h3>
-          <a href="/collections/best-sellers" class="ks-collection-link">Shop Now →</a>
-        </div>
-      </div>
-
+    <div class="thr-collections-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.product_link }}" class="thr-collection-card">
+          <div class="thr-collection-image">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title | escape }}">
+            {% endif %}
+          </div>
+          <div class="thr-collection-info">
+            <h3>{{ block.settings.title }}</h3>
+            <div class="thr-collection-price-row">
+              <span class="thr-collection-price">{{ block.settings.price }}</span>
+              {% if block.settings.compare_price != blank %}
+                <span class="thr-collection-compare">{{ block.settings.compare_price }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
     </div>
   </div>
 </section>
 
 <style>
-.ks-collections {
-  padding: 100px 40px;
-  background: #0A0A0A;
+.thr-collections {
+  background: #FFFFFF;
+  padding: 60px 32px;
 }
-.ks-collections-inner { max-width: 1400px; margin: 0 auto; }
-.ks-section-header { text-align: center; margin-bottom: 60px; }
-.ks-section-eyebrow {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 5px;
-  color: #C9A84C;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: block;
+.thr-collections-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
-.ks-section-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #FAFAF5;
+.thr-collections-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 10px;
 }
-.ks-collections-grid {
+.thr-collections-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 36px;
+}
+.thr-collections-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 24px;
+  text-align: left;
 }
-.ks-collection-card {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  cursor: pointer;
-  background: #1A1A1A;
-}
-.ks-collection-bg {
-  position: absolute;
-  inset: 0;
-  transition: transform 0.6s ease;
-}
-.ks-collection-card:hover .ks-collection-bg { transform: scale(1.05); }
-.ks-collection-bg-1 { background: linear-gradient(135deg, #1a1206 0%, #2d1f08 40%, #1a1206 100%); }
-.ks-collection-bg-2 { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%); }
-.ks-collection-bg-3 { background: linear-gradient(135deg, #0d1a12 0%, #142b1c 50%, #0d1a12 100%); }
-.ks-collection-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
-}
-.ks-collection-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 30px;
-}
-.ks-collection-tag {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: #C9A84C;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.ks-collection-name {
-  font-family: 'Cinzel', serif;
-  font-size: 22px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #FAFAF5;
-  margin-bottom: 12px;
-}
-.ks-collection-link {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #C9A84C;
-  text-transform: uppercase;
+.thr-collection-card {
+  display: block;
   text-decoration: none;
-  border-bottom: 1px solid rgba(201,168,76,0.4);
-  padding-bottom: 2px;
-  transition: all 0.2s;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
 }
-.ks-collection-link:hover { border-color: #C9A84C; }
+.thr-collection-card:hover { border-color: #E63946; transform: translateY(-2px); }
+.thr-collection-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #F4F4F4;
+}
+.thr-collection-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thr-collection-info { padding: 16px; }
+.thr-collection-info h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px;
+}
+.thr-collection-price-row { display: flex; align-items: center; gap: 8px; }
+.thr-collection-price { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; color: #E63946; }
+.thr-collection-compare { font-family: 'Inter', sans-serif; font-size: 12px; color: #999; text-decoration: line-through; }
+
 @media (max-width: 768px) {
-  .ks-collections { padding: 60px 20px; }
-  .ks-collections-grid { grid-template-columns: 1fr; gap: 8px; }
-  .ks-collection-card { aspect-ratio: 4/3; }
+  .thr-collections { padding: 36px 16px; }
+  .thr-collections-heading { font-size: 22px; }
+  .thr-collections-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
 }
 </style>
 
 {% schema %}
 {
-  "name": "KS Collections",
-  "settings": [],
-  "presets": [{ "name": "KS Collections" }]
+  "name": "Thrivve Collections",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop The System" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Everything you need for a simple, daily scalp care routine." }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Red Light Therapy Cap" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$80.00" },
+        { "type": "text", "id": "compare_price", "label": "Compare-at price" },
+        { "type": "url", "id": "product_link", "label": "Product link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve Collections",
+      "blocks": [
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" }
+      ]
+    }
+  ]
 }
 {% endschema %}
