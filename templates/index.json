@@ -12,7 +12,15 @@
     "ks-hero": {
       "type": "ks-hero",
       "disabled": true,
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "FDA-REGISTERED RED LIGHT THERAPY",
+        "heading": "<p>Visibly Thicker Hair in 90 Days. Or Your Money Back.</p>",
+        "subheading": "<p>Dual-wavelength red light therapy — the same 660nm/850nm technology used in clinical hair restoration — now in a cap you wear for 15 minutes a day.</p>",
+        "button_label": "Buy It Now",
+        "button_link": "",
+        "support_line": "30-Day Money-Back Guarantee · Free Shipping Over $50"
+      }
     },
     "featured_product_6cXG7y": {
       "type": "featured-product",
@@ -73,14 +81,14 @@
         "product": "thrivve-labs-red-light-cap",
         "color_scheme": "",
         "secondary_background": false,
-        "media_size": "medium",
+        "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
         "media_position": "left",
         "image_zoom": "lightbox",
         "hide_variants": false,
         "enable_video_looping": false,
-        "padding_top": 0,
+        "padding_top": 20,
         "padding_bottom": 0
       }
     },

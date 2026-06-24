@@ -1,162 +1,52 @@
-<style>
-  .thrivve-testimonials__heading {
-    text-align: center;
-    font-size: 3rem;
-    margin-bottom: 3.2rem;
-  }
-  .thrivve-testimonials__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.4rem;
-  }
-  .thrivve-testimonial-card {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 2.8rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-  .thrivve-testimonial-card__stars {
-    font-size: 1.8rem;
-    letter-spacing: 0.15em;
-    color: #f5a623;
-  }
-  .thrivve-testimonial-card__title {
-    font-size: 1.8rem;
-    line-height: 1.3;
-    margin: 0;
-  }
-  .thrivve-testimonial-card__body {
-    font-size: 1.5rem;
-    line-height: 1.6;
-    opacity: 0.85;
-    margin: 0;
-  }
-  .thrivve-testimonial-card__body p {
-    margin: 0;
-  }
-  .thrivve-testimonial-card__author {
-    font-size: 1.4rem;
-    font-weight: 600;
-    opacity: 0.7;
-    margin: 0;
-  }
-  @media screen and (max-width: 989px) {
-    .thrivve-testimonials__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
-
-<div class="thrivve-testimonials page-width section-{{ section.id }}-padding">
-  {% if section.settings.heading != blank %}
-    <h2 class="thrivve-testimonials__heading">{{ section.settings.heading | escape }}</h2>
-  {% endif %}
-
-  <div class="thrivve-testimonials__grid">
-    {% for block in section.blocks %}
-      {% if block.type == 'testimonial' %}
-        <div class="thrivve-testimonial-card" {{ block.shopify_attributes }}>
-          <div class="thrivve-testimonial-card__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              {% if i <= block.settings.rating %}★{% else %}☆{% endif %}
-            {% endfor %}
-          </div>
-          {% if block.settings.title != blank %}
-            <h3 class="thrivve-testimonial-card__title">{{ block.settings.title | escape }}</h3>
-          {% endif %}
-          {% if block.settings.body != blank %}
-            <div class="thrivve-testimonial-card__body">{{ block.settings.body }}</div>
-          {% endif %}
-          {% if block.settings.author != blank %}
-            <p class="thrivve-testimonial-card__author">— {{ block.settings.author | escape }}</p>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-</div>
-
-{% schema %}
-{
-  "name": "Thrivve Testimonials",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "What customers are saying"
-    },
-    {
-      "type": "header",
-      "content": "Padding"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Top padding",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Bottom padding",
-      "default": 36
-    }
-  ],
-  "blocks": [
-    {
-      "type": "testimonial",
-      "name": "Testimonial",
-      "settings": [
-        {
-          "type": "range",
-          "id": "rating",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "label": "Star rating",
-          "default": 5
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Review title",
-          "default": "I was skeptical but my part line is visibly thinner now"
-        },
-        {
-          "type": "richtext",
-          "id": "body",
-          "label": "Review body",
-          "default": "<p>I bought this after my dermatologist mentioned red light therapy as an option before going the prescription route. Used it most nights for about 3 months. My hairline at the temples filled in noticeably.</p>"
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author",
-          "default": "Marcus T., verified buyer"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Thrivve Testimonials",
-      "blocks": [
-        { "type": "testimonial" },
-        { "type": "testimonial" },
-        { "type": "testimonial" }
-      ]
-    }
-  ]
+.thrivve-testimonials__heading {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 3.2rem;
 }
-{% endschema %}
+
+.thrivve-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+}
+
+.thrivve-testimonial-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.thrivve-testimonial-card__stars {
+  font-size: 1.8rem;
+  letter-spacing: 0.15em;
+  color: #f5a623;
+}
+
+.thrivve-testimonial-card__title {
+  font-size: 1.8rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.thrivve-testimonial-card__body {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.thrivve-testimonial-card__author {
+  font-size: 1.4rem;
+  font-weight: 600;
+  opacity: 0.7;
+  margin: 0;
+}
+
+@media screen and (max-width: 989px) {
+  .thrivve-testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+}
