@@ -11,7 +11,78 @@
   "sections": {
     "ks-hero": {
       "type": "ks-hero",
+      "disabled": true,
       "settings": {}
+    },
+    "featured_product_6cXG7y": {
+      "type": "featured-product",
+      "blocks": {
+        "text_UyMxth": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_7nGdzN": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_znUgNn": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_b9btMV": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_X8PVVt": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_epAfTX": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_3N7H7Y": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_UyMxth",
+        "title_7nGdzN",
+        "price_znUgNn",
+        "variant_picker_b9btMV",
+        "quantity_selector_X8PVVt",
+        "buy_buttons_epAfTX",
+        "share_3N7H7Y"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "thrivve-labs-red-light-cap",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "ks-trust-bar": {
       "type": "ks-trust-bar",
@@ -19,19 +90,27 @@
     },
     "ks-collections": {
       "type": "ks-collections",
-      "settings": {}
+      "settings": {
+        "heading": "Shop The System",
+        "subheading": "Everything you need for a simple, daily scalp care routine."
+      }
     },
     "ks-testimonials": {
       "type": "ks-testimonials",
+      "disabled": true,
       "settings": {}
     },
     "ks-mission": {
       "type": "ks-mission",
+      "disabled": true,
       "settings": {}
     },
     "ks-email": {
       "type": "ks-email",
-      "settings": {}
+      "settings": {
+        "heading": "Get 10% Off Your First Order",
+        "subheading": "Sign up for restock alerts, routine tips, and exclusive discounts."
+      }
     },
     "ks-footer": {
       "type": "ks-footer",
@@ -40,6 +119,7 @@
   },
   "order": [
     "ks-hero",
+    "featured_product_6cXG7y",
     "ks-trust-bar",
     "ks-collections",
     "ks-testimonials",
