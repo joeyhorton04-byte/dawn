@@ -25,6 +25,10 @@
     "featured_product_6cXG7y": {
       "type": "featured-product",
       "blocks": {
+        "rating_JPCbXW": {
+          "type": "rating",
+          "settings": {}
+        },
         "text_UyMxth": {
           "type": "text",
           "settings": {
@@ -59,22 +63,16 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
-        },
-        "share_3N7H7Y": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
         }
       },
       "block_order": [
+        "rating_JPCbXW",
         "text_UyMxth",
         "title_7nGdzN",
         "price_znUgNn",
         "variant_picker_b9btMV",
         "quantity_selector_X8PVVt",
-        "buy_buttons_epAfTX",
-        "share_3N7H7Y"
+        "buy_buttons_epAfTX"
       ],
       "name": "t:sections.featured-product.presets.name",
       "settings": {
