@@ -1,171 +1,108 @@
-<footer class="ks-footer">
-  <div class="ks-footer-inner">
-
-    <div class="ks-footer-brand">
-      <h2 class="ks-footer-logo">Kingdom Supply</h2>
-      <p class="ks-footer-tagline">Faith-inspired jewelry for believers who wear their testimony with pride.</p>
-      <p class="ks-footer-ministry">✝ 10% of every purchase goes to ministry.</p>
+<footer class="thr-footer">
+  <div class="thr-footer-inner">
+    <div class="thr-footer-col">
+      <a href="/" class="thr-footer-logo">THRIVVE <span>LABS</span></a>
+      <p class="thr-footer-tagline">Simple, hands-free red light therapy for everyday scalp care.</p>
     </div>
 
-    <div class="ks-footer-links">
-
-      <div class="ks-footer-col">
-        <h3>Shop</h3>
-        <ul>
-          <li><a href="/collections/all">All Jewelry</a></li>
-          <li><a href="/collections/best-sellers">Best Sellers</a></li>
-        </ul>
-      </div>
-
-      <div class="ks-footer-col">
-        <h3>Help</h3>
-        <ul>
-          <li><a href="/pages/shipping-returns">Shipping & Returns</a></li>
-          <li><a href="/pages/contact">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <div class="ks-footer-col">
-        <h3>About</h3>
-        <ul>
-          <li><a href="/pages/our-mission">Our Mission</a></li>
-          <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
-          <li><a href="/policies/terms-of-service">Terms of Service</a></li>
-        </ul>
-      </div>
-
+    <div class="thr-footer-col">
+      <h4>Shop</h4>
+      <a href="/collections/all">All Products</a>
+      <a href="/products">Red Light Cap</a>
     </div>
 
+    <div class="thr-footer-col">
+      <h4>Support</h4>
+      <a href="/pages/track-order">Track Your Order</a>
+      <a href="/pages/contact">Contact</a>
+      <a href="/pages/faq">FAQ</a>
+      <a href="/pages/returns">Returns & Warranty</a>
+    </div>
+
+    <div class="thr-footer-col">
+      <h4>Legal</h4>
+      <a href="/policies/privacy-policy">Privacy Policy</a>
+      <a href="/policies/terms-of-service">Terms of Service</a>
+      <a href="/policies/shipping-policy">Shipping Policy</a>
+    </div>
   </div>
 
-  <div class="ks-footer-bottom">
-    <p>© 2025 Kingdom Supply. All rights reserved.</p>
+  <div class="thr-footer-bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} Thrivve Labs. All rights reserved.</span>
   </div>
 </footer>
 
 <style>
-.ks-footer {
-  background: #050505;
-  border-top: 1px solid rgba(201,168,76,0.15);
-  padding: 60px 20px 32px;
-  color: #888888;
+.thr-footer {
+  background: #0B0B0B;
+  color: #BBBBBB;
+  padding: 48px 32px 24px;
 }
-.ks-footer-inner {
-  max-width: 1200px;
-  margin: 0 auto 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-.ks-footer-logo {
-  font-family: 'Cinzel', serif;
-  font-size: 20px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #C9A84C;
-  margin-bottom: 12px;
-}
-.ks-footer-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 15px;
-  color: #666666;
-  line-height: 1.7;
-  margin-bottom: 12px;
-}
-.ks-footer-ministry {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #C9A84C;
-}
-.ks-footer-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px;
-}
-.ks-footer-col h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #C9A84C;
-  margin-bottom: 20px;
-}
-.ks-footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.ks-footer-col ul li {
-  margin-bottom: 12px;
-}
-.ks-footer-col ul li a {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  color: #888888;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.ks-footer-col ul li a:hover {
-  color: #C9A84C;
-}
-.ks-footer-bottom {
+.thr-footer-inner {
   max-width: 1200px;
   margin: 0 auto;
-  border-top: 1px solid rgba(201,168,76,0.1);
-  padding-top: 24px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+.thr-footer-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 12px;
+}
+.thr-footer-logo span { color: #E63946; }
+.thr-footer-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.6;
+  max-width: 260px;
+}
+.thr-footer-col h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+.thr-footer-col a {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #999;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.thr-footer-col a:hover { color: #E63946; }
+.thr-footer-bottom {
+  max-width: 1200px;
+  margin: 36px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #777;
   text-align: center;
 }
-.ks-footer-bottom p {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #444444;
-}
 
-/* TABLET */
-@media (min-width: 768px) {
-  .ks-footer {
-    padding: 80px 40px 40px;
-  }
-  .ks-footer-inner {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 60px;
-  }
-  .ks-footer-brand {
-    flex: 0 0 280px;
-  }
-  .ks-footer-links {
-    flex: 1;
-  }
-}
-
-/* MOBILE */
-@media (max-width: 767px) {
-  .ks-footer-links {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-  .ks-footer-col:last-child {
-    grid-column: 1 / -1;
-  }
-  .ks-footer-col ul li a {
-    font-size: 15px;
-  }
+@media (max-width: 768px) {
+  .thr-footer { padding: 32px 18px 18px; }
+  .thr-footer-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
 }
 </style>
 
 {% schema %}
 {
-  "name": "KS Footer",
+  "name": "Thrivve Footer",
+  "tag": "section",
+  "class": "section",
   "settings": [],
-  "presets": [{ "name": "KS Footer" }]
+  "presets": [{ "name": "Thrivve Footer" }]
 }
 {% endschema %}
