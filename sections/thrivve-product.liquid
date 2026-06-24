@@ -1,28 +1,29 @@
-<style>
-  .thrivve-product {
+{%- style -%}
+  .thrivve-hero-product {
     padding: 4rem 0;
   }
-  .thrivve-product__grid {
+  .thrivve-hero-product__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 5rem;
     align-items: start;
   }
-  .thrivve-product__gallery-main {
+  .thrivve-hero-product__gallery-main {
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 1.2rem;
     background: #111;
+    margin-bottom: 1.2rem;
   }
-  .thrivve-product__gallery-main img {
+  .thrivve-hero-product__gallery-main img {
     width: 100%;
     display: block;
   }
-  .thrivve-product__thumbs {
+  .thrivve-hero-product__thumbs {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
   }
-  .thrivve-product__thumb {
+  .thrivve-hero-product__thumb {
     width: 80px;
     height: 80px;
     border-radius: 6px;
@@ -30,46 +31,50 @@
     border: 2px solid transparent;
     cursor: pointer;
     background: #111;
+    padding: 0;
   }
-  .thrivve-product__thumb.is-active {
-    border-color: var(--thrivve-accent, #e8492a);
+  .thrivve-hero-product__thumb.is-active {
+    border-color: {{ section.settings.accent_color }};
   }
-  .thrivve-product__thumb img {
+  .thrivve-hero-product__thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
-  .thrivve-product__reviews {
+  .thrivve-hero-product__reviews {
     font-size: 1.4rem;
     margin-bottom: 1rem;
     opacity: 0.8;
   }
-  .thrivve-product__reviews .stars {
+  .thrivve-hero-product__reviews .stars {
     color: #f5a623;
     margin-right: 0.6rem;
+    letter-spacing: 0.1em;
   }
-  .thrivve-product__title {
-    font-size: 3.2rem;
+  .thrivve-hero-product__title {
+    font-size: 3.4rem;
     line-height: 1.1;
-    margin-bottom: 1.4rem;
+    margin: 0 0 1.4rem;
   }
-  .thrivve-product__price-row {
+  .thrivve-hero-product__price-row {
     display: flex;
     align-items: baseline;
     gap: 1.2rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 1.8rem;
+    flex-wrap: wrap;
   }
-  .thrivve-product__price {
+  .thrivve-hero-product__price {
     font-size: 2.6rem;
     font-weight: 700;
   }
-  .thrivve-product__compare-price {
+  .thrivve-hero-product__compare-price {
     font-size: 1.8rem;
     text-decoration: line-through;
     opacity: 0.55;
   }
-  .thrivve-product__save-badge {
-    background: var(--thrivve-accent, #e8492a);
+  .thrivve-hero-product__save-badge {
+    background: {{ section.settings.accent_color }};
     color: #fff;
     font-size: 1.2rem;
     font-weight: 700;
@@ -77,125 +82,220 @@
     border-radius: 4px;
     letter-spacing: 0.04em;
   }
-  .thrivve-product__benefits {
+  .thrivve-hero-product__benefits {
     list-style: none;
-    margin: 2rem 0;
+    margin: 0 0 2.2rem;
     padding: 0;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
   }
-  .thrivve-product__benefits li {
+  .thrivve-hero-product__benefits li {
     font-size: 1.5rem;
     display: flex;
     align-items: center;
     gap: 0.8rem;
   }
-  .thrivve-product__buy-button {
+  .thrivve-hero-product__variants {
+    margin-bottom: 1.6rem;
+  }
+  .thrivve-hero-product__variants fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 1.2rem;
+  }
+  .thrivve-hero-product__variants legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    opacity: 0.8;
+  }
+  .thrivve-hero-product__variants select {
+    width: 100%;
+    padding: 1.1rem 1.4rem;
+    font-size: 1.5rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: inherit;
+  }
+  .thrivve-hero-product__quantity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .thrivve-hero-product__quantity label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+  .thrivve-hero-product__quantity input {
+    width: 70px;
+    padding: 0.9rem;
+    font-size: 1.5rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: inherit;
+    text-align: center;
+  }
+  .thrivve-hero-product__buy-button {
     width: 100%;
     padding: 1.6rem;
     font-size: 1.6rem;
-    margin-top: 1rem;
+    border: none;
+    border-radius: 6px;
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
   }
-  .thrivve-product__guarantee {
+  .thrivve-hero-product__buy-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .thrivve-hero-product__guarantee {
     font-size: 1.3rem;
     opacity: 0.7;
-    margin-top: 1.2rem;
+    margin-top: 1.4rem;
     text-align: center;
   }
+  .thrivve-hero-product__inventory {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: {{ section.settings.accent_color }};
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin: 1.6rem 0;
+  }
   @media screen and (max-width: 749px) {
-    .thrivve-product__grid {
+    .thrivve-hero-product__grid {
       grid-template-columns: 1fr;
       gap: 2.4rem;
     }
+    .thrivve-hero-product__title {
+      font-size: 2.6rem;
+    }
   }
-</style>
+{%- endstyle -%}
 
-<div class="thrivve-product color-{{ section.settings.color_scheme }} page-width">
-  <div class="thrivve-product__grid">
-    <div class="thrivve-product__gallery">
-      <div class="thrivve-product__gallery-main">
-        {% if section.settings.image_1 != blank %}
-          {{ section.settings.image_1 | image_url: width: 1200 | image_tag: loading: 'lazy', id: 'thrivve-main-image' }}
-        {% else %}
-          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-        {% endif %}
-      </div>
-      <div class="thrivve-product__thumbs">
-        {% for i in (1..3) %}
-          {% liquid
-            assign img_key = 'image_' | append: i
-            assign img = section.settings[img_key]
-          %}
-          <div class="thrivve-product__thumb {% if i == 1 %}is-active{% endif %}" data-thumb-index="{{ i }}">
-            {% if img != blank %}
-              {{ img | image_url: width: 160 | image_tag: loading: 'lazy' }}
-            {% else %}
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-            {% endif %}
+{%- assign product = section.settings.product -%}
+
+<div class="thrivve-hero-product color-{{ section.settings.color_scheme }} page-width">
+  {%- if product != blank -%}
+    <div class="thrivve-hero-product__grid">
+
+      <div class="thrivve-hero-product__gallery">
+        <div class="thrivve-hero-product__gallery-main">
+          {%- if product.featured_media != blank -%}
+            {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', id: 'thrivve-hero-main-image' }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="thrivve-hero-product__thumbs">
+            {%- for media in product.media limit: 6 -%}
+              <button type="button" class="thrivve-hero-product__thumb {% if forloop.first %}is-active{% endif %}" data-full-src="{{ media | image_url: width: 1200 }}">
+                {{ media | image_url: width: 160 | image_tag: loading: 'lazy' }}
+              </button>
+            {%- endfor -%}
           </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="thrivve-product__info">
-      {% if section.settings.review_count > 0 %}
-        <p class="thrivve-product__reviews">
-          <span class="stars">★★★★★</span>{{ section.settings.review_rating }}/5 ({{ section.settings.review_count }} Reviews)
-        </p>
-      {% endif %}
-
-      <h1 class="thrivve-product__title">{{ section.settings.product_title | default: 'Thrivve Labs Red Light Cap' }}</h1>
-
-      <div class="thrivve-product__price-row">
-        <span class="thrivve-product__price">{{ section.settings.price | default: '$0.00' }}</span>
-        {% if section.settings.compare_price != blank %}
-          <span class="thrivve-product__compare-price">{{ section.settings.compare_price }}</span>
-          {% if section.settings.save_percent != blank %}
-            <span class="thrivve-product__save-badge">SAVE {{ section.settings.save_percent }}%</span>
-          {% endif %}
-        {% endif %}
+        {%- endif -%}
       </div>
 
-      {% if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank %}
-        <ul class="thrivve-product__benefits">
-          {% if section.settings.benefit_1 != blank %}<li>{{ section.settings.benefit_1 }}</li>{% endif %}
-          {% if section.settings.benefit_2 != blank %}<li>{{ section.settings.benefit_2 }}</li>{% endif %}
-          {% if section.settings.benefit_3 != blank %}<li>{{ section.settings.benefit_3 }}</li>{% endif %}
-        </ul>
-      {% endif %}
+      <div class="thrivve-hero-product__info">
+        {%- if section.settings.show_reviews -%}
+          <p class="thrivve-hero-product__reviews">
+            <span class="stars">★★★★★</span>{{ section.settings.review_rating }}/5 ({{ section.settings.review_count }} Reviews)
+          </p>
+        {%- endif -%}
 
-      {% if section.settings.product != blank %}
-        {% form 'product', section.settings.product %}
-          <input type="hidden" name="id" value="{{ section.settings.product.selected_or_first_available_variant.id }}">
-          <button type="submit" class="button button--primary thrivve-product__buy-button">
-            {{ section.settings.button_label | default: 'Add to Cart' }}
+        <h1 class="thrivve-hero-product__title">{{ product.title }}</h1>
+
+        <div class="thrivve-hero-product__price-row">
+          <span class="thrivve-hero-product__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+            <span class="thrivve-hero-product__compare-price">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+            {%- assign discount = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100.0 | divided_by: product.selected_or_first_available_variant.compare_at_price | round -%}
+            <span class="thrivve-hero-product__save-badge">SAVE {{ discount }}%</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank -%}
+          <ul class="thrivve-hero-product__benefits">
+            {%- if section.settings.benefit_1 != blank -%}<li>{{ section.settings.benefit_1 }}</li>{%- endif -%}
+            {%- if section.settings.benefit_2 != blank -%}<li>{{ section.settings.benefit_2 }}</li>{%- endif -%}
+            {%- if section.settings.benefit_3 != blank -%}<li>{{ section.settings.benefit_3 }}</li>{%- endif -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.show_inventory and product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+          {%- assign qty = product.selected_or_first_available_variant.inventory_quantity -%}
+          {%- if qty > 0 and qty <= section.settings.low_stock_threshold -%}
+            <p class="thrivve-hero-product__inventory">Only {{ qty }} left in stock!</p>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'thrivve-hero-product-form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="thrivve-hero-variant-id">
+
+          {%- if product.has_only_default_variant == false -%}
+            <div class="thrivve-hero-product__variants">
+              {%- for option in product.options_with_values -%}
+                <fieldset>
+                  <legend>{{ option.name }}</legend>
+                  <select name="options[{{ option.name | escape }}]" class="thrivve-hero-variant-select">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </fieldset>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="thrivve-hero-product__quantity">
+            <label for="thrivve-hero-quantity">Qty</label>
+            <input type="number" id="thrivve-hero-quantity" name="quantity" value="1" min="1">
+          </div>
+
+          <button type="submit" class="thrivve-hero-product__buy-button" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            {%- if product.selected_or_first_available_variant.available -%}
+              {{ section.settings.button_label | default: 'Add to Cart' }}
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
           </button>
-        {% endform %}
-      {% else %}
-        <button type="button" class="button button--primary thrivve-product__buy-button" disabled>
-          {{ section.settings.button_label | default: 'Add to Cart' }}
-        </button>
-      {% endif %}
+        {%- endform -%}
 
-      {% if section.settings.guarantee_text != blank %}
-        <p class="thrivve-product__guarantee">{{ section.settings.guarantee_text }}</p>
-      {% endif %}
+        {%- if section.settings.guarantee_text != blank -%}
+          <p class="thrivve-hero-product__guarantee">{{ section.settings.guarantee_text }}</p>
+        {%- endif -%}
+      </div>
     </div>
-  </div>
+  {%- else -%}
+    <p style="text-align:center; padding: 4rem 0; opacity: 0.6;">Select a product in the section settings to display it here.</p>
+  {%- endif -%}
 </div>
 
 <script>
   (function() {
-    var thumbs = document.querySelectorAll('.thrivve-product__thumb');
-    var mainImg = document.getElementById('thrivve-main-image');
+    var section = document.currentScript.closest('.thrivve-hero-product') || document.querySelector('.thrivve-hero-product');
+    if (!section) return;
+
+    var thumbs = section.querySelectorAll('.thrivve-hero-product__thumb');
+    var mainImg = document.getElementById('thrivve-hero-main-image');
     thumbs.forEach(function(thumb) {
       thumb.addEventListener('click', function() {
         thumbs.forEach(function(t) { t.classList.remove('is-active'); });
         thumb.classList.add('is-active');
-        var thumbImg = thumb.querySelector('img');
-        if (thumbImg && mainImg) {
-          mainImg.src = thumbImg.src.replace('width=160', 'width=1200');
+        if (mainImg) {
+          mainImg.src = thumb.getAttribute('data-full-src');
         }
       });
     });
@@ -204,7 +304,7 @@
 
 {% schema %}
 {
-  "name": "Thrivve Product",
+  "name": "Thrivve Hero Product",
   "settings": [
     {
       "type": "color_scheme",
@@ -213,41 +313,25 @@
       "default": "scheme-1"
     },
     {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#e8492a"
+    },
+    {
       "type": "product",
       "id": "product",
       "label": "Product"
-    },
-    {
-      "type": "text",
-      "id": "product_title",
-      "label": "Product title override",
-      "default": "Thrivve Labs Red Light Cap"
-    },
-    {
-      "type": "text",
-      "id": "price",
-      "label": "Price (display only — connect real product for live pricing)",
-      "default": "$0.00"
-    },
-    {
-      "type": "text",
-      "id": "compare_price",
-      "label": "Compare-at price (optional)"
-    },
-    {
-      "type": "text",
-      "id": "save_percent",
-      "label": "Save percent (e.g. 40)"
     },
     {
       "type": "header",
       "content": "Reviews"
     },
     {
-      "type": "number",
-      "id": "review_count",
-      "label": "Review count",
-      "default": 0
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show review badge",
+      "default": true
     },
     {
       "type": "text",
@@ -256,23 +340,10 @@
       "default": "0.0"
     },
     {
-      "type": "header",
-      "content": "Images"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": "Image 1"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3",
-      "label": "Image 3"
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count",
+      "default": 0
     },
     {
       "type": "header",
@@ -298,6 +369,22 @@
     },
     {
       "type": "header",
+      "content": "Inventory urgency"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inventory",
+      "label": "Show low-stock message (uses real, live inventory — requires inventory tracking turned on for this product)",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "low_stock_threshold",
+      "label": "Show message when stock is at or below",
+      "default": 10
+    },
+    {
+      "type": "header",
       "content": "Buy box"
     },
     {
@@ -315,7 +402,7 @@
   ],
   "presets": [
     {
-      "name": "Thrivve Product"
+      "name": "Thrivve Hero Product"
     }
   ]
 }
