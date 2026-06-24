@@ -97,7 +97,6 @@
     },
     "ks-testimonials": {
       "type": "ks-testimonials",
-      "disabled": true,
       "settings": {}
     },
     "ks-mission": {
