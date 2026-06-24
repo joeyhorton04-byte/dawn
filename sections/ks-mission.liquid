@@ -1,41 +1,111 @@
-.thrivve-mission__inner {
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.thrivve-mission__eyebrow {
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  opacity: 0.75;
-}
-
-.thrivve-mission__heading {
-  font-size: 3.2rem;
-  line-height: 1.15;
-  margin-bottom: 2rem;
-}
-
-.thrivve-mission__body {
-  font-size: 1.6rem;
-  line-height: 1.7;
-  opacity: 0.85;
-  text-align: left;
-}
-
-.thrivve-mission__body p {
-  margin-bottom: 1.6rem;
-}
-
-.thrivve-mission__body p:last-child {
-  margin-bottom: 0;
-}
-
-@media screen and (max-width: 749px) {
-  .thrivve-mission__heading {
-    font-size: 2.6rem;
+<style>
+  .thrivve-mission__inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
   }
+  .thrivve-mission__eyebrow {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0.75;
+  }
+  .thrivve-mission__heading {
+    font-size: 3.2rem;
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+  .thrivve-mission__heading p {
+    margin: 0;
+  }
+  .thrivve-mission__body {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    text-align: left;
+  }
+  .thrivve-mission__body p {
+    margin-bottom: 1.6rem;
+  }
+  .thrivve-mission__body p:last-child {
+    margin-bottom: 0;
+  }
+  @media screen and (max-width: 749px) {
+    .thrivve-mission__heading {
+      font-size: 2.6rem;
+    }
+  }
+</style>
+
+<div class="thrivve-mission page-width section-{{ section.id }}-padding">
+  <div class="thrivve-mission__inner">
+    {% if section.settings.eyebrow != blank %}
+      <p class="thrivve-mission__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <div class="thrivve-mission__heading">{{ section.settings.heading }}</div>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="thrivve-mission__body">{{ section.settings.body }}</div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Thrivve Mission",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "WHY WE EXIST"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Most hair products sell hope. We sell wavelengths.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>The hair loss industry is full of products that work because you want them to. Red light therapy isn't one of them — 660nm and 850nm light have been studied for their effect on follicle activity for years, independent of any brand name on the box.</p><p>We didn't build Thrivve Labs to chase a trend. We built it because the science behind low-level light therapy was already proven, and almost nothing on the market was using it correctly — wrong wavelengths, underpowered diodes, sessions too short to matter.</p><p>Thrivve Labs is one product, built around the two wavelengths that actually do something, worn for the amount of time the research actually supports. No proprietary blends. No vague \"clinical strength\" claims. Just light, at the right frequency, every day.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve Mission"
+    }
+  ]
 }
+{% endschema %}
