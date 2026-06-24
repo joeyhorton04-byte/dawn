@@ -1,0 +1,322 @@
+<style>
+  .thrivve-product {
+    padding: 4rem 0;
+  }
+  .thrivve-product__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .thrivve-product__gallery-main {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    background: #111;
+  }
+  .thrivve-product__gallery-main img {
+    width: 100%;
+    display: block;
+  }
+  .thrivve-product__thumbs {
+    display: flex;
+    gap: 1rem;
+  }
+  .thrivve-product__thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: #111;
+  }
+  .thrivve-product__thumb.is-active {
+    border-color: var(--thrivve-accent, #e8492a);
+  }
+  .thrivve-product__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .thrivve-product__reviews {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+  .thrivve-product__reviews .stars {
+    color: #f5a623;
+    margin-right: 0.6rem;
+  }
+  .thrivve-product__title {
+    font-size: 3.2rem;
+    line-height: 1.1;
+    margin-bottom: 1.4rem;
+  }
+  .thrivve-product__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  .thrivve-product__price {
+    font-size: 2.6rem;
+    font-weight: 700;
+  }
+  .thrivve-product__compare-price {
+    font-size: 1.8rem;
+    text-decoration: line-through;
+    opacity: 0.55;
+  }
+  .thrivve-product__save-badge {
+    background: var(--thrivve-accent, #e8492a);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .thrivve-product__benefits {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .thrivve-product__benefits li {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .thrivve-product__buy-button {
+    width: 100%;
+    padding: 1.6rem;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
+  .thrivve-product__guarantee {
+    font-size: 1.3rem;
+    opacity: 0.7;
+    margin-top: 1.2rem;
+    text-align: center;
+  }
+  @media screen and (max-width: 749px) {
+    .thrivve-product__grid {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+    }
+  }
+</style>
+
+<div class="thrivve-product color-{{ section.settings.color_scheme }} page-width">
+  <div class="thrivve-product__grid">
+    <div class="thrivve-product__gallery">
+      <div class="thrivve-product__gallery-main">
+        {% if section.settings.image_1 != blank %}
+          {{ section.settings.image_1 | image_url: width: 1200 | image_tag: loading: 'lazy', id: 'thrivve-main-image' }}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="thrivve-product__thumbs">
+        {% for i in (1..3) %}
+          {% liquid
+            assign img_key = 'image_' | append: i
+            assign img = section.settings[img_key]
+          %}
+          <div class="thrivve-product__thumb {% if i == 1 %}is-active{% endif %}" data-thumb-index="{{ i }}">
+            {% if img != blank %}
+              {{ img | image_url: width: 160 | image_tag: loading: 'lazy' }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="thrivve-product__info">
+      {% if section.settings.review_count > 0 %}
+        <p class="thrivve-product__reviews">
+          <span class="stars">★★★★★</span>{{ section.settings.review_rating }}/5 ({{ section.settings.review_count }} Reviews)
+        </p>
+      {% endif %}
+
+      <h1 class="thrivve-product__title">{{ section.settings.product_title | default: 'Thrivve Labs Red Light Cap' }}</h1>
+
+      <div class="thrivve-product__price-row">
+        <span class="thrivve-product__price">{{ section.settings.price | default: '$0.00' }}</span>
+        {% if section.settings.compare_price != blank %}
+          <span class="thrivve-product__compare-price">{{ section.settings.compare_price }}</span>
+          {% if section.settings.save_percent != blank %}
+            <span class="thrivve-product__save-badge">SAVE {{ section.settings.save_percent }}%</span>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank %}
+        <ul class="thrivve-product__benefits">
+          {% if section.settings.benefit_1 != blank %}<li>{{ section.settings.benefit_1 }}</li>{% endif %}
+          {% if section.settings.benefit_2 != blank %}<li>{{ section.settings.benefit_2 }}</li>{% endif %}
+          {% if section.settings.benefit_3 != blank %}<li>{{ section.settings.benefit_3 }}</li>{% endif %}
+        </ul>
+      {% endif %}
+
+      {% if section.settings.product != blank %}
+        {% form 'product', section.settings.product %}
+          <input type="hidden" name="id" value="{{ section.settings.product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="button button--primary thrivve-product__buy-button">
+            {{ section.settings.button_label | default: 'Add to Cart' }}
+          </button>
+        {% endform %}
+      {% else %}
+        <button type="button" class="button button--primary thrivve-product__buy-button" disabled>
+          {{ section.settings.button_label | default: 'Add to Cart' }}
+        </button>
+      {% endif %}
+
+      {% if section.settings.guarantee_text != blank %}
+        <p class="thrivve-product__guarantee">{{ section.settings.guarantee_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var thumbs = document.querySelectorAll('.thrivve-product__thumb');
+    var mainImg = document.getElementById('thrivve-main-image');
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+        var thumbImg = thumb.querySelector('img');
+        if (thumbImg && mainImg) {
+          mainImg.src = thumbImg.src.replace('width=160', 'width=1200');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Thrivve Product",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product title override",
+      "default": "Thrivve Labs Red Light Cap"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price (display only — connect real product for live pricing)",
+      "default": "$0.00"
+    },
+    {
+      "type": "text",
+      "id": "compare_price",
+      "label": "Compare-at price (optional)"
+    },
+    {
+      "type": "text",
+      "id": "save_percent",
+      "label": "Save percent (e.g. 40)"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "review_rating",
+      "label": "Rating out of 5",
+      "default": "0.0"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Benefit bullets"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "🔴 Dual-wavelength red light therapy"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "⚡ 15-minute daily sessions"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "🧢 Lightweight, hands-free comfort"
+    },
+    {
+      "type": "header",
+      "content": "Buy box"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee line",
+      "default": "30-Day Money-Back Guarantee · Free Shipping Over $50"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve Product"
+    }
+  ]
+}
+{% endschema %}
