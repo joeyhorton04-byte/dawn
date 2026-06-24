@@ -90,6 +90,7 @@
     },
     "ks-collections": {
       "type": "ks-collections",
+      "disabled": true,
       "settings": {
         "heading": "Shop The System",
         "subheading": "Everything you need for a simple, daily scalp care routine."
@@ -97,6 +98,7 @@
     },
     "ks-testimonials": {
       "type": "ks-testimonials",
+      "disabled": true,
       "settings": {}
     },
     "ks-mission": {
