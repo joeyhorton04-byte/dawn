@@ -1,397 +1,676 @@
-<section class="ks-product">
-  <div class="ks-product-inner">
+{%- style -%}
+  .thrivve-hero-product {
+    padding: 4rem 0;
+  }
+  .thrivve-hero-product__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .thrivve-hero-product__gallery-main {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+    margin-bottom: 1.2rem;
+  }
+  .thrivve-hero-product__gallery-main img {
+    width: 100%;
+    display: block;
+  }
+  .thrivve-hero-product__thumbs {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .thrivve-hero-product__thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: #111;
+    padding: 0;
+  }
+  .thrivve-hero-product__thumb.is-active {
+    border-color: {{ section.settings.accent_color }};
+  }
+  .thrivve-hero-product__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .thrivve-hero-product__reviews {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+  .thrivve-hero-product__reviews .stars {
+    color: #f5a623;
+    margin-right: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  .thrivve-hero-product__title {
+    font-size: 3.4rem;
+    line-height: 1.1;
+    margin: 0 0 1.4rem;
+  }
+  .thrivve-hero-product__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+    flex-wrap: wrap;
+  }
+  .thrivve-hero-product__price {
+    font-size: 2.6rem;
+    font-weight: 700;
+  }
+  .thrivve-hero-product__compare-price {
+    font-size: 1.8rem;
+    text-decoration: line-through;
+    opacity: 0.55;
+  }
+  .thrivve-hero-product__save-badge {
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .thrivve-hero-product__benefits {
+    list-style: none;
+    margin: 0 0 2.2rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .thrivve-hero-product__benefits li {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .thrivve-hero-product__variants {
+    margin-bottom: 1.6rem;
+  }
+  .thrivve-hero-product__variants fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 1.2rem;
+  }
+  .thrivve-hero-product__variants legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    opacity: 0.8;
+  }
+  .thrivve-hero-product__variants select {
+    width: 100%;
+    padding: 1.1rem 1.4rem;
+    font-size: 1.5rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: inherit;
+  }
+  .thrivve-hero-product__quantity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .thrivve-hero-product__quantity label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+  .thrivve-hero-product__quantity input {
+    width: 70px;
+    padding: 0.9rem;
+    font-size: 1.5rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: inherit;
+    text-align: center;
+  }
+  .thrivve-hero-product__buy-button {
+    width: 100%;
+    padding: 1.6rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 6px;
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .thrivve-hero-product__buy-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .thrivve-hero-product__guarantee {
+    font-size: 1.3rem;
+    opacity: 0.7;
+    margin-top: 1.4rem;
+    text-align: center;
+  }
+  .thrivve-hero-product__inventory {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: {{ section.settings.accent_color }};
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin: 1.6rem 0;
+  }
 
-    <!-- IMAGE GALLERY -->
-    <div class="ks-product-gallery">
-      <div class="ks-product-main-image">
-        {% if product.featured_image %}
-          <img id="ks-main-img" src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
-        {% endif %}
-        <div class="ks-product-badge">Low Stock</div>
-        <div class="ks-gallery-nav">
-          <button class="ks-prev" onclick="ksPrevImage()">&#8592;</button>
-          <button class="ks-next" onclick="ksNextImage()">&#8594;</button>
+  /* Bundle tiers */
+  .thrivve-bundles {
+    margin-bottom: 1.6rem;
+  }
+  .thrivve-bundle-tier {
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .thrivve-bundle-tier.is-selected {
+    border-color: {{ section.settings.accent_color }};
+  }
+  .thrivve-bundle-tier__badge {
+    position: absolute;
+    top: -1px;
+    right: 1.6rem;
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.4rem 1.2rem;
+    border-radius: 0 0 6px 6px;
+    letter-spacing: 0.04em;
+  }
+  .thrivve-bundle-tier__header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.6rem 1.8rem;
+    cursor: pointer;
+  }
+  .thrivve-bundle-tier__radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .thrivve-bundle-tier.is-selected .thrivve-bundle-tier__radio {
+    border-color: {{ section.settings.accent_color }};
+  }
+  .thrivve-bundle-tier.is-selected .thrivve-bundle-tier__radio::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: {{ section.settings.accent_color }};
+    border-radius: 50%;
+  }
+  .thrivve-bundle-tier__name {
+    flex: 1;
+  }
+  .thrivve-bundle-tier__name strong {
+    display: block;
+    font-size: 1.5rem;
+  }
+  .thrivve-bundle-tier__name span {
+    font-size: 1.3rem;
+    opacity: 0.65;
+  }
+  .thrivve-bundle-tier__price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .thrivve-bundle-tier__price strong {
+    display: block;
+    font-size: 1.5rem;
+  }
+  .thrivve-bundle-tier__price del {
+    font-size: 1.2rem;
+    opacity: 0.5;
+  }
+  .thrivve-bundle-tier__items {
+    display: none;
+    padding: 0 1.8rem 1.6rem;
+    gap: 1.2rem;
+  }
+  .thrivve-bundle-tier.is-selected .thrivve-bundle-tier__items {
+    display: flex;
+  }
+  .thrivve-bundle-tier__item {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    padding: 1.2rem;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  .thrivve-bundle-tier__item img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 0 auto 0.8rem;
+    display: block;
+  }
+
+  .thrivve-addon {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.6rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  .thrivve-addon input {
+    width: 18px;
+    height: 18px;
+    accent-color: {{ section.settings.accent_color }};
+  }
+  .thrivve-addon__label {
+    flex: 1;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .thrivve-addon__price {
+    font-size: 1.4rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+  .thrivve-bundle-disclaimer {
+    font-size: 1.1rem;
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .thrivve-hero-product__grid {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+    }
+    .thrivve-hero-product__title {
+      font-size: 2.6rem;
+    }
+  }
+{%- endstyle -%}
+
+{%- assign product = section.settings.product -%}
+
+<div class="thrivve-hero-product color-{{ section.settings.color_scheme }} page-width">
+  {%- if product != blank -%}
+    <div class="thrivve-hero-product__grid">
+
+      <div class="thrivve-hero-product__gallery">
+        <div class="thrivve-hero-product__gallery-main">
+          {%- if product.featured_media != blank -%}
+            {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', id: 'thrivve-hero-main-image' }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
         </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="thrivve-hero-product__thumbs">
+            {%- for media in product.media limit: 6 -%}
+              <button type="button" class="thrivve-hero-product__thumb {% if forloop.first %}is-active{% endif %}" data-full-src="{{ media | image_url: width: 1200 }}">
+                {{ media | image_url: width: 160 | image_tag: loading: 'lazy' }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="thrivve-hero-product__info">
+        {%- if section.settings.show_reviews -%}
+          <p class="thrivve-hero-product__reviews">
+            <span class="stars">★★★★★</span>{{ section.settings.review_rating }}/5 ({{ section.settings.review_count }} Reviews)
+          </p>
+        {%- endif -%}
+
+        <h1 class="thrivve-hero-product__title">{{ product.title }}</h1>
+
+        <div class="thrivve-hero-product__price-row">
+          <span class="thrivve-hero-product__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+            <span class="thrivve-hero-product__compare-price">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+            {%- assign discount = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100.0 | divided_by: product.selected_or_first_available_variant.compare_at_price | round -%}
+            <span class="thrivve-hero-product__save-badge">SAVE {{ discount }}%</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.benefit_1 != blank or section.settings.benefit_2 != blank or section.settings.benefit_3 != blank -%}
+          <ul class="thrivve-hero-product__benefits">
+            {%- if section.settings.benefit_1 != blank -%}<li>{{ section.settings.benefit_1 }}</li>{%- endif -%}
+            {%- if section.settings.benefit_2 != blank -%}<li>{{ section.settings.benefit_2 }}</li>{%- endif -%}
+            {%- if section.settings.benefit_3 != blank -%}<li>{{ section.settings.benefit_3 }}</li>{%- endif -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.show_inventory and product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+          {%- assign qty = product.selected_or_first_available_variant.inventory_quantity -%}
+          {%- if qty > 0 and qty <= section.settings.low_stock_threshold -%}
+            <p class="thrivve-hero-product__inventory">Only {{ qty }} left in stock!</p>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_bundles -%}
+          <div class="thrivve-bundles">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'bundle_tier' -%}
+                <div class="thrivve-bundle-tier {% if forloop.first %}is-selected{% endif %}" data-bundle-tier data-price="{{ block.settings.price }}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.badge != blank -%}
+                    <span class="thrivve-bundle-tier__badge">{{ block.settings.badge | escape }}</span>
+                  {%- endif -%}
+                  <div class="thrivve-bundle-tier__header">
+                    <span class="thrivve-bundle-tier__radio"></span>
+                    <span class="thrivve-bundle-tier__name">
+                      <strong>{{ block.settings.name | escape }}</strong>
+                      <span>{{ block.settings.subtitle | escape }}</span>
+                    </span>
+                    <span class="thrivve-bundle-tier__price">
+                      <strong>${{ block.settings.price }}</strong>
+                      {%- if block.settings.compare_price != blank -%}<del>${{ block.settings.compare_price }}</del>{%- endif -%}
+                    </span>
+                  </div>
+                  {%- if block.settings.item_1_name != blank or block.settings.item_2_name != blank -%}
+                    <div class="thrivve-bundle-tier__items">
+                      {%- if block.settings.item_1_name != blank -%}
+                        <div class="thrivve-bundle-tier__item">{{ block.settings.item_1_name | escape }}</div>
+                      {%- endif -%}
+                      {%- if block.settings.item_2_name != blank -%}
+                        <div class="thrivve-bundle-tier__item">{{ block.settings.item_2_name | escape }}</div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'addon' -%}
+              <label class="thrivve-addon" {{ block.shopify_attributes }}>
+                <input type="checkbox" data-addon-price="{{ block.settings.price }}" {% if block.settings.checked_by_default %}checked{% endif %}>
+                <span class="thrivve-addon__label">{{ block.settings.label | escape }}</span>
+                <span class="thrivve-addon__price">+${{ block.settings.price }}</span>
+              </label>
+            {%- endif -%}
+          {%- endfor -%}
+
+          <p class="thrivve-bundle-disclaimer">Placeholder bundle pricing — connect a bundle app to charge and fulfill these correctly. Currently for display only; only the cap itself adds to cart.</p>
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'thrivve-hero-product-form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="thrivve-hero-variant-id">
+
+          {%- if product.has_only_default_variant == false -%}
+            <div class="thrivve-hero-product__variants">
+              {%- for option in product.options_with_values -%}
+                <fieldset>
+                  <legend>{{ option.name }}</legend>
+                  <select name="options[{{ option.name | escape }}]" class="thrivve-hero-variant-select">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </fieldset>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="thrivve-hero-product__quantity">
+            <label for="thrivve-hero-quantity">Qty</label>
+            <input type="number" id="thrivve-hero-quantity" name="quantity" value="1" min="1">
+          </div>
+
+          <button type="submit" class="thrivve-hero-product__buy-button" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            {%- if product.selected_or_first_available_variant.available -%}
+              {{ section.settings.button_label | default: 'Add to Cart' }}
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if section.settings.guarantee_text != blank -%}
+          <p class="thrivve-hero-product__guarantee">{{ section.settings.guarantee_text }}</p>
+        {%- endif -%}
       </div>
     </div>
-
-    <!-- PRODUCT INFO -->
-    <div class="ks-product-info">
-      <div class="ks-product-reviews">
-        <span class="ks-stars">★★★★★</span>
-        <span class="ks-review-count">4.9 · 238 REVIEWS</span>
-      </div>
-
-      <h1 class="ks-product-title">{{ product.title }}</h1>
-      <p class="ks-product-tagline">Carry the message of Christ wherever you go — a daily reminder of His sacrifice and who you live for.</p>
-
-
-      <div class="ks-product-features">
-        <div class="ks-feature-pill">✝ Faith-Driven Design</div>
-        <div class="ks-feature-pill">⚡ Lifetime Guarantee</div>
-        <div class="ks-feature-pill">💧 Skin-Safe, No Tarnish</div>
-        <div class="ks-feature-pill">🙏 Serenity Prayer Engraved</div>
-      </div>
-
-      <!-- VARIANT SELECTOR - OUTSIDE FORM SO IT SHOWS ABOVE KATCHING -->
-      {% for option in product.options_with_values %}
-        <p class="ks-variant-label">{{ option.name }}</p>
-        <div class="ks-variants">
-          {% for value in option.values %}
-            {% assign swatch_color = '#A8A8A8' %}
-            {% if value == '18K Gold' or value == 'Gold' %}
-              {% assign swatch_color = '#C9A84C' %}
-            {% endif %}
-            <button
-              type="button"
-              class="ks-swatch-btn {% if forloop.first %}active{% endif %}"
-              onclick="ksSelectVariant(this, '{{ value }}')"
-              data-value="{{ value }}"
-              title="{{ value }}"
-              style="background: {{ swatch_color }}; width:44px; height:44px; border-radius:50%; border:3px solid #0A0A0A; cursor:pointer; display:inline-block; box-shadow: 0 0 0 2px {% if forloop.first %}#C9A84C{% else %}transparent{% endif %};"
-            ></button>
-          {% endfor %}
-        </div>
-      {% endfor %}
-
-      {% form 'product', product %}
-        <input type="hidden" name="id" id="ks-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-
-<button type="submit" name="add" class="ks-add-to-cart">
-  ADD TO CART
-</button>
-      {% endform %}
-
-      <div class="ks-product-accordion">
-        <div class="ks-accordion-item open">
-          <div class="ks-accordion-header" onclick="ksToggle(this)">
-            Product Details <span class="ks-accordion-arrow">▼</span>
-          </div>
-          <div class="ks-accordion-body">{{ product.description }}</div>
-        </div>
-        <div class="ks-accordion-item">
-          <div class="ks-accordion-header" onclick="ksToggle(this)">
-            Materials <span class="ks-accordion-arrow">▼</span>
-          </div>
-          <div class="ks-accordion-body">316L Stainless Steel with triple-coat 18K gold option. Tarnish-free, waterproof, heat and sweat resistant, hypoallergenic. Backed by a Lifetime Warranty.</div>
-        </div>
-        <div class="ks-accordion-item">
-          <div class="ks-accordion-header" onclick="ksToggle(this)">
-            Shipping & Returns <span class="ks-accordion-arrow">▼</span>
-          </div>
-          <div class="ks-accordion-body">Orders processed within 24–72 hours. Ships worldwide in 7–12 business days. 14-day easy returns. Email support@kingdomsupply.com.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-.ks-product {
-  padding: 60px 40px;
-  background: #0A0A0A;
-}
-.ks-product-inner {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-.ks-product-main-image {
-  width: 100%;
-  aspect-ratio: 1;
-  background: transparent;
-  border: none;
-  position: relative;
-  overflow: hidden;
-}
-.ks-product-main-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: opacity 0.3s;
-}
-.ks-product-badge {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: #C9A84C;
-  color: #0A0A0A;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  z-index: 2;
-}
-.ks-gallery-nav {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  gap: 8px;
-  z-index: 2;
-}
-.ks-prev, .ks-next {
-  width: 36px;
-  height: 36px;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(201,168,76,0.4);
-  color: #C9A84C;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.ks-prev:hover, .ks-next:hover {
-  background: #C9A84C;
-  color: #0A0A0A;
-}
-.ks-product-reviews {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.ks-stars { color: #C9A84C; font-size: 16px; letter-spacing: 2px; }
-.ks-review-count {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  color: #888888;
-  letter-spacing: 1px;
-}
-.ks-product-title {
-  font-family: 'Cinzel', serif;
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #FAFAF5;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-.ks-product-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: #CCCCCC;
-  margin-bottom: 28px;
-  line-height: 1.6;
-}
-.ks-product-price {
-  font-family: 'Cinzel', serif;
-  font-size: 32px;
-  font-weight: 600;
-  color: #C9A84C;
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.ks-compare-price {
-  font-size: 20px;
-  color: #888888;
-  text-decoration: line-through;
-}
-.ks-product-features {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 32px;
-}
-.ks-feature-pill {
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.2);
-  padding: 10px 14px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #E8C97A;
-}
-.ks-variant-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #888888;
-  margin-bottom: 12px;
-}
-.ks-variants {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.ks-swatch-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 3px solid #0A0A0A;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 0 0 2px transparent;
-  display: inline-block;
-}
-.ks-swatch-btn:hover { box-shadow: 0 0 0 2px rgba(201,168,76,0.6); }
-.ks-swatch-btn.active { box-shadow: 0 0 0 2px #C9A84C; }
-.ks-stock-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  color: #888888;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-.ks-stock-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #4CAF50;
-  animation: ksPulse 2s infinite;
-}
-@keyframes ksPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.ks-add-to-cart {
-  width: 100%;
-  padding: 20px;
-  background: #C9A84C;
-  color: #0A0A0A;
-  border: none;
-  font-family: 'Cinzel', serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.25s;
-  margin-bottom: 32px;
-}
-.ks-add-to-cart:hover { background: #E8C97A; }
-.ks-product-accordion { border-top: 1px solid rgba(201,168,76,0.15); }
-.ks-accordion-item { border-bottom: 1px solid rgba(201,168,76,0.15); }
-.ks-accordion-header {
-  padding: 18px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #CCCCCC;
-  transition: color 0.2s;
-}
-.ks-accordion-header:hover { color: #C9A84C; }
-.ks-accordion-arrow { transition: transform 0.3s; font-size: 10px; }
-.ks-accordion-body {
-  padding: 0 0 20px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  color: #888888;
-  line-height: 1.7;
-  display: none;
-}
-.ks-accordion-item.open .ks-accordion-body { display: block; }
-.ks-accordion-item.open .ks-accordion-arrow { transform: rotate(180deg); }
-@media (max-width: 768px) {
-  .ks-product { padding: 20px 16px; }
-  .ks-product-inner { grid-template-columns: 1fr; gap: 24px; }
-  .ks-product-title { font-size: 24px; letter-spacing: 1px; margin-bottom: 10px; }
-  .ks-product-tagline { font-size: 14px; margin-bottom: 16px; }
-  .ks-product-price { font-size: 26px; margin-bottom: 16px; }
-  .ks-product-features { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-  .ks-feature-pill { font-size: 9px; padding: 8px 10px; letter-spacing: 1px; }
-  .ks-variants { gap: 8px; margin-bottom: 20px; }
-  .ks-swatch-btn { width: 40px !important; height: 40px !important; }
-  .ks-stock-indicator { font-size: 11px; margin-bottom: 14px; }
-  .ks-add-to-cart { font-size: 14px; padding: 16px; margin-bottom: 20px; letter-spacing: 2px; }
-  .ks-accordion-header { font-size: 11px; padding: 14px 0; }
-  .ks-accordion-body { font-size: 14px; }
-  .ks-product-reviews { margin-bottom: 12px; }
-  .ks-stars { font-size: 14px; }
-  .ks-review-count { font-size: 11px; }
-}
-</style>
+  {%- else -%}
+    <p style="text-align:center; padding: 4rem 0; opacity: 0.6;">Select a product in the section settings to display it here.</p>
+  {%- endif -%}
+</div>
 
 <script>
-const ksImages = [
-  {% for image in product.images %}
-    "{{ image | img_url: 'master' }}"{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-];
+  (function() {
+    var section = document.currentScript.closest('.thrivve-hero-product') || document.querySelector('.thrivve-hero-product');
+    if (!section) return;
 
-const ksVariantImages = {
-  {% for variant in product.variants %}
-    "{{ variant.title }}": "{{ variant.featured_image | img_url: 'master' }}"{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-};
+    var thumbs = section.querySelectorAll('.thrivve-hero-product__thumb');
+    var mainImg = document.getElementById('thrivve-hero-main-image');
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+        if (mainImg) {
+          mainImg.src = thumb.getAttribute('data-full-src');
+        }
+      });
+    });
 
-let ksCurrentIndex = 0;
-
-function ksSetMainImage(src) {
-  const img = document.getElementById('ks-main-img');
-  img.style.opacity = '0';
-  setTimeout(() => { img.src = src; img.style.opacity = '1'; }, 200);
-}
-
-function ksNextImage() {
-  ksCurrentIndex = (ksCurrentIndex + 1) % ksImages.length;
-  ksSetMainImage(ksImages[ksCurrentIndex]);
-}
-
-function ksPrevImage() {
-  ksCurrentIndex = (ksCurrentIndex - 1 + ksImages.length) % ksImages.length;
-  ksSetMainImage(ksImages[ksCurrentIndex]);
-}
-
-function ksSelectVariant(btn, variantTitle) {
-  document.querySelectorAll('.ks-swatch-btn').forEach(b => {
-    b.style.boxShadow = '0 0 0 2px transparent';
-  });
-  btn.style.boxShadow = '0 0 0 2px #C9A84C';
-
-  {% for variant in product.variants %}
-    if (variantTitle === "{{ variant.title }}") {
-      document.getElementById('ks-variant-id').value = "{{ variant.id }}";
-      document.querySelector('.ks-add-to-cart').innerHTML = 'ADD TO CART';
-      {% if variant.featured_image %}
-        const idx = ksImages.indexOf("{{ variant.featured_image | img_url: 'master' }}");
-        if (idx !== -1) { ksCurrentIndex = idx; ksSetMainImage(ksImages[idx]); }
-      {% endif %}
-    }
-  {% endfor %}
-}
-
-function ksToggle(header) {
-  const item = header.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.ks-accordion-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
+    var tiers = section.querySelectorAll('[data-bundle-tier]');
+    tiers.forEach(function(tier) {
+      tier.querySelector('.thrivve-bundle-tier__header').addEventListener('click', function() {
+        tiers.forEach(function(t) { t.classList.remove('is-selected'); });
+        tier.classList.add('is-selected');
+      });
+    });
+  })();
 </script>
 
 {% schema %}
 {
-  "name": "Product",
-  "tag": "section",
-  "class": "section",
-  "settings": [],
-  "blocks": [],
-  "presets": [{ "name": "Product" }]
+  "name": "Thrivve Hero Product",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#e8492a"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show review badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_rating",
+      "label": "Rating out of 5",
+      "default": "0.0"
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Benefit bullets"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "🔴 Dual-wavelength red light therapy"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "⚡ 15-minute daily sessions"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "🧢 Lightweight, hands-free comfort"
+    },
+    {
+      "type": "header",
+      "content": "Bundle tiers (placeholder pricing — wire up a bundle app for real checkout)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bundles",
+      "label": "Show bundle tier selector",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Inventory urgency"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inventory",
+      "label": "Show low-stock message (uses real, live inventory — requires inventory tracking turned on for this product)",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "low_stock_threshold",
+      "label": "Show message when stock is at or below",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Buy box"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee line",
+      "default": "30-Day Money-Back Guarantee · Free Shipping Over $50"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_tier",
+      "name": "Bundle tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (e.g. MOST POPULAR) — leave blank for none"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Tier name",
+          "default": "Starter"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Red Light Therapy Cap"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price (number only, e.g. 79.99)",
+          "default": "79.99"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare-at price (optional, number only)"
+        },
+        {
+          "type": "text",
+          "id": "item_1_name",
+          "label": "Included item 1 (optional)"
+        },
+        {
+          "type": "text",
+          "id": "item_2_name",
+          "label": "Included item 2 (optional)"
+        }
+      ]
+    },
+    {
+      "type": "addon",
+      "name": "Add-on checkbox",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shipping Protection"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price (number only)",
+          "default": "4.40"
+        },
+        {
+          "type": "checkbox",
+          "id": "checked_by_default",
+          "label": "Checked by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thrivve Hero Product"
+    }
+  ]
 }
 {% endschema %}
