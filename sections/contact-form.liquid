@@ -1,218 +1,265 @@
-{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
-
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
-
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.heading }}
-      </h2>
-    {%- else -%}
-      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
-    {%- endif -%}
-    {%- liquid
-      assign contact_form_class = 'isolate'
-      if settings.animations_reveal_on_scroll
-        assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
-      endif
-    -%}
-    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
-      {%- if form.posted_successfully? -%}
-        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-          {{- 'icon-success.svg' | inline_asset_content -}}
-          {{ 'templates.contact.form.post_success' | t }}
-        </h2>
-      {%- elsif form.errors -%}
-        <div class="form__message">
-          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
-            {{- 'icon-error.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.error_heading' | t }}
-          </h2>
-        </div>
-        <ul class="form-status-list caption-large" role="list">
-          <li>
-            <a href="#ContactForm-email" class="link">
-              {{ form.errors.translated_fields.email | capitalize }}
-              {{ form.errors.messages.email }}
-            </a>
-          </li>
-        </ul>
-      {%- endif -%}
-      <div class="contact__fields">
-        <div class="field">
-          <input
-            class="field__input"
-            autocomplete="name"
-            type="text"
-            id="ContactForm-name"
-            name="contact[{{ 'templates.contact.form.name' | t }}]"
-            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-            placeholder="{{ 'templates.contact.form.name' | t }}"
-          >
-          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
-        </div>
-        <div class="field field--with-error">
-          <input
-            autocomplete="email"
-            type="email"
-            id="ContactForm-email"
-            class="field__input"
-            name="contact[email]"
-            spellcheck="false"
-            autocapitalize="off"
-            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-            aria-required="true"
-            {% if form.errors contains 'email' %}
-              aria-invalid="true"
-              aria-describedby="ContactForm-email-error"
-            {% endif %}
-            placeholder="{{ 'templates.contact.form.email' | t }}"
-          >
-          <label class="field__label" for="ContactForm-email">
-            {{- 'templates.contact.form.email' | t }}
-            <span aria-hidden="true">*</span></label
-          >
-          {%- if form.errors contains 'email' -%}
-            <small class="contact__field-error" id="ContactForm-email-error">
-              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
-              <span class="form__message">
-                <span class="svg-wrapper">
-                  {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </span>
-            </small>
-          {%- endif -%}
-        </div>
-      </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
-      </div>
-      <div class="field">
-        <textarea
-          rows="10"
-          id="ContactForm-body"
-          class="text-area field__input"
-          name="contact[{{ 'templates.contact.form.comment' | t }}]"
-          placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
-        <label class="form__label field__label" for="ContactForm-body">
-          {{- 'templates.contact.form.comment' | t -}}
-        </label>
-      </div>
-      <div class="contact__button">
-        <button type="submit" class="button">
-          {{ 'templates.contact.form.send' | t }}
-        </button>
-      </div>
-    {%- endform -%}
-  </div>
-</div>
-
-{% schema %}
 {
-  "name": "t:sections.contact-form.name",
-  "tag": "section",
-  "class": "section",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
-  "settings": [
-    {
-      "type": "inline_richtext",
-      "id": "heading",
-      "default": "t:sections.contact-form.settings.title.default",
-      "label": "t:sections.contact-form.settings.title.label"
+  "sections": {
+    "announcement-bar": {
+      "type": "thrivve-announcement-bar",
+      "settings": {
+        "message_1": "FREE SHIPPING OVER $75",
+        "message_2": "30-DAY MONEY-BACK GUARANTEE",
+        "icon_color": "#FF2A3A",
+        "speed": 25
+      }
     },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
+    "product-hero": {
+      "type": "thrivve-product-hero",
+      "settings": {
+        "eyebrow": "RED LIGHT THERAPY",
+        "subheading": "660nm and 850nm wavelengths delivered through a full-coverage cap. 10 minutes a day for thicker, fuller hair and a sharper recovery routine.",
+        "cta_text": "Add to Cart — Start Glowing",
+        "trust_items": "FDA-Registered Device,30-Day Trial,Free US Shipping"
+      }
+    },
+    "feature-icons": {
+      "type": "thrivve-feature-icons",
+      "blocks": {
+        "icon-1": {
+          "type": "icon_item",
+          "settings": {
+            "title": "Dual Wavelength",
+            "text": "660nm + 850nm for surface and deep tissue"
+          }
         },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
+        "icon-2": {
+          "type": "icon_item",
+          "settings": {
+            "title": "10 Min Sessions",
+            "text": "Fits into any morning or night routine"
+          }
         },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
+        "icon-3": {
+          "type": "icon_item",
+          "settings": {
+            "title": "Full Coverage",
+            "text": "272 medical-grade LEDs, scalp to crown"
+          }
         },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
+        "icon-4": {
+          "type": "icon_item",
+          "settings": {
+            "title": "Cordless & Light",
+            "text": "Rechargeable battery, under 12oz"
+          }
         }
+      },
+      "block_order": [
+        "icon-1",
+        "icon-2",
+        "icon-3",
+        "icon-4"
+      ]
+    },
+    "comparison-table": {
+      "type": "thrivve-comparison-table",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "label": "272 medical-grade LEDs",
+            "others_has_it": false
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "label": "Clinically studied 660nm + 850nm",
+            "others_has_it": false
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "label": "Full scalp-to-crown coverage",
+            "others_has_it": false
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "label": "Cordless, rechargeable design",
+            "others_has_it": true
+          }
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {
+            "label": "FDA-registered device",
+            "others_has_it": false
+          }
+        },
+        "row-6": {
+          "type": "row",
+          "settings": {
+            "label": "30-day trial + 2-year warranty",
+            "others_has_it": false
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6"
       ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
+      "settings": {
+        "eyebrow": "THE DIFFERENCE",
+        "heading": "Why Thrivve outperforms the rest",
+        "subheading": "Most red light devices cut corners on LED count, wavelength accuracy, or coverage. We didn't.",
+        "brand_name": "Thrivve Labs"
+      }
     },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+    "results": {
+      "type": "thrivve-results",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "stat": "92%",
+            "description": "Reported visibly thicker hair after 90 days"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "stat": "87%",
+            "description": "Noticed reduced shedding within 6 weeks"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "stat": "4.8/5",
+            "description": "Average rating across 1,200+ verified reviews"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
+      "settings": {
+        "eyebrow": "REAL RESULTS",
+        "heading": "Backed by the data, proven by real users",
+        "caption": "Based on an internal survey of 500 Thrivve customers after 90 days of use."
+      }
     },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+    "testimonials": {
+      "type": "thrivve-testimonials",
+      "blocks": {
+        "t-1": {
+          "type": "testimonial",
+          "settings": {
+            "heading": "Genuinely surprised by the results",
+            "quote": "I was skeptical but stuck with it for 10 weeks. My part looks noticeably fuller and my hairline has filled in a bit too.",
+            "author": "Marcus T."
+          }
+        },
+        "t-2": {
+          "type": "testimonial",
+          "settings": {
+            "heading": "Easy to fit into my routine",
+            "quote": "10 minutes while I make coffee. No mess, no mirror needed, just put it on and go.",
+            "author": "Dana R."
+          }
+        },
+        "t-3": {
+          "type": "testimonial",
+          "settings": {
+            "heading": "Worth the investment",
+            "quote": "Tried two cheaper caps before this one. The difference in build quality and actual coverage is night and day.",
+            "author": "Chris P."
+          }
+        }
+      },
+      "block_order": [
+        "t-1",
+        "t-2",
+        "t-3"
+      ],
+      "settings": {
+        "eyebrow": "WHAT THEY'RE SAYING",
+        "heading": "Real people, real glow-ups"
+      }
     },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+    "faq": {
+      "type": "thrivve-faq",
+      "blocks": {
+        "faq-1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long until I see results?",
+            "answer": "Most users report visible changes in shedding within 4-6 weeks, with fuller, thicker-looking hair by 12-16 weeks of consistent use."
+          }
+        },
+        "faq-2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often do I need to use it?",
+            "answer": "10 minutes a day, 5 days a week is the recommended protocol for best results."
+          }
+        },
+        "faq-3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe?",
+            "answer": "Yes. The cap uses low-level red and near-infrared light, the same wavelengths used in clinical studies, and is registered with the FDA as a Class II medical device."
+          }
+        },
+        "faq-4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's your return policy?",
+            "answer": "We offer a 30-day trial. If you're not seeing the results you expected, send it back for a full refund."
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4"
+      ],
+      "settings": {
+        "eyebrow": "QUESTIONS",
+        "heading": "Frequently asked questions"
+      }
     },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+    "contact-form": {
+      "type": "thrivve-contact-form",
+      "settings": {
+        "eyebrow": "GET IN TOUCH",
+        "heading": "Questions about your cap?",
+        "subheading": "Our team typically responds within one business day.",
+        "cta_text": "Send Message"
+      }
+    },
+    "sticky-cart": {
+      "type": "thrivve-sticky-cart",
+      "settings": {
+        "cta_text": "Add to Cart"
+      }
     }
-  ],
-  "presets": [
-    {
-      "name": "t:sections.contact-form.presets.name"
-    }
+  },
+  "order": [
+    "announcement-bar",
+    "product-hero",
+    "feature-icons",
+    "comparison-table",
+    "results",
+    "testimonials",
+    "faq",
+    "contact-form",
+    "sticky-cart"
   ]
 }
-{% endschema %}
