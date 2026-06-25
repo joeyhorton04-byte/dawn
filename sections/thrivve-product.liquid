@@ -14,10 +14,7 @@
     background: #111;
     margin-bottom: 1.2rem;
   }
-  .thrivve-hero-product__gallery-main img {
-    width: 100%;
-    display: block;
-  }
+ {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', id: 'thrivve-hero-main-image' }}
   .thrivve-hero-product__thumbs {
     display: flex;
     gap: 1rem;
