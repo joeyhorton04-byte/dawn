@@ -14,9 +14,25 @@
       "disabled": true,
       "settings": {}
     },
-    "main": {
-      "type": "main-product",
-      "settings": {}
+    "thrivve_product_LGiN3D": {
+      "type": "thrivve-product",
+      "name": "Thrivve Product",
+      "settings": {
+        "color_scheme": "",
+        "product": "thrivve-labs-red-light-cap",
+        "product_title": "Thrivve Labs Red Light Cap",
+        "price": "$0.00",
+        "compare_price": "",
+        "save_percent": "",
+        "review_count": 0,
+        "review_rating": "0.0",
+        "image_1": "shopify://shop_images/ChatGPTImageJun24_2026_04_35_04PM.png",
+        "benefit_1": "🔴 Dual-wavelength red light therapy",
+        "benefit_2": "⚡ 15-minute daily sessions",
+        "benefit_3": "🧢 Lightweight, hands-free comfort",
+        "button_label": "Add to Cart",
+        "guarantee_text": "30-Day Money-Back Guarantee · Free Shipping Over $50"
+      }
     },
     "ks-testimonials": {
       "type": "ks-testimonials",
@@ -28,7 +44,10 @@
     },
     "ks-email": {
       "type": "ks-email",
-      "settings": {}
+      "settings": {
+        "heading": "Get 10% Off Your First Order",
+        "subheading": "Sign up for restock alerts, routine tips, and exclusive discounts."
+      }
     },
     "ks-footer": {
       "type": "ks-footer",
@@ -37,7 +56,7 @@
   },
   "order": [
     "ks-announcement",
-    "main",
+    "thrivve_product_LGiN3D",
     "ks-testimonials",
     "ks-mission",
     "ks-email",
