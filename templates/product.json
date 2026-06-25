@@ -1,79 +1,265 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "ks-announcement": {
-      "type": "ks-announcement",
-      "disabled": true,
-      "settings": {}
-    },
-    "thrivve_product_LGiN3D": {
-      "type": "thrivve-product",
-      "name": "Thrivve Product",
+    "announcement-bar": {
+      "type": "thrivve-announcement-bar",
       "settings": {
-        "color_scheme": "",
-        "product": "thrivve-labs-red-light-cap",
-        "product_title": "Thrivve Labs Red Light Cap",
-        "price": "$0.00",
-        "compare_price": "",
-        "save_percent": "",
-        "review_count": 0,
-        "review_rating": "0.0",
-        "image_1": "shopify://shop_images/ChatGPTImageJun24_2026_04_35_04PM.png",
-        "benefit_1": "🔴 Dual-wavelength red light therapy",
-        "benefit_2": "⚡ 15-minute daily sessions",
-        "benefit_3": "🧢 Lightweight, hands-free comfort",
-        "button_label": "Add to Cart",
-        "guarantee_text": "30-Day Money-Back Guarantee · Free Shipping Over $50"
+        "message_1": "FREE SHIPPING OVER $75",
+        "message_2": "30-DAY MONEY-BACK GUARANTEE",
+        "icon_color": "#FF2A3A",
+        "speed": 25
       }
     },
-    "ks-testimonials": {
-      "type": "ks-testimonials",
-      "settings": {}
-    },
-    "ks-mission": {
-      "type": "ks-mission",
-      "settings": {}
-    },
-    "ks-email": {
-      "type": "ks-email",
+    "product-hero": {
+      "type": "thrivve-product-hero",
       "settings": {
-        "heading": "Get 10% Off Your First Order",
-        "subheading": "Sign up for restock alerts, routine tips, and exclusive discounts."
+        "eyebrow": "RED LIGHT THERAPY",
+        "subheading": "660nm and 850nm wavelengths delivered through a full-coverage cap. 10 minutes a day for thicker, fuller hair and a sharper recovery routine.",
+        "cta_text": "Add to Cart — Start Glowing",
+        "trust_items": "FDA-Registered Device,30-Day Trial,Free US Shipping"
       }
     },
-    "ks-footer": {
-      "type": "ks-footer",
-      "settings": {}
+    "feature-icons": {
+      "type": "thrivve-feature-icons",
+      "blocks": {
+        "icon-1": {
+          "type": "icon_item",
+          "settings": {
+            "title": "Dual Wavelength",
+            "text": "660nm + 850nm for surface and deep tissue"
+          }
+        },
+        "icon-2": {
+          "type": "icon_item",
+          "settings": {
+            "title": "10 Min Sessions",
+            "text": "Fits into any morning or night routine"
+          }
+        },
+        "icon-3": {
+          "type": "icon_item",
+          "settings": {
+            "title": "Full Coverage",
+            "text": "272 medical-grade LEDs, scalp to crown"
+          }
+        },
+        "icon-4": {
+          "type": "icon_item",
+          "settings": {
+            "title": "Cordless & Light",
+            "text": "Rechargeable battery, under 12oz"
+          }
+        }
+      },
+      "block_order": [
+        "icon-1",
+        "icon-2",
+        "icon-3",
+        "icon-4"
+      ]
     },
-    "ks_hero_tMrMMd": {
-      "type": "ks-hero",
-      "name": "Thrivve Hero",
+    "comparison-table": {
+      "type": "thrivve-comparison-table",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "label": "272 medical-grade LEDs",
+            "others_has_it": false
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "label": "Clinically studied 660nm + 850nm",
+            "others_has_it": false
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "label": "Full scalp-to-crown coverage",
+            "others_has_it": false
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "label": "Cordless, rechargeable design",
+            "others_has_it": true
+          }
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {
+            "label": "FDA-registered device",
+            "others_has_it": false
+          }
+        },
+        "row-6": {
+          "type": "row",
+          "settings": {
+            "label": "30-day trial + 2-year warranty",
+            "others_has_it": false
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6"
+      ],
       "settings": {
-        "color_scheme": "",
-        "eyebrow": "FDA-REGISTERED RED LIGHT THERAPY",
-        "heading": "<p>Visibly Thicker Hair in 90 Days. Or Your Money Back.</p>",
-        "subheading": "<p>Dual-wavelength red light therapy — the same 660nm/850nm technology used in clinical hair restoration — now in a cap you wear for 15 minutes a day.</p>",
-        "button_label": "Buy It Now",
-        "button_link": "",
-        "support_line": "30-Day Money-Back Guarantee · Free Shipping Over $50"
+        "eyebrow": "THE DIFFERENCE",
+        "heading": "Why Thrivve outperforms the rest",
+        "subheading": "Most red light devices cut corners on LED count, wavelength accuracy, or coverage. We didn't.",
+        "brand_name": "Thrivve Labs"
+      }
+    },
+    "results": {
+      "type": "thrivve-results",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "stat": "92%",
+            "description": "Reported visibly thicker hair after 90 days"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "stat": "87%",
+            "description": "Noticed reduced shedding within 6 weeks"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "stat": "4.8/5",
+            "description": "Average rating across 1,200+ verified reviews"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
+      "settings": {
+        "eyebrow": "REAL RESULTS",
+        "heading": "Backed by the data, proven by real users",
+        "caption": "Based on an internal survey of 500 Thrivve customers after 90 days of use."
+      }
+    },
+    "testimonials": {
+      "type": "thrivve-testimonials",
+      "blocks": {
+        "t-1": {
+          "type": "testimonial",
+          "settings": {
+            "heading": "Genuinely surprised by the results",
+            "quote": "I was skeptical but stuck with it for 10 weeks. My part looks noticeably fuller and my hairline has filled in a bit too.",
+            "author": "Marcus T."
+          }
+        },
+        "t-2": {
+          "type": "testimonial",
+          "settings": {
+            "heading": "Easy to fit into my routine",
+            "quote": "10 minutes while I make coffee. No mess, no mirror needed, just put it on and go.",
+            "author": "Dana R."
+          }
+        },
+        "t-3": {
+          "type": "testimonial",
+          "settings": {
+            "heading": "Worth the investment",
+            "quote": "Tried two cheaper caps before this one. The difference in build quality and actual coverage is night and day.",
+            "author": "Chris P."
+          }
+        }
+      },
+      "block_order": [
+        "t-1",
+        "t-2",
+        "t-3"
+      ],
+      "settings": {
+        "eyebrow": "WHAT THEY'RE SAYING",
+        "heading": "Real people, real glow-ups"
+      }
+    },
+    "faq": {
+      "type": "thrivve-faq",
+      "blocks": {
+        "faq-1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long until I see results?",
+            "answer": "Most users report visible changes in shedding within 4-6 weeks, with fuller, thicker-looking hair by 12-16 weeks of consistent use."
+          }
+        },
+        "faq-2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How often do I need to use it?",
+            "answer": "10 minutes a day, 5 days a week is the recommended protocol for best results."
+          }
+        },
+        "faq-3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe?",
+            "answer": "Yes. The cap uses low-level red and near-infrared light, the same wavelengths used in clinical studies, and is registered with the FDA as a Class II medical device."
+          }
+        },
+        "faq-4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's your return policy?",
+            "answer": "We offer a 30-day trial. If you're not seeing the results you expected, send it back for a full refund."
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4"
+      ],
+      "settings": {
+        "eyebrow": "QUESTIONS",
+        "heading": "Frequently asked questions"
+      }
+    },
+    "contact-form": {
+      "type": "thrivve-contact-form",
+      "settings": {
+        "eyebrow": "GET IN TOUCH",
+        "heading": "Questions about your cap?",
+        "subheading": "Our team typically responds within one business day.",
+        "cta_text": "Send Message"
+      }
+    },
+    "sticky-cart": {
+      "type": "thrivve-sticky-cart",
+      "settings": {
+        "cta_text": "Add to Cart"
       }
     }
   },
   "order": [
-    "ks-announcement",
-    "thrivve_product_LGiN3D",
-    "ks-testimonials",
-    "ks-mission",
-    "ks-email",
-    "ks-footer",
-    "ks_hero_tMrMMd"
+    "announcement-bar",
+    "product-hero",
+    "feature-icons",
+    "comparison-table",
+    "results",
+    "testimonials",
+    "faq",
+    "contact-form",
+    "sticky-cart"
   ]
 }
